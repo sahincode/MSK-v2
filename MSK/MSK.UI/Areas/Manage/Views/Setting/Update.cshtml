@@ -1,0 +1,30 @@
+﻿@model SettingUpdateDto
+
+<style>
+    .form-container {
+        padding: 50px;
+        max-width: 650px;
+        margin-top: 100px;
+    }
+</style>
+<div class="form-container container shadow">
+    <div>
+        <h1>Update Setting</h1>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Key" class="form-label">Key</label>
+            <input asp-for="Key" class="form-control">
+            <span asp-validation-for="Key"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Value" class="form-label">Value</label>
+            <input asp-for="Value" class="form-control">
+            <span asp-validation-for="Value"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" asp-controller="setting" class="btn btn-info">Back To Home</a>
+    </form>
+</div>
