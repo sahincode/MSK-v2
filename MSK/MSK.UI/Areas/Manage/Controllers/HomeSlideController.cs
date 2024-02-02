@@ -5,6 +5,7 @@ using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
+using MSK.ViewModels;
 using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
@@ -20,20 +21,29 @@ namespace MSK.UI.Areas.Manage.Controllers
             this._homeSlideService = settingService;
             this._mapper = mapper;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( int page)
         {
-            var settings = await _homeSlideService.GetAll(null, null);
-            if (settings is null)
+            var slides = await _homeSlideService.GetAll(null, null);
+            if (slides is null)
             {
                 return NotFound();
             }
+            List<HomeSlideIndexDto> listSlides = new List<HomeSlideIndexDto>();
+            foreach (var slide in slides)
+            {
+                HomeSlideIndexDto homeSlideIndexDto = _mapper.Map<HomeSlideIndexDto>(slide);
+                listSlides.Add(homeSlideIndexDto);
+            }
+            PaginatedList<HomeSlideIndexDto> homeSlideIndexDtos =  PaginatedList<HomeSlideIndexDto>.Create
+                (listSlides.AsQueryable(), page ,50);
 
-            return View(settings);
+            return View(homeSlideIndexDtos);
         }
         public async Task<IActionResult> Create()
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> Create(HomeSlideCreateDto homeSlideCreateDto)
         {
             if (!ModelState.IsValid)

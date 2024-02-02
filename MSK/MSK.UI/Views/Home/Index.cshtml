@@ -1,50 +1,28 @@
-﻿<section class="mf-slider">
+﻿@model List<HomeSlideLayoutDto>
+<section class="mf-slider">
     <div class="container">
         <div id="carouselCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class=""></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" class=""></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" class="active" aria-current="true"></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3" class=""></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="4" class=""></button>
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class=""></button>
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" class=""></button>
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3" class=""></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="4" class=""></button>
             </div>
             <div class="carousel-inner">
 
-                <div class="carousel-item" data-bs-interval="5000">
-                    <a class="slider-link-img" href="/en/news/view/1255" style="background-image: url('/uploads/dataimages/2024/01/31/bc38014c616ea44fec67574cc0650ca31706716770-slider.jpeg')"></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><a href="/en/news/view/1255">Regarding the Presidential elections, Technical Supervision Center on webcams was visited</a></h5>
-                        <p><a href="/en/news/view/1255">Regarding the Presidential elections, Technical Supervision Center on webcams was visited</a></p>
+                @foreach (var slide in Model)
+                {
+                    <div class="carousel-item" data-bs-interval="5000">
+                        <a class="slider-link-img" href="" style="background-image: url('../assets/img/newspaper.jpg')"></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5><a href="">@slide.Title </a></h5>
+                            <h3><a href="">@slide.SubDescription</a></h3>
+                            <p><a href="">@slide.Description</a></p>
+                        </div>
                     </div>
-                </div>
+                }
 
-                <div class="carousel-item" data-bs-interval="5000">
-                    <a class="slider-link-img" href="/en/news/view/1254" style="background-image: url('/uploads/dataimages/2024/01/31/0cfded00539ecc9262237b2073ed16f51706680359-slider.jpeg')"></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><a href="/en/news/view/1254">Central Election Commission held seminar jointly with the Ministry of Health and TABIB</a></h5>
-                        <p><a href="/en/news/view/1254">Central Election Commission held seminar jointly with the Ministry of Health and TABIB</a></p>
-                    </div>
-                </div>
 
-                <div class="carousel-item active" data-bs-interval="5000">
-                    <a class="slider-link-img" href="/en/news/view/1252" style="background-image: url('/uploads/dataimages/2024/01/29/f81e82cd0f45efe7b6ffcb4048d5033b1706526312-slider.jpeg')"></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><a href="/en/news/view/1252">A round table dedicated to the increase of women participation in elections was held</a></h5>
-                        <p><a href="/en/news/view/1252">A round table dedicated to the increase of women participation in elections was held</a></p>
-                    </div>
-                </div>
-
-                <div class="carousel-item" data-bs-interval="5000">
-                    <a class="slider-link-img" href="/en/news/view/1251" style="background-image: url('/uploads/dataimages/2024/01/26/c27ca5cc5574619658c84efc64cdae491706286494-slider.jpeg')"></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><a href="/en/news/view/1251">Central Election Commission conducted the next session on January 26, 2024</a></h5>
-                        <p><a href="/en/news/view/1251">Central Election Commission conducted the next session on January 26, 2024</a></p>
-                    </div>
-                </div>
-
-                <div class="carousel-item" data-bs-interval="5000">
-                    <a class="slider-link-img" href="/en/news/view/1249" style="background-image: url('/uploads/dataimages/2024/01/24/76bf394b5deb5444406fe3a971a320f51706093636-slider.jpeg')"></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><a href="/en/news/view/1249">Ballot Papers for the Presidential Elections started to be printed</a></h5>
-                        <p><a href="/en/news/view/1249">Ballot Papers for the Presidential Elections started to be printed</a></p>
-                    </div>
-                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
