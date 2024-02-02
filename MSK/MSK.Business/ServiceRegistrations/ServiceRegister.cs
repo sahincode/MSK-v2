@@ -11,6 +11,7 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<LayoutService>();
+            services.AddScoped<IHomeSlideService, HomeSlideService>();
 
 
 

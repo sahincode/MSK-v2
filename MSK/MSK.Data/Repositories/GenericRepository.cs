@@ -21,7 +21,7 @@ namespace MSK.Data.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public async Task Create(T entity)
+        public async Task CreateAsync(T entity)
         {
             await Table.AddAsync(entity);
         }

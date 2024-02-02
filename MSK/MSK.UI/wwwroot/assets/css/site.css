@@ -90,11 +90,7 @@ a{
     justify-content:center;
     align-items:center;
 }
-    #countdown ul li:before {
-        content: ":";
-     
-       
-    }
+    
     #countdown ul li {
         display: inline-block;
         list-style-type: none;
@@ -112,3 +108,21 @@ a{
         display:block;
         padding-bottom:2px;
     }
+.mf-elections ul li:not(:last-child)::before{
+    content: ":";
+    position: absolute;
+    top: 0px;
+    left: 81px;
+    font-size: 38px;
+}
+.mf-current:before {
+    content: " ";
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+    background-image: url(../img/newspaper.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;

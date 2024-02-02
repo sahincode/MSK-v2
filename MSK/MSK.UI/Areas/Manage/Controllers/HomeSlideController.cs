@@ -1,26 +1,28 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
+using System.Data;
 
-namespace MSK.Areas.Manage.Controllers
+namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    public class SettingController : Controller
+    public class HomeSlideController : Controller
     {
-        private readonly ISettingService _settingService;
+        private readonly IHomeSlideService _homeSlideService;
         private readonly IMapper _mapper;
 
-        public SettingController(ISettingService settingService, IMapper mapper)
+        public HomeSlideController(IHomeSlideService settingService, IMapper mapper)
         {
-            this._settingService = settingService;
+            this._homeSlideService = settingService;
             this._mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-            var settings = await _settingService.GetAllAsync(null, null);
+            var settings = await _homeSlideService.GetAll(null, null);
             if (settings is null)
             {
                 return NotFound();
@@ -28,10 +30,32 @@ namespace MSK.Areas.Manage.Controllers
 
             return View(settings);
         }
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        public async Task<IActionResult> Create(HomeSlideCreateDto homeSlideCreateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(homeSlideCreateDto);
+            }
+            try
+            {
+                await _homeSlideService.CreateAsync(homeSlideCreateDto);
+            }
+            catch (NullEntityException ex)
+            {
+                return NotFound();
 
+            }
+           
+
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> Update(int id)
         {
-            var setting = await _settingService.GetById(id);
+            var setting = await _homeSlideService.GetById(id);
             if (setting is null)
             {
                 return NotFound();
@@ -42,22 +66,22 @@ namespace MSK.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> Update(SettingUpdateDto settingUpdateDto)
+        public async Task<IActionResult> Update(HomeSlideUpdateDto homeSlideUpdateDto)
         {
             if (!ModelState.IsValid)
             {
-                return View(settingUpdateDto);
+                return View(homeSlideUpdateDto);
             }
             try
             {
-                await _settingService.Update(settingUpdateDto);
+                await _homeSlideService.UpdateAsync(homeSlideUpdateDto);
             }
             catch (NullEntityException ex)
             {
                 return NotFound();
 
             }
-            return RedirectToAction("index", "setting");
+            return RedirectToAction("index", "homeslide");
 
         }
         [Authorize(Roles = "SuperAdmin")]
@@ -65,7 +89,7 @@ namespace MSK.Areas.Manage.Controllers
         {
             try
             {
-                await _settingService.Delete(id);
+                await _homeSlideService.Delete(id);
             }
             catch (NullEntityException ex)
             {
@@ -79,7 +103,7 @@ namespace MSK.Areas.Manage.Controllers
         {
             try
             {
-                await _settingService.ToggleDelete(id);
+                await _homeSlideService.ToggleDelete(id);
             }
             catch (NullEntityException ex)
             {
@@ -90,3 +114,4 @@ namespace MSK.Areas.Manage.Controllers
         }
     }
 }
+

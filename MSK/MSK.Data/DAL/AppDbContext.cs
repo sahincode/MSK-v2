@@ -14,6 +14,8 @@ namespace MSK.Data.DAL
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<HomeSlide> HomeSlides { get; set; }
+
 
         public AppDbContext(DbContextOptions options):base(options){}
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
