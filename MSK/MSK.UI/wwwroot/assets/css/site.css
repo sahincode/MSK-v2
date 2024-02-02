@@ -1,0 +1,114 @@
+li {
+    list-style: none;
+
+}
+a{
+    text-decoration:none;
+}
+
+.mf-elections {
+    background-color: #E8F1F5;
+    padding: 10px 0;
+    min-height: 98px;
+}
+
+    .mf-elections h4, .mf-elections h5 {
+        font-size: 1rem;
+        color: #004A7C;
+        margin: 0;
+        line-height: 21px;
+    }
+
+.mf-nav {
+    background-color: #E8F1F5;
+}
+
+.mf-header {
+    padding: 40px 0;
+    background-color: #2853BC;
+}
+
+.mf-social-icons li {
+    list-style: none;
+}
+
+.fa-brands {
+    color: white;
+    font-size: 26px;
+}
+
+    .fa-brands:not(:nth-child(4)) {
+        margin-left: 20px;
+    }
+.mf-header .mf-logo {
+    color: #FFFFFF;
+    font-size: 32px;
+    text-decoration: none;
+}
+.input-group input{
+    color:none;
+    
+    border-bottom:2px solid white;
+}
+.fa-magnifying-glass{
+    color:white;
+}
+.mf-header .mf-search input[type=text]  {
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    background: none;
+    color: #FFFFFF;
+
+    text-align: right;
+    font-size: 14px;
+    height: 22px;
+    margin-right: 10px;
+}
+.mf-search button {
+    border :none;
+    background:none;
+}
+.mf-search input:hover, .mf-search input:hover{
+   border:none;
+   color:white;
+}
+.mf-langs a{
+    color:white;
+    font-size:18px;
+    font-weight:500;
+   
+}
+.mf-langs :not(:last-child){
+    margin-right:15px;
+}
+.mf-langs:hover {
+    color: #18A2C1;
+
+}
+#countdown ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+    #countdown ul li:before {
+        content: ":";
+     
+       
+    }
+    #countdown ul li {
+        display: inline-block;
+        list-style-type: none;
+        font-size: 12px;
+        position: relative;
+        width: 70px;
+        text-align: center;
+        margin-right: 24px;
+        padding-bottom: 4px;
+        color: #004A7C;
+    }
+    
+    #countdown ul li span{
+        font-size:36px;
+        display:block;
+        padding-bottom:2px;
+    }
