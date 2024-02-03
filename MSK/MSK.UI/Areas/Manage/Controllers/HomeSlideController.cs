@@ -65,13 +65,13 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var setting = await _homeSlideService.GetById(id);
-            if (setting is null)
+            var slide = await _homeSlideService.GetById(id);
+            if (slide is null)
             {
                 return NotFound();
             }
-            SettingUpdateDto settingUpdateDto = _mapper.Map<SettingUpdateDto>(setting);
-            return View(settingUpdateDto);
+            HomeSlideUpdateDto HomeSlideUpdateDto = _mapper.Map<HomeSlideUpdateDto>(slide);
+            return View(HomeSlideUpdateDto);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]

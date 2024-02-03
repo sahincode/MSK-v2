@@ -30,7 +30,7 @@ namespace MSK.Business.DTOs.HomeSlideDTOs
                                    MinimumLength(3).WithMessage("Can not be less than 3 digits");
             RuleFor(e => e.Description).NotNull().WithMessage("Can not be null").
                                     NotEmpty().WithMessage("Can not be empty").
-                                    EmailAddress().WithMessage("Please add valid email address").
+                                   
                                     MaximumLength(300).WithMessage("Can not be greater than 300 digits").
                                    MinimumLength(3).WithMessage("Can not be less than 3 digits");
         }

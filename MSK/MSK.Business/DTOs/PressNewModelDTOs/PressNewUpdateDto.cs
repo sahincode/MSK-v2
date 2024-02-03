@@ -24,10 +24,9 @@ namespace MSK.Business.DTOs.PressNewDTOs
                                    NotEmpty().WithMessage("Can not be empty").
                                    MaximumLength(300).WithMessage("Can not be greater than 300 digits").
                                    MinimumLength(3).WithMessage("Can not be less than 3 digits");
-            RuleFor(e => e.SubDescription).NotNull().WithMessage("Can not be null").
+            RuleFor(e => e.Article).NotNull().WithMessage("Can not be null").
                                     NotEmpty().WithMessage("Can not be empty").
-                                    EmailAddress().WithMessage("Please add valid email address").
-                                    MaximumLength(200).WithMessage("Can not be greater than 200 digits").
+                                    MaximumLength(8000).WithMessage("Can not be greater than 8000 digits").
                                    MinimumLength(3).WithMessage("Can not be less than 3 digits");
 
         }

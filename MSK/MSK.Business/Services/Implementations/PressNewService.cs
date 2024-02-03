@@ -11,14 +11,14 @@ using System.Linq.Expressions;
 
 namespace MSK.Business.Services.Implementations
 {
-    public class PressnewService :IPressNewService
+    public class PressNewService :IPressNewService
     {
         private readonly IMapper _mapper;
         private readonly IPressNewRepository _pressNewRepository;
         private readonly IWebHostEnvironment _env;
-        public const string passPath = "assets/img/PressNew";
+        public const string passPath = "assets/img/pressnew";
 
-        public PressnewService(IMapper mapper, IPressNewRepository pressNewRepository, IWebHostEnvironment env)
+        public PressNewService(IMapper mapper, IPressNewRepository pressNewRepository, IWebHostEnvironment env)
         {
             this._mapper = mapper;
             this._pressNewRepository= pressNewRepository;

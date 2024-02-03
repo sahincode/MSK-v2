@@ -1,9 +1,9 @@
-﻿@model List<PressNewLayoutDto>
+﻿@model HomeIndexViewModel
 <section class="mf-slider">
     <div class="container">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
-                @for (int i = 0; i < Model.Count; i++)
+                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
                 {
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i==0 ? "active":"")" aria-label="Slide @(i+1)"></button>
                 }
@@ -11,14 +11,14 @@
 
             </div>
             <div class="carousel-inner">
-                @for (int i = 0; i < Model.Count; i++)
+                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
                 {
                     <div class="carousel-item @(i==0 ? "active":"")">
-                        <img class="d-block w-100" src="~/assets/img/homeslide/@Model[i].ImageUrl" alt="First slide">
+                        <img class="d-block w-100" src="~/assets/img/homeslide/@Model.HomeSlideLayoutDtos[i].ImageUrl" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5><a href="">@Model[i].Title </a></h5>
-                            <h3><a href="">@Model[i].SubDescription</a></h3>
-                            <p><a href="">@Model[i].Description</a></p>
+                            <h5><a href="">@Model.HomeSlideLayoutDtos[i].Title </a></h5>
+                            <h3><a href="">@Model.HomeSlideLayoutDtos[i].SubDescription</a></h3>
+                            <p><a href="">@Model.HomeSlideLayoutDtos[i].Description</a></p>
                         </div>
                     </div>
                 }
@@ -92,36 +92,27 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7 d-flex flex-row">
                 <article class="article-item">
-                    <div class="article-img"><img src="~/assets/img/pressnews/" alt=""></div>
+                    <div class="article-img"><img src="~/assets/img/pressnew/@Model.PressNewLayoutDtos[0].ImageUrl" alt=""></div>
                     <div class="article-content">
-                        <p>Regarding the Presidential elections, Technical Supervision Center on webcams was visited</p>
-                        <time>31 january 2024 17:00</time>
+                        <h4>@Model.PressNewLayoutDtos[0].Title</h4>
+                        <p>@Model.PressNewLayoutDtos[0].Description</p>
+                        <time>@Model.PressNewLayoutDtos[0].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
                     </div>
                     <a href="/en/news/view/1255" class="mf-link"></a>
                 </article>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-5 d-flex">
                 <div class="list-news d-flex flex-column">
-                    <article data-image="/uploads/dataimages/2024/01/31/cb1782075a93bf9621d9e3b1b6f764331706716748-photo.jpeg" class="active">
-                        <p>Regarding the Presidential elections, Technical Supervision Center on webcams was visited</p>
-                        <time><i class="bi bi-calendar-date"></i> 31 january 2024 17:00</time>
-                        <a href="/en/news/view/1255" class="mf-link"></a>
-                    </article>
-                    <article data-image="/uploads/dataimages/2024/01/31/c27306d56a71f09c2dbdd8f655f03c141706680345-photo.jpeg" class="">
-                        <p>Central Election Commission held seminar jointly with the Ministry of Health and TABIB</p>
-                        <time><i class="bi bi-calendar-date"></i> 30 january 2024 15:00</time>
-                        <a href="/en/news/view/1254" class="mf-link"></a>
-                    </article>
-                    <article data-image="/uploads/dataimages/2024/01/29/7ea5a37fc86916576133a26fc855472d1706526285-photo.jpeg" class="">
-                        <p>A round table dedicated to the increase of women participation in elections was held</p>
-                        <time><i class="bi bi-calendar-date"></i> 29 january 2024 11:50</time>
-                        <a href="/en/news/view/1252" class="mf-link"></a>
-                    </article>
-                    <article data-image="/uploads/dataimages/2024/01/26/c27ca5cc5574619658c84efc64cdae491706286481-photo.jpeg" class="">
-                        <p>Central Election Commission conducted the next session on January 26, 2024</p>
-                        <time><i class="bi bi-calendar-date"></i> 26 january 2024 19:00</time>
-                        <a href="/en/news/view/1251" class="mf-link"></a>
-                    </article>
+                    @for(int i = 1; i < Model.PressNewLayoutDtos.Count; i++)
+                    {
+                        <article data-image="~/assets/img/pressnew/@Model.PressNewLayoutDtos[i].ImageUrl" class="active">
+                            <h4>@Model.PressNewLayoutDtos[i].Title</h4>
+                            <p>@Model.PressNewLayoutDtos[i].Description</p>
+                            <time>@Model.PressNewLayoutDtos[i].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
+                            <a href="/en/news/view/1255" class="mf-link"></a>
+                        </article>
+                    }
+
                 </div>
             </div>
         </div>

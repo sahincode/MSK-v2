@@ -1,5 +1,7 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.Mappers;
 using MSK.Core.Models;
 using MSK.Data.DAL;
@@ -9,7 +11,10 @@ using Pigga.Business.ServiceRegistrations;
 var builder = WebApplication.CreateBuilder(args);
 const string connection = "default";
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(opt =>
+{
+    opt.RegisterValidatorsFromAssembly(typeof(HomeSlideCreateDtoValidator).Assembly);
+});
 builder.Services.AddDbContext<AppDbContext>(opts =>
 {
 

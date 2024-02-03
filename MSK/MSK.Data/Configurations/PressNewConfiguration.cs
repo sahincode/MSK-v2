@@ -17,7 +17,7 @@ namespace MSK.Data.Configurations
             builder.Property(c => c.ImageUrl).IsRequired().HasMaxLength(100);
             
             builder.Property(c => c.Description).IsRequired().HasMaxLength(300);
-            builder.Property(c => c.Article).IsRequired().HasMaxLength(2000);
+            builder.Property(c => c.Article).IsRequired().HasMaxLength(8000);
 
         }
     }

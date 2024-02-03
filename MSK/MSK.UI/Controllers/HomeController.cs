@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.Services.Interfaces;
+using MSK.UI.ViewModels;
 using System.Diagnostics;
 
 namespace MSK.UI.Controllers
@@ -10,11 +12,13 @@ namespace MSK.UI.Controllers
     {
         private readonly IHomeSlideService _homeSlideService;
         private readonly IMapper _mapper;
+        private readonly IPressNewService _pressNewService;
 
-        public HomeController(IHomeSlideService homeSlideService ,IMapper mapper)
+        public HomeController(IHomeSlideService homeSlideService ,IMapper mapper ,IPressNewService pressNewService)
         {
             this._homeSlideService = homeSlideService;
             this._mapper = mapper;
+            this._pressNewService = pressNewService;
         }
 
         public async Task< IActionResult> Index()
@@ -27,8 +31,22 @@ namespace MSK.UI.Controllers
                 homeSlideLayoutDtos.Add(homeSlideLayoutDto);
 
             }
+            List<PressNewLayoutDto> pressNewLayoutDtos = new List<PressNewLayoutDto>();
+            var news = _pressNewService.GetAll(s => s.IsDeleted == false).Result.OrderBy(n => n.CreatedDate);
+            foreach (var neW in news)
+            {
+                PressNewLayoutDto pressNewLayoutDto = _mapper.Map<PressNewLayoutDto>(neW);
+                pressNewLayoutDtos.Add(pressNewLayoutDto);
 
-            return View(homeSlideLayoutDtos);
+            }
+            HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
+            {
+                HomeSlideLayoutDtos = homeSlideLayoutDtos,
+                PressNewLayoutDtos = pressNewLayoutDtos,
+
+            };
+
+            return View(homeIndexViewModel);
         }
 
         

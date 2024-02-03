@@ -11,6 +11,7 @@ using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
+    [Area("Manage")]
     public class PressNewController : Controller
     {
         private readonly IPressNewService _pressNewService;
@@ -23,21 +24,21 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Index(int page)
         {
-            var slides = await _pressNewService.GetAll(null, null);
-            if (slides is null)
+            var news = await _pressNewService.GetAll(null, null);
+            if (news is null)
             {
                 return NotFound();
             }
-            List<HomeSlideIndexDto> listSlides = new List<HomeSlideIndexDto>();
-            foreach (var slide in slides)
+            List<PressNewIndexDto> listSlides = new List<PressNewIndexDto>();
+            foreach (var neW in news)
             {
-                HomeSlideIndexDto homeSlideIndexDto = _mapper.Map<HomeSlideIndexDto>(slide);
-                listSlides.Add(homeSlideIndexDto);
+                PressNewIndexDto pressNewIndexDto = _mapper.Map<PressNewIndexDto>(neW);
+                listSlides.Add(pressNewIndexDto);
             }
-            PaginatedList<HomeSlideIndexDto> homeSlideIndexDtos = PaginatedList<HomeSlideIndexDto>.Create
+            PaginatedList<PressNewIndexDto> pressNewIndexDtos = PaginatedList<PressNewIndexDto>.Create
                 (listSlides.AsQueryable(), page, 50);
 
-            return View(homeSlideIndexDtos);
+            return View(pressNewIndexDtos);
         }
         public async Task<IActionResult> Create()
         {
@@ -65,13 +66,13 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var setting = await _pressNewService.GetById(id);
-            if (setting is null)
+            var neW = await _pressNewService.GetById(id);
+            if (neW is null)
             {
                 return NotFound();
             }
-            SettingUpdateDto settingUpdateDto = _mapper.Map<SettingUpdateDto>(setting);
-            return View(settingUpdateDto);
+            PressNewUpdateDto pressNewUpdateDto = _mapper.Map<PressNewUpdateDto>(neW);
+            return View(pressNewUpdateDto);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]

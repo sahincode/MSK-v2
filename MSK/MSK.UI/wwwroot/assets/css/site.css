@@ -1,3 +1,11 @@
+body {
+    font-family: "TT Hoves", Arial, sans-serif;
+    font-weight: 300;
+    color: #212529;
+    background-color: #FAFAFA;
+    font-size: 16px;
+}
+
 li {
     list-style: none;
 }
@@ -164,10 +172,105 @@ a {
     color: #004A7C;
     opacity: 0.8;
 }
-.fa-regular{
+
+.fa-regular {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: 100;
+}
+/*press new section design*/
+.article-content {
+    width: 100%;
+    padding: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.article-img {
+    position: relative;
+}
+
+.article-item {
+    position: relative;
+}
+
+.mf-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+/*election section style
+*/
+.mf-elections .election-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 10px 10px;
+    border: 2px solid #004A7C;
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+    .mf-elections .election-item:before {
+        content: "";
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 64px 64px;
+        border-color: transparent transparent #004A7C transparent;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    display: inline-block;
+    font-display: block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.bi{
     position:absolute;
-    bottom:20px;
-    right:20px;
-   font-size:20px;
-   font-weight:100;
+    bottom:7px;
+    right:7px;
+}
+.mf-elections .election-item .mf-icon {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    bottom: 0;
+    right: 5px;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.bi-arrow-right::before {
+    content: "\f138";
+}
+
+.mf-elections .election-item .mf-icon {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    color: #FFFFFF;
+    font-size: 24px;
 }

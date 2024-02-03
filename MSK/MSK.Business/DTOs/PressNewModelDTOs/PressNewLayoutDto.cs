@@ -13,6 +13,7 @@ namespace MSK.Business.DTOs.PressNewDTOs
         public string Article { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-
+        public DateTime CreationTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }
