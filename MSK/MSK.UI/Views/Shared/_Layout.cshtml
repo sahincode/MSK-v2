@@ -7,25 +7,24 @@
 
     <!-- Bootstrap core CSS -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <link href="~/assets/css/bootstrap/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 
     <!-- Custom styles for this template -->
     <link href="~/assets/css/site.css" rel="stylesheet" />
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/favicon/apple-touch-icon.png">
+   @* <link rel="apple-touch-icon" sizes="76x76" href="~/assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="~/assets/favicon/site.webmanifest">
     <link rel="mask-icon" href="~/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-
+*@
     <!-- countdown -->
-    <link href="~/assets/css/pages/countdown.css" rel="stylesheet">
+    @*<link href="~/assets/css/pages/countdown.css" rel="stylesheet">*@
 </head>
 <body>
 
@@ -120,6 +119,16 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav">
 
@@ -138,7 +147,7 @@
                         </li>
                         <li class="nav-item dropdown">
 
-                            <a  class="nav-link dropdown-toggle" role="button" aria-expanded="false">Elections</a>
+                            <a class="nav-link dropdown-toggle" role="button" aria-expanded="false">Elections</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a href="/en/elections/pages/elections-milli-majlis" class="dropdown-item">Elections to the Milli Majlis</a>
@@ -227,9 +236,10 @@
             </div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
     <script src="~/assets/js/site.js"></script>
-
 
 </body>
 </html>

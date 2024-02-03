@@ -15,6 +15,8 @@ namespace MSK.Data.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<HomeSlide> HomeSlides { get; set; }
+        public DbSet<PressNew> PressNews { get; set; }
+
 
 
         public AppDbContext(DbContextOptions options):base(options){}

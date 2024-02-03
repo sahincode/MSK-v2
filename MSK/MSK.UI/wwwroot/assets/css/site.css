@@ -1,9 +1,9 @@
 li {
     list-style: none;
-
 }
-a{
-    text-decoration:none;
+
+a {
+    text-decoration: none;
 }
 
 .mf-elections {
@@ -40,57 +40,63 @@ a{
     .fa-brands:not(:nth-child(4)) {
         margin-left: 20px;
     }
+
 .mf-header .mf-logo {
     color: #FFFFFF;
     font-size: 32px;
     text-decoration: none;
 }
-.input-group input{
-    color:none;
-    
-    border-bottom:2px solid white;
+
+.input-group input {
+    color: none;
+    border-bottom: 2px solid white;
 }
-.fa-magnifying-glass{
-    color:white;
+
+.fa-magnifying-glass {
+    color: white;
 }
-.mf-header .mf-search input[type=text]  {
+
+.mf-header .mf-search input[type=text] {
     border: none;
     border-bottom: 1px solid #FFFFFF;
     background: none;
     color: #FFFFFF;
-
     text-align: right;
     font-size: 14px;
     height: 22px;
     margin-right: 10px;
 }
+
 .mf-search button {
-    border :none;
-    background:none;
+    border: none;
+    background: none;
 }
-.mf-search input:hover, .mf-search input:hover{
-   border:none;
-   color:white;
+
+.mf-search input:hover, .mf-search input:hover {
+    border: none;
+    color: white;
 }
-.mf-langs a{
-    color:white;
-    font-size:18px;
-    font-weight:500;
-   
+
+.mf-langs a {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
 }
-.mf-langs :not(:last-child){
-    margin-right:15px;
+
+.mf-langs :not(:last-child) {
+    margin-right: 15px;
 }
+
 .mf-langs:hover {
     color: #18A2C1;
+}
 
+#countdown ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#countdown ul{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-    
+
     #countdown ul li {
         display: inline-block;
         list-style-type: none;
@@ -102,19 +108,21 @@ a{
         padding-bottom: 4px;
         color: #004A7C;
     }
-    
-    #countdown ul li span{
-        font-size:36px;
-        display:block;
-        padding-bottom:2px;
-    }
-.mf-elections ul li:not(:last-child)::before{
+
+        #countdown ul li span {
+            font-size: 36px;
+            display: block;
+            padding-bottom: 2px;
+        }
+
+.mf-elections ul li:not(:last-child)::before {
     content: ":";
     position: absolute;
     top: 0px;
     left: 81px;
     font-size: 38px;
 }
+
 .mf-current:before {
     content: " ";
     position: fixed;
@@ -126,3 +134,40 @@ a{
     background-size: cover;
     width: 100%;
     height: 100%;
+}
+
+.carousel-indicators li {
+    height: 4px;
+    width: 20px;
+    background-color: peru;
+}
+/*current issies css section*/
+.mf-block-header .mf-title {
+    color: #004A7C;
+    font-size: 34px;
+    line-height: 60px;
+    font-weight: 200;
+    margin: 0;
+}
+
+.mf-current .mf-current-item {
+    min-height: 120px;
+    height: 100%;
+    position: relative;
+    display: block;
+    padding: 10px;
+    border: 2px solid #004A7C;
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    background-color: #FFFFFF;
+    color: #004A7C;
+    opacity: 0.8;
+}
+.fa-regular{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+   font-size:20px;
+   font-weight:100;
+}

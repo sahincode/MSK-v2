@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MSK.Core.Models
 {
+
     public class HomeSlide : BaseEntity
     {
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Core.Models;
 
@@ -18,6 +19,11 @@ namespace MSK.Business.Mappers
             CreateMap<HomeSlideUpdateDto, HomeSlide>().ReverseMap();
             CreateMap<HomeSlideIndexDto, HomeSlide>().ReverseMap();
             CreateMap<HomeSlideLayoutDto, HomeSlide>().ReverseMap();
+            //press new  model model mapping profile
+            CreateMap<PressNewCreateDto, PressNew>().ReverseMap();
+            CreateMap<PressNewUpdateDto, PressNew>().ReverseMap();
+            CreateMap<PressNewIndexDto, PressNew>().ReverseMap();
+            CreateMap<PressNewLayoutDto, PressNew>().ReverseMap();
 
 
         }

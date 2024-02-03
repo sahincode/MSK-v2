@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using MSK.Business.DTOs.PressNewDTOs;
 
 namespace MSK.Business.DTOs.HomeSlideDTOs
 {

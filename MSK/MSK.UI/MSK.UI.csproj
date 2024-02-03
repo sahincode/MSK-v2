@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\admin\img\homeslide\" />
+    <Folder Include="wwwroot\assets\img\pressnews\" />
   </ItemGroup>
 
 </Project>

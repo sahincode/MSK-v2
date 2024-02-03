@@ -106,7 +106,7 @@ namespace MSK.UI.Areas.Manage.Controllers
                 return NotFound();
 
             }
-            return RedirectToAction("index", "setting");
+            return RedirectToAction("index", "homeslide");
         }
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> ToggleDelete(int id)
@@ -120,7 +120,7 @@ namespace MSK.UI.Areas.Manage.Controllers
                 return NotFound();
 
             }
-            return RedirectToAction("index", "setting");
+            return RedirectToAction("index", "homeslide");
         }
     }
 }

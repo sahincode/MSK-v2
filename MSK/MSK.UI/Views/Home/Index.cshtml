@@ -1,38 +1,38 @@
-﻿@model List<HomeSlideLayoutDto>
+﻿@model List<PressNewLayoutDto>
 <section class="mf-slider">
     <div class="container">
-        <div id="carouselCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class=""></button>
-                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" class=""></button>
-                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" class="active" aria-current="true"></button>
-                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="3" class=""></button><button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="4" class=""></button>
-            </div>
-            <div class="carousel-inner">
-
-                @foreach (var slide in Model)
+                @for (int i = 0; i < Model.Count; i++)
                 {
-                    <div class="carousel-item" data-bs-interval="5000">
-                        <a class="slider-link-img" href="" style="background-image: url('../assets/img/newspaper.jpg')"></a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5><a href="">@slide.Title </a></h5>
-                            <h3><a href="">@slide.SubDescription</a></h3>
-                            <p><a href="">@slide.Description</a></p>
-                        </div>
-                    </div>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i==0 ? "active":"")" aria-label="Slide @(i+1)"></button>
                 }
 
 
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="carousel-item @(i==0 ? "active":"")">
+                        <img class="d-block w-100" src="~/assets/img/homeslide/@Model[i].ImageUrl" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5><a href="">@Model[i].Title </a></h5>
+                            <h3><a href="">@Model[i].SubDescription</a></h3>
+                            <p><a href="">@Model[i].Description</a></p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Prev</span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
     </div>
 </section>
 
@@ -48,7 +48,33 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 mb-3 mb-md-0"><a href="/en/elections/pages/presidential-elections/07-02-2024" class="mf-current-item d-flex align-items-center"><p>Presidential Elections - 2024</p><i class="bi bi-arrow-right-circle"></i></a></div><div class="col-md-3 mb-3 mb-md-0"><a href="/en/elections/view/1202" class="mf-current-item d-flex align-items-center"><p>Free airtime and space for publication - 26.12.2023</p><i class="bi bi-arrow-right-circle"></i></a></div><div class="col-md-3 mb-3 mb-md-0"><a href="https://www.infocenter.gov.az/e-services/adsoyad.aspx" class="mf-current-item d-flex align-items-center"><p>Search your name in the voters' list</p><i class="bi bi-arrow-right-circle"></i></a></div><div class="col-md-3 mb-3 mb-md-0"><a href="/az/news" class="mf-current-item d-flex align-items-center"><p>Agenda news</p><i class="bi bi-arrow-right-circle"></i></a></div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <a href="/en/elections/pages/presidential-elections/07-02-2024" class="mf-current-item d-flex align-items-center">
+                            <p>Presidential Elections - 2024</p>
+                            <i class="fa-regular fa-circle-right"></i>
+
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <a href="/en/elections/view/1202" class="mf-current-item d-flex align-items-center">
+                            <p>Free airtime and space for publication - 26.12.2023</p>
+                            <i class="fa-regular fa-circle-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <a href="https://www.infocenter.gov.az/e-services/adsoyad.aspx" class="mf-current-item d-flex align-items-center">
+                            <p>
+                                Search your name in the voters' list
+                            </p>
+                            <i class="fa-regular fa-circle-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <a href="/az/news" class="mf-current-item d-flex align-items-center">
+                            <p>Agenda news</p>
+                            <i class="fa-regular fa-circle-right"></i>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -66,7 +92,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7 d-flex flex-row">
                 <article class="article-item">
-                    <div class="article-img"><img src="/uploads/dataimages/2024/01/31/cb1782075a93bf9621d9e3b1b6f764331706716748-photo.jpeg" alt=""></div>
+                    <div class="article-img"><img src="~/assets/img/pressnews/" alt=""></div>
                     <div class="article-content">
                         <p>Regarding the Presidential elections, Technical Supervision Center on webcams was visited</p>
                         <time>31 january 2024 17:00</time>
@@ -102,43 +128,7 @@
     </div>
 </section>
 
-<section class="mf-useful">
-    <div class="container">
-        <!--div class="mf-block-header d-flex">
-            <h2 class="mf-title">Useful sections</h2>
-        </div-->
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-2 mt-2">
-                <div class="useful-item">
-                    <h3>Central Election Commission</h3>
-                    <ul><li><a href="/en/pages/view/fealiyyet-ve-selahiyyet">Activities and Authorities</a></li><li><a href="/en/structure">CEC composition</a></li><li><a href="/en/secretariat">CEC Secretariat</a></li></ul>
-                </div>
-                <div class="footer"></div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-2 mt-2">
-                <div class="useful-item">
-                    <h3>Documents</h3>
-                    <ul><li><a href="/en/post/list/serencamlar">Orders</a></li><li><a href="/en/decisions">Decisions</a></li><li><a href="/en/instructions">Instructions</a></li><li><a href="/en/pages/view/esasname">Regulations</a></li><li><a href="/en/post/list/hesabatlar">Reports</a></li><li><a href="/en/post/list/beyanatlar">Statements</a></li></ul>
-                </div>
-                <div class="footer"></div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-2 mt-2">
-                <div class="useful-item">
-                    <h3>Press-releases</h3>
-                    <ul><li><a href="/en/news">Press-release</a></li><li><a href="/en/electioneditions">Election editions</a></li></ul>
-                </div>
-                <div class="footer"></div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-2 mt-2">
-                <div class="useful-item">
-                    <h3>Announcement</h3>
-                    <ul><li><a href="/en/pages/view/faq">FAQ</a></li><li><a href="/en/announcement">Announcement</a></li><li><a href="/en/videogallery">Video Gallery</a></li></ul>
-                </div>
-                <div class="footer"></div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <section class="mf-elections">
     <div class="container">
@@ -179,87 +169,7 @@
     </div>
 </section>
 
-<section class="mf-gallery">
-    <div class="container">
-        <div class="mf-block-header d-flex align-items-md-center flex-column flex-md-row">
-            <h2 class="mf-title">Gallery</h2>
-            <div class="mf-gallery-links ms-md-auto">
-                <a href="/en/photogallery">PHOTO GALLERY</a> <span>/</span> <a href="/en/videogallery">VIDEO GALLERY</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-6 col-lg-6">
-                <div class="mf-photogallery">
-                    <div class="row">
 
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_37/bc38014c616ea44fec67574cc0650ca31706717400-photo.jpg" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"><img src="/uploads/galleries/folder_37/bc38014c616ea44fec67574cc0650ca31706717400-photo.jpg" alt="Visit of Technical Control Service of Webcams - 31.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_37/a7324ba15520112b6331b753fd9d713c1706717401-photo.jpg" class="hidden-img" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"></a><a href="/uploads/galleries/folder_37/22a5a6cac374179a7e7ad0f38745346c1706717401-photo.jpg" class="hidden-img" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"></a><a href="/uploads/galleries/folder_37/240485e63bb02bdb32c18960be561f161706717400-photo.jpg" class="hidden-img" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"></a><a href="/uploads/galleries/folder_37/592e3f095a1db20ce56c28ea5d49e7151706717402-photo.jpg" class="hidden-img" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"></a><a href="/uploads/galleries/folder_37/cb1782075a93bf9621d9e3b1b6f764331706717401-photo.jpg" class="hidden-img" data-fancybox="gallery-37" data-caption="Visit of Technical Control Service of Webcams - 31.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_36/76bf394b5deb5444406fe3a971a320f51706167324-photo.jpg" data-fancybox="gallery-36" data-caption="Printing of ballot papers - 24.01.2024"><img src="/uploads/galleries/folder_36/76bf394b5deb5444406fe3a971a320f51706167324-photo.jpg" alt="Printing of ballot papers - 24.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_36/ece17c67e1f84a945a6432ca99516d7c1706167324-photo.jpg" class="hidden-img" data-fancybox="gallery-36" data-caption="Printing of ballot papers - 24.01.2024"></a><a href="/uploads/galleries/folder_36/eba948e0db8a63b2017ddef48496941e1706167324-photo.jpg" class="hidden-img" data-fancybox="gallery-36" data-caption="Printing of ballot papers - 24.01.2024"></a><a href="/uploads/galleries/folder_36/5b2b43e229980d4ad259b1ff72aac69d1706167325-photo.jpg" class="hidden-img" data-fancybox="gallery-36" data-caption="Printing of ballot papers - 24.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_35/f17144aeb5bf87cfc8f2e7bfb353a9b91706166922-photo.jpg" data-fancybox="gallery-35" data-caption="Seminar for IT specialists - 24.01.2024"><img src="/uploads/galleries/folder_35/f17144aeb5bf87cfc8f2e7bfb353a9b91706166922-photo.jpg" alt="Seminar for IT specialists - 24.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_35/c57bab8a99e33c05b770d065503e309f1706166922-photo.jpg" class="hidden-img" data-fancybox="gallery-35" data-caption="Seminar for IT specialists - 24.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_34/d53211387fe5f7adac7279750f857c9e1705571442-photo.jpg" data-fancybox="gallery-34" data-caption="Survey of the Independent Media Center - 17.01.2024"><img src="/uploads/galleries/folder_34/d53211387fe5f7adac7279750f857c9e1705571442-photo.jpg" alt="Survey of the Independent Media Center - 17.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_34/d2d56a183faee36c79d19ac070532a5b1705571441-photo.jpg" class="hidden-img" data-fancybox="gallery-34" data-caption="Survey of the Independent Media Center - 17.01.2024"></a><a href="/uploads/galleries/folder_34/8a3efcb090a2c29a973b9d74b70ba1551705571442-photo.jpg" class="hidden-img" data-fancybox="gallery-34" data-caption="Survey of the Independent Media Center - 17.01.2024"></a><a href="/uploads/galleries/folder_34/c8e063013defc2b258030f5c75ccfcab1705571442-photo.jpg" class="hidden-img" data-fancybox="gallery-34" data-caption="Survey of the Independent Media Center - 17.01.2024"></a><a href="/uploads/galleries/folder_34/4b6be31a00d4523e3222a154acce6c0b1705571442-photo.jpg" class="hidden-img" data-fancybox="gallery-34" data-caption="Survey of the Independent Media Center - 17.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_8/605a95c977fbba8687e4457e44acf50d1705566075-photo.jpeg" data-fancybox="gallery-8" data-caption="Foreign meetings"><img src="/uploads/galleries/folder_8/605a95c977fbba8687e4457e44acf50d1705566075-photo.jpeg" alt="Foreign meetings"></a>
-
-                            <a href="/uploads/galleries/folder_8/40abd87ef7cd545df3ddead1afac34ca1705566334-photo.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/b493b4434bf88978f895ea757fdd95ec1705566301-photo.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/57263b103b4643c6dc4a700ab202826f1705571882-photo.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/b3f78823dbd5383392754a13e83347581705571789-photo.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/2bc4736f30a816eb8d339bc9400fb1421705571763-photo.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_448F2A-B07F64-52B0CD-3CE5BD-ED26E6-2DD523.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_042B2F-6F0037-F0E18B-015094-FCAA60-3AB702.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_4E6BAF-7D1034-BA928E-0F6F6B-A9C4D0-C906F7.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_6CAAA8-EAE593-2E81AD-2EF530-CC6E3D-94FD7E.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_1F0300-E42011-6F00C5-0EF464-64C088-E25DCC.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_3E58EC-C95D1E-533D16-C0ACB3-7E2876-8C5A00.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_93019D-056616-3B5362-EA3731-04BD96-42D979.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_806EFF-77DBC1-EC56FC-250831-1DF5D5-6CC967.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_111430-C48392-49E589-CE45C1-AAC879-09C617.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_94F1DA-F48B55-53A517-0991FB-AACB7A-ED0943.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_32AFDF-408E88-AB2FD9-483323-3DEAA2-95D2EE.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_2AA82C-D1AFAC-B04A9B-796C09-E15906-C8A80F.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_E0EDC8-E5C026-A42B82-8646CE-A37E51-EAB568.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_7DF1A7-9D6650-DD8948-5A3790-1DC2F4-F5E919.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_87C541-1DF7A3-7C8391-E65434-D8F5A5-2C079A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_407AD4-31B1FE-4478CD-C9EB79-23F05E-F341B2.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_03CC1A-6D91CB-DFFB90-0FE15E-A67587-47059A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_57856C-D19C5A-C4D96E-0A115B-720640-F9D3FB.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_481D39-70FADB-55D472-0B073C-00B070-2F061F.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_3BF64F-DB0CC2-7F5086-413216-15E36A-772968.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_42391A-314CB9-2A00D1-D2E032-688C9A-C89611.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_C03907-332805-8B1C61-064305-530BF3-0B5DDF.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_332EB1-9624D9-92FC7A-A69152-5A6B2E-7EE060.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_917019-DC02FC-308056-C394B3-13C0D9-44BB14.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_C770D8-9C9D30-895160-D93F68-525CFE-AD320B.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_32C111-5B9F75-0E5ED3-F606AA-9088DA-22521C.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_28209F-A17963-F99AAE-A776E4-42D531-2FDA6D.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_B53EE5-2D234A-E13BB1-12F58E-AA13CE-CCBD7A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_3A1520-3A1C11-EAC696-853E88-19C156-5CBC1A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_04EA56-F72CA6-C86488-446997-2B13DD-621BD7.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_BF6712-37B9E8-AC9BC7-6C808E-6E4313-511772.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_E07A5D-AF8E97-7EFBA3-F1FB3D-517904-726430.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_976CB6-B92BBB-B92131-A6F99E-F75FDD-476F44.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_D9DC68-87C785-2923AA-143673-54C7B8-5DA7E8.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_9AD23A-0EAE5A-C089D2-7ABD57-8B3884-9C4D04.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_4AF395-43D04D-78A6C7-539C66-E742A9-C01056.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_5CE503-A9536E-5895F2-AEF0EA-356967-0F6460.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_FD1365-12D3FC-B0646D-51029A-D4D241-4F2C34.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_630F29-F3BAB7-31182B-9C40A0-634CC6-D51617.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_6DFA24-DF31D7-B83DFF-1976B4-653D19-8DA502.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_0E7976-FED1EF-43A472-A5EE97-0F9368-480849.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_D3F934-7635CE-8A3EE1-42B1F0-89A965-4580A0.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_C3738F-D71D2A-C316AF-5FF98A-75036E-2913A0.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_78D6D7-A81507-D235A3-2BCDA8-D7AB99-145E6D.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_1D7886-4A1BC2-E4C242-245D55-4AC8CA-33E47A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_01C4A2-6AF022-6DE7FE-249F32-641E9B-B3D225.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_253B91-821BE5-E7E10E-A0E116-488496-0B8803.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_0FBD8B-BA38BA-8EF65D-CE8B13-228C2E-052149.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_41CFFA-2F4922-77488C-7C60AF-487C9B-0FC279.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_9D286A-15BD71-37C692-AF0151-1DC649-8DA5C7.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_E6F6DD-2D6150-CDF2EB-3C7685-A5C653-FAF21A.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_DEB825-1C0B5F-7565E2-54C063-A7890A-8F0968.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a><a href="/uploads/galleries/folder_8/IMG_C94E16-4C7173-7ED27D-49FCB5-57992D-354936.jpg" class="hidden-img" data-fancybox="gallery-8" data-caption="Foreign meetings"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_33/c9a194c850a781a8c82ce7a5efb0e0971704961703-photo.jpg" data-fancybox="gallery-33" data-caption="Training for lower election commissions - 10.01.2024"><img src="/uploads/galleries/folder_33/c9a194c850a781a8c82ce7a5efb0e0971704961703-photo.jpg" alt="Training for lower election commissions - 10.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_33/f586f797c663e1073676df689679a0e71704961703-photo.jpg" class="hidden-img" data-fancybox="gallery-33" data-caption="Training for lower election commissions - 10.01.2024"></a><a href="/uploads/galleries/folder_33/2a4d4bb981bef4c7f6d89f943a515de21704961702-photo.jpg" class="hidden-img" data-fancybox="gallery-33" data-caption="Training for lower election commissions - 10.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_32/29df5923da910f7ec134ea8eb418a4861704725090-photo.jpg" data-fancybox="gallery-32" data-caption="Seminar-conference on the election-related dispute resolution - 08.01.2024"><img src="/uploads/galleries/folder_32/29df5923da910f7ec134ea8eb418a4861704725090-photo.jpg" alt="Seminar-conference on the election-related dispute resolution - 08.01.2024"></a>
-
-                            <a href="/uploads/galleries/folder_32/440003924a66226e21a5716e44e2906a1704725089-photo.jpg" class="hidden-img" data-fancybox="gallery-32" data-caption="Seminar-conference on the election-related dispute resolution - 08.01.2024"></a><a href="/uploads/galleries/folder_32/cf7b8c51c1679539d7fefc72d4e7a2661704725089-photo.jpg" class="hidden-img" data-fancybox="gallery-32" data-caption="Seminar-conference on the election-related dispute resolution - 08.01.2024"></a><a href="/uploads/galleries/folder_32/b30d8dad743b5671233f364fbffb7cb31704725090-photo.jpg" class="hidden-img" data-fancybox="gallery-32" data-caption="Seminar-conference on the election-related dispute resolution - 08.01.2024"></a><a href="/uploads/galleries/folder_32/45b14da97670fd3617260bc62307b45e1704725090-photo.jpg" class="hidden-img" data-fancybox="gallery-32" data-caption="Seminar-conference on the election-related dispute resolution - 08.01.2024"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_5/e57494ce67dfe7613403aa2f462323781705576573-photo.jpg" data-fancybox="gallery-5" data-caption="Session of CEC"><img src="/uploads/galleries/folder_5/e57494ce67dfe7613403aa2f462323781705576573-photo.jpg" alt="Session of CEC"></a>
-
-                            <a href="/uploads/galleries/folder_5/16d9de7b182b81ff75956daef33da9a31705576930-photo.jpg" class="hidden-img" data-fancybox="gallery-5" data-caption="Session of CEC"></a><a href="/uploads/galleries/folder_5/9583e2af2bc1f11a33ae6b3bebfb078c1705576186-photo.jpeg" class="hidden-img" data-fancybox="gallery-5" data-caption="Session of CEC"></a><a href="/uploads/galleries/folder_5/9e2535669d9a87070f05a5706a7ab0431705576028-photo.jpg" class="hidden-img" data-fancybox="gallery-5" data-caption="Session of CEC"></a>
-                        </div>
-
-                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3">
-                            <a href="/uploads/galleries/folder_15/IMG_1AEEA7-5A5691-DC5871-52EBEC-80B0CC-822267.jpg" data-fancybox="gallery-15" data-caption="Seminars"><img src="/uploads/galleries/folder_15/IMG_1AEEA7-5A5691-DC5871-52EBEC-80B0CC-822267.jpg" alt="Seminars"></a>
-
-                            <a href="/uploads/galleries/folder_15/IMG_201D56-568AAE-687492-F23FCC-BAB74D-6B1FE4.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_4C9FDD-6CA189-BD36BD-05D86F-2CF940-8CD13D.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_864AD9-97C368-4A1D50-0F237D-66D414-E14764.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_7EB00C-1A6BCD-D1FBBE-2820CE-5F09CE-0B5038.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_92CA81-6BD319-1707A5-251522-C3BB89-1E1027.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_11CD98-F7079C-8ED9C2-491D32-A323E7-5EBE99.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_861928-1D28AC-0B713D-24525D-FD3C25-C15B09.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a><a href="/uploads/galleries/folder_15/IMG_89909E-8C8FF9-0F31A0-87FCE4-B28162-8D5053.jpg" class="hidden-img" data-fancybox="gallery-15" data-caption="Seminars"></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-xl-6 col-lg-6">
-                <div class="mf-videogallery">
-                    <a href="https://www.youtube.com/embed/j9w2AI4di58" data-fancybox="gallery-418">
-                        <div class="youtube-play"><i class="bi bi-play-fill"></i></div>
-                        <img src="https://img.youtube.com/vi/j9w2AI4di58/0.jpg">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="mf-useful-links">
     <div class="container">
 
