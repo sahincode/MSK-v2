@@ -248,11 +248,13 @@ a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-.bi{
-    position:absolute;
-    bottom:7px;
-    right:7px;
+
+.bi {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
 }
+
 .mf-elections .election-item .mf-icon {
     position: absolute;
     width: 100px;
@@ -274,3 +276,43 @@ a {
     color: #FFFFFF;
     font-size: 24px;
 }
+
+.mf-img {
+    width: 25%;
+    position: relative;
+}
+
+.mf-useful-links a.useful-links-item .mf-img img {
+    width: 100%;
+}
+
+.mf-useful-links a.useful-links-item {
+    display: block;
+    padding: 10px;
+    border: 1px solid #CFCFCF;
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    width: 100%;
+}
+
+.mf-footer {
+    margin-bottom: 0;
+    background-color: #2853BC;
+    background-size: cover;
+    padding: 70px 0;
+    margin-top: 70px;
+}
+
+    .mf-footer .mf-logo {
+        color: #FFFFFF;
+        font-size: 26px;
+        line-height: 36px;
+        text-decoration: none;
+    }
+
+    .mf-footer p {
+        color: #FFFFFF;
+        font-size: 16px;
+        line-height: 24px;
+    }
