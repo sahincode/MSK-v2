@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Core.Models;
@@ -10,7 +12,7 @@ namespace MSK.Business.Mappers
     {
         public MapProfile()
         {
-           
+
             //setting model mapping profile
             CreateMap<SettingUpdateDto, Setting>().ReverseMap();
             CreateMap<SettingGetDto, Setting>().ReverseMap();
@@ -24,6 +26,16 @@ namespace MSK.Business.Mappers
             CreateMap<PressNewUpdateDto, PressNew>().ReverseMap();
             CreateMap<PressNewIndexDto, PressNew>().ReverseMap();
             CreateMap<PressNewLayoutDto, PressNew>().ReverseMap();
+            //history  model model mapping profile
+            CreateMap<HistoryCreateDto, History>().ReverseMap();
+            CreateMap<HistoryUpdateDto, History>().ReverseMap();
+            CreateMap<HistoryIndexDto, History>().ReverseMap();
+            CreateMap<HistoryLayoutDto, History>().ReverseMap();
+            //national attribute model model mapping profile
+            CreateMap<NationalAttributeCreateDto, NationalAttribute>().ReverseMap();
+            CreateMap<NationalAttributeUpdateDto, NationalAttribute>().ReverseMap();
+            CreateMap<NationalAttributeIndexDto, NationalAttribute>().ReverseMap();
+            CreateMap<NationalAttributeLayoutDto, NationalAttribute>().ReverseMap();
 
 
         }

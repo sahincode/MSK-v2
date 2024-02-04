@@ -16,9 +16,9 @@ namespace MSK.UI.Areas.Manage.Controllers
         private readonly IHomeSlideService _homeSlideService;
         private readonly IMapper _mapper;
 
-        public HomeSlideController(IHomeSlideService settingService, IMapper mapper)
+        public HomeSlideController(IHomeSlideService homeSlideService, IMapper mapper)
         {
-            this._homeSlideService = settingService;
+            this._homeSlideService = homeSlideService;
             this._mapper = mapper;
         }
         public async Task<IActionResult> Index( int page)

@@ -1,19 +1,29 @@
 ﻿/*mf-breadcrumb section style*/
-.mf-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+.mf-breadcrumb .breadcrumb-item .breadcrumb-item::before {
     content: "»";
     float: none;
     position: relative;
     top: -1px;
 }
-.breadcrumb-item a{
-    color: #606161 !important;
 
+.breadcrumb-item a {
+    color: #606161 !important;
 }
+
     .breadcrumb-item a:hover {
         color: #373E40 !important;
-        text-decoration:underline;
+        text-decoration: underline;
     }
-.main-content{
-    z-index:-1;
-    position:static;
+
+.azerbaijan.page-azerbaijan .az-flag {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.azerbaijan.page-azerbaijan .div-flag img {
+    width: 80%;
+}
+
+.div-flag {
+    height: 500px;
 }

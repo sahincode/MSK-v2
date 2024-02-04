@@ -12,6 +12,10 @@ namespace MSK.Data.RepositoryRegistrations
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IHomeSlideRepository,HomeSlideRepository>();
             services.AddScoped<IPressNewRepository, PressNewRepository>();
+            services.AddScoped<IHistorRepository,HistorRepository>();
+            services.AddScoped<INationalAttributeRepository, NationalAttributeRepository>();
+
+
 
 
 

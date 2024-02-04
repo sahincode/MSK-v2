@@ -16,6 +16,10 @@ namespace MSK.Data.DAL
         public DbSet<Setting> Settings { get; set; }
         public DbSet<HomeSlide> HomeSlides { get; set; }
         public DbSet<PressNew> PressNews { get; set; }
+        public DbSet<History> Histories { get; set; }
+        public DbSet<NationalAttribute> NationalAttributes { get; set; }
+
+
 
 
 
