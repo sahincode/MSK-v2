@@ -105,7 +105,7 @@
                 <div class="list-news d-flex flex-column">
                     @for(int i = 1; i < Model.PressNewLayoutDtos.Count; i++)
                     {
-                        <article data-image="~/assets/img/pressnew/@Model.PressNewLayoutDtos[i].ImageUrl" class="active">
+                        <article data-image="~/assets/img/pressnew/@Model.PressNewLayoutDtos[i].ImageUrl" class="active article-item">
                             <h4>@Model.PressNewLayoutDtos[i].Title</h4>
                             <p>@Model.PressNewLayoutDtos[i].Description</p>
                             <time>@Model.PressNewLayoutDtos[i].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
