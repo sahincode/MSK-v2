@@ -38,3 +38,20 @@
             //seconds
         }, 0)
 }());
+const navButton = document.querySelector('.navbar-toggler');
+const navDiv = document.querySelector('.navbar-collapse');
+
+navButton.addEventListener("click", function () {
+  
+    if (navButton.classList.contains('collapsed') && !navButton.classList.contains('show')) {
+        navButton.classList.remove('collapsed')
+        navDiv.classList.add('show');
+    }
+
+    else {
+        navButton.classList.add('collapsed');
+        navDiv.classList.remove('show');
+
+    }
+
+})
