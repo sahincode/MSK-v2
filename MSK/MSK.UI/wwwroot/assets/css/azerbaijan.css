@@ -1,6 +1,6 @@
 ﻿/*mf-breadcrumb section style*/
-.mf-breadcrumb .breadcrumb-item .breadcrumb-item::before {
-    content: "»";
+.mf-breadcrumb .breadcrumb-item:not(:first-child):before {
+    content: "»" !important;
     float: none;
     position: relative;
     top: -1px;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MSK.Business.DTOs.AccredationModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
@@ -36,6 +37,11 @@ namespace MSK.Business.Mappers
             CreateMap<NationalAttributeUpdateDto, NationalAttribute>().ReverseMap();
             CreateMap<NationalAttributeIndexDto, NationalAttribute>().ReverseMap();
             CreateMap<NationalAttributeLayoutDto, NationalAttribute>().ReverseMap();
+            // accredation model model mapping profile
+            CreateMap<AccredationCreateDto, Accredation>().ReverseMap();
+            CreateMap<AccredationUpdateDto, Accredation>().ReverseMap();
+            CreateMap<AccredationIndexDto, Accredation>().ReverseMap();
+            CreateMap<AccredationLayoutDto, Accredation>().ReverseMap();
 
 
         }

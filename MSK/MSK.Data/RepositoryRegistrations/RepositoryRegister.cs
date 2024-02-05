@@ -14,6 +14,8 @@ namespace MSK.Data.RepositoryRegistrations
             services.AddScoped<IPressNewRepository, PressNewRepository>();
             services.AddScoped<IHistorRepository,HistorRepository>();
             services.AddScoped<INationalAttributeRepository, NationalAttributeRepository>();
+            services.AddScoped<IAccredationRepository, AccredationRepository>();
+
 
 
 
