@@ -48,5 +48,28 @@ namespace MSK.Business.InternalHelperServices
 
             return videoName;
         }
+        public async static Task<string> SavePdf(string filePath, string passPath, IFormFile pdf)
+        {
+
+            var FolderPdf = Path.Combine(filePath, passPath);
+            string pdfName = null;
+            if (!Directory.Exists(FolderPdf))
+            {
+
+                Directory.CreateDirectory(FolderPdf);
+            }
+            pdfName = pdf.FileName.Length > 64 ?
+                Guid.NewGuid().ToString() + pdf.FileName.Substring(pdf.FileName.Length - 64, 64).Replace(" ", "")
+                : Guid.NewGuid().ToString() + pdf.FileName.Replace(" ", "");
+
+            var fileFullPath = Path.Combine(FolderPdf, pdfName);
+
+            using (var FileStream = new FileStream(fileFullPath, FileMode.Create))
+            {
+                await pdf.CopyToAsync(FileStream);
+            }
+
+            return pdfName;
+        }
     }
 }

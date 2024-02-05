@@ -15,10 +15,11 @@ using System.Threading.Tasks;
 using MSK.Data.Repositories;
 using MSK.Business.Services.Interfaces;
 using MSK.Business.DTOs.AccredationModelDTOs;
+using MSK.Business.Exceptions.SizeExceptions;
 
 namespace MSK.Business.Services.Implementations
 {
-    public class AccredationService :IAccredationService
+    public class AccredationService : IAccredationService
     {
         private readonly IMapper _mapper;
         private readonly IAccredationRepository _accredationRepository;
@@ -35,18 +36,18 @@ namespace MSK.Business.Services.Implementations
         {
             string rootPath = _env.WebRootPath;
             Accredation accredation = _mapper.Map<Accredation>(entity);
-            if (entity.PDFEn.ContentType != "application/pdf") throw new OutOfRangeImageSizeException("PDFEn", "only pdf file!");
-            if (entity.PDFRu.ContentType != "application/pdf") throw new OutOfRangeImageSizeException("PDFRu", "only pdf file!");
-            if (entity.PDFAz.ContentType != "application/pdf") throw new OutOfRangeImageSizeException("PDFAz", "only pdf file!");
+            if (entity.PDFEn.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFEn", "only pdf file!");
+            if (entity.PDFRu.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFRu", "only pdf file!");
+            if (entity.PDFAz.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFAz", "only pdf file!");
 
 
-            if (entity.PDFEn.Length > 2097152) throw new OutOfRangeImageSizeException("PDFEn", "please upload less than 2 mg");
-            if (entity.PDFRu.Length > 2097152) throw new OutOfRangeImageSizeException("PDFRu", "please upload less than 2 mg");
-            if (entity.PDFAz.Length > 2097152) throw new OutOfRangeImageSizeException("PDFRu", "please upload less than 2 mg");
+            if (entity.PDFEn.Length > 104857600) throw new OutOfRangePdfSizeException("PDFEn", "please upload less than 100 mg");
+            if (entity.PDFRu.Length > 104857600) throw new OutOfRangePdfSizeException("PDFRu", "please upload less than 100 mg");
+            if (entity.PDFAz.Length > 104857600) throw new OutOfRangePdfSizeException("PDFRu", "please upload less than 100 mg");
 
-            accredation.PDFUrlEn = await FileHelper.SaveImage(rootPath, passPath, entity.PDFEn);
-            accredation.PDFUrlRu = await FileHelper.SaveImage(rootPath, passPath, entity.PDFEn);
-            accredation.PDFUrlAz = await FileHelper.SaveImage(rootPath, passPath, entity.PDFEn);
+            accredation.PDFUrlEn = await FileHelper.SavePdf(rootPath, passPath, entity.PDFEn);
+            accredation.PDFUrlRu = await FileHelper.SavePdf(rootPath, passPath, entity.PDFEn);
+            accredation.PDFUrlAz = await FileHelper.SavePdf(rootPath, passPath, entity.PDFEn);
 
             await _accredationRepository.CreateAsync(accredation);
             await _accredationRepository.CommitAsync();
@@ -114,43 +115,28 @@ namespace MSK.Business.Services.Implementations
 
             if (entity.PDFAz is not null)
             {
-                if (entity.PDFAz.ContentType != "application/pdf")
-                {
-                    throw new OutOfRangeImageSizeException("PDFAz", "only pdf file!");
-                }
-                if (entity.PDFAz.Length > 2097152)
-                {
-                    throw new OutOfRangeImageSizeException("PDFAz", "please upload less than 2 mg");
-                }
-                updatedAccredation.PDFUrlAz = await FileHelper.SaveImage(rootPath, passPath, entity.PDFAz);
+                if (entity.PDFAz.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFAz", "only pdf file!");
+
+                if (entity.PDFAz.Length > 104857600) throw new OutOfRangePdfSizeException("PDFAz", "please upload less than 100 mg");
+                updatedAccredation.PDFUrlAz = await FileHelper.SavePdf(rootPath, passPath, entity.PDFAz);
 
 
             }
 
             if (entity.PDFEn is not null)
             {
-                if (entity.PDFEn.ContentType != "application/pdf")
-                {
-                    throw new OutOfRangeImageSizeException("PDFEn", "only pdf file!");
-                }
-                if (entity.PDFEn.Length > 2097152)
-                {
-                    throw new OutOfRangeImageSizeException("PDFEn", "please upload less than 2 mg");
-                }
-                updatedAccredation.PDFUrlAz = await FileHelper.SaveImage(rootPath, passPath, entity.PDFEn);
+                if (entity.PDFEn.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFEn", "only pdf file!");
+                if (entity.PDFEn.Length > 104857600) throw new OutOfRangePdfSizeException("PDFEn", "please upload less than 100 mg");
+
+                updatedAccredation.PDFUrlAz = await FileHelper.SavePdf(rootPath, passPath, entity.PDFEn);
             }
 
             if (entity.PDFRu is not null)
             {
-                if (entity.PDFRu.ContentType != "application/pdf")
-                {
-                    throw new OutOfRangeImageSizeException("PDFRu", "only pdf file!");
-                }
-                if (entity.PDFRu.Length > 2097152)
-                {
-                    throw new OutOfRangeImageSizeException("PDFRu", "please upload less than 2 mg");
-                }
-                updatedAccredation.PDFUrlRu = await FileHelper.SaveImage(rootPath, passPath, entity.PDFRu);
+                if (entity.PDFRu.ContentType != "application/pdf") throw new OutOfRangePdfSizeException("PDFRu", "only pdf file!");
+
+                if (entity.PDFRu.Length > 104857600) throw new OutOfRangePdfSizeException("PDFRu", "please upload less than 100 mg");
+                updatedAccredation.PDFUrlRu = await FileHelper.SavePdf(rootPath, passPath, entity.PDFRu);
             }
 
             await _accredationRepository.CommitAsync();

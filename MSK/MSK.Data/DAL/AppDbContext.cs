@@ -19,6 +19,8 @@ namespace MSK.Data.DAL
         public DbSet<History> Histories { get; set; }
         public DbSet<NationalAttribute> NationalAttributes { get; set; }
         public DbSet<Accredation> Accredations { get; set; }
+        public DbSet<Legislation> Legislations { get; set; }
+
 
 
 

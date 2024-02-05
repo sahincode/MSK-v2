@@ -2,6 +2,7 @@
 using MSK.Business.DTOs.AccredationModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.LegislationModelDTOs;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
@@ -42,6 +43,11 @@ namespace MSK.Business.Mappers
             CreateMap<AccredationUpdateDto, Accredation>().ReverseMap();
             CreateMap<AccredationIndexDto, Accredation>().ReverseMap();
             CreateMap<AccredationLayoutDto, Accredation>().ReverseMap();
+            // legislation model model mapping profile
+            CreateMap<LegislationCreateDto, Legislation>().ReverseMap();
+            CreateMap<LegislationUpdateDto, Legislation>().ReverseMap();
+            CreateMap<LegislationIndexDto, Legislation>().ReverseMap();
+            CreateMap<LegislationLayoutDto, Legislation>().ReverseMap();
 
 
         }
