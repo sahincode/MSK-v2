@@ -11,6 +11,8 @@ using System.Data;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+    [ValidateAntiForgeryToken]
     public class HistoryController : Controller
     {
         private readonly IHistoryService _historyService;
@@ -44,6 +46,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HistoryCreateDto historyCreateDto)
         {
             if (!ModelState.IsValid)
@@ -73,7 +77,9 @@ namespace MSK.UI.Areas.Manage.Controllers
             HistoryUpdateDto historyUpdateDto = _mapper.Map<HistoryUpdateDto>(slide);
             return View(historyUpdateDto);
         }
-       
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(HistoryUpdateDto historyUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -93,6 +99,8 @@ namespace MSK.UI.Areas.Manage.Controllers
 
         }
         [Authorize(Roles = "SuperAdmin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -106,7 +114,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             }
             return RedirectToAction("index", "history");
         }
- 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ToggleDelete(int id)
         {
             try

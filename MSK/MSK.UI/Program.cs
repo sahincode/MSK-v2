@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MSK.Business.DTOs.HomeSlideDTOs;
@@ -30,7 +31,10 @@ builder.Services.AddIdentity<User, IdentityRole>(opts =>
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
 builder.Services.RegisterServices();
 builder.Services.RegisterRepos();
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Manage/account/login";
+});
 
 var app = builder.Build();
 

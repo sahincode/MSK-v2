@@ -21,10 +21,7 @@ namespace MSK.Areas.Manage.Controllers
             _roleManager = roleManager;
             _accountService = accountService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+    
         [HttpGet]
         public IActionResult Login()
         {
@@ -46,7 +43,7 @@ namespace MSK.Areas.Manage.Controllers
                 return View();
             }
 
-            return RedirectToAction("index", "chef");
+            return RedirectToAction("index", "home");
         }
 
 

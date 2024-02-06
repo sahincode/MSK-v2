@@ -38,21 +38,24 @@
                                 <h5 class="modal-title btn btn-success" id="item@(item.Id)ModalLabel">About</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="border-bottom-info">
+                            <div >
                                 <div>
-                                    <h5 class="font-weight-bold">Created Time:<span class="text-danger"> @(item.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
+                                    <h5 class="font-weight-bold">Created Time:<span class="text-danger fw-normal"> @(item.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
                                 </div>
+                                <hr class="text-danger">
                                 <div>
-                                    <h5 class="font-weight-bold">Updated Time:<span class="text-danger"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
+                                    <h5 class="font-weight-bold">Updated Time:<span class="text-danger fw-normal"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
                                 </div>
+                                <hr>
                                 <div class="border-bottom-1">
-
+                                    Deleted Status:
                                     <a asp-action="toggledelete" asp-controller="homeslide" asp-route-id="@item.Id" class="@(item.IsDeleted == true ? " btn btn-danger":" btn btn-success")" form="soft-delete-form">
                                         <i class="fa-solid @(item.IsDeleted == true ? "fa-check":"fa-x")"></i>
                                     </a>
 
                                 </div>
                             </div>
+                            <hr>
                             <div class="modal-body">
                                 Title: @item.Title
                             </div>
@@ -62,10 +65,10 @@
                             </div>
                             <hr>
                             <div class="modal-body">
-                                Article : @item.Article
+                                Article : @Html.Raw(item.Article)
                             </div>
                             <div>
-                                <img style="max-width:200px;" src="~/assets/img/homeslide/@item.ImageUrl" />
+                                <img style="max-width:200px;" src="~/assets/img/pressnew/@item.ImageUrl" />
                             </div>
 
                         </div>
@@ -81,7 +84,7 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="pressnew">
+                        <a class="btn btn-danger delete-btn" asp-action="Delete" asp-route-id="@item.Id" asp-controller="pressnew">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">
@@ -96,6 +99,6 @@
 </div>
 
 @section jsFiles{
-    <script src="~/assets/js/main.js"></script>
+    <script src="~/admin/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
 }
