@@ -27,7 +27,7 @@ namespace MSK.Data.DAL
 
 
         public AppDbContext(DbContextOptions options):base(options){}
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries<BaseEntity>();
             foreach (var entry in entries)
@@ -59,7 +59,7 @@ namespace MSK.Data.DAL
                     }
                 }
             }
-            return base.SaveChangesAsync(cancellationToken);
+            return await  base.SaveChangesAsync(cancellationToken);
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -55,3 +55,21 @@ navButton.addEventListener("click", function () {
     }
 
 })
+const articles = document.querySelectorAll('.article-active');
+const articleContent = document.querySelector('.article-content');
+const articleImg= document.querySelector('.image-article');
+
+
+articles.forEach(article => article.addEventListener('mouseover', function () {
+
+    var previouslyActive = document.querySelector('.active');
+    if (previouslyActive) {
+        previouslyActive.classList.remove('active');
+    }
+    articleContent.innerHTML = '';
+    if (articleContent.innerHTML === '') {
+        articleContent.innerHTML = article.innerHTML;
+    }
+    articleImg.src = article.getAttribute('data-image');
+    article.classList.add('active');
+}))

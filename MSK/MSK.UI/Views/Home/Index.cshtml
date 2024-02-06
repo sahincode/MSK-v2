@@ -92,9 +92,9 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7 d-flex flex-row">
                 <article class="article-item">
-                    <div class="article-img"><img src="~/assets/img/pressnew/@Model.PressNewLayoutDtos[0].ImageUrl" alt=""></div>
+                    <div class="article-img"><img class="image-article w-100" src="~/assets/img/pressnew/@Model.PressNewLayoutDtos[0].ImageUrl" alt=""></div>
                     <div class="article-content">
-                        <h4>@Model.PressNewLayoutDtos[0].Title</h4>
+                       
                         <p>@Model.PressNewLayoutDtos[0].Description</p>
                         <time>@Model.PressNewLayoutDtos[0].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
                     </div>
@@ -103,12 +103,14 @@
             </div>
             <div class="col-sm-12 col-md-12 col-lg-5 d-flex">
                 <div class="list-news d-flex flex-column">
-                    @for(int i = 1; i < Model.PressNewLayoutDtos.Count; i++)
+                    @for (int i = 0; i < Model.PressNewLayoutDtos.Count; i++)
                     {
-                        <article data-image="~/assets/img/pressnew/@Model.PressNewLayoutDtos[i].ImageUrl" class="active article-item">
-                            <h4>@Model.PressNewLayoutDtos[i].Title</h4>
-                            <p>@Model.PressNewLayoutDtos[i].Description</p>
-                            <time>@Model.PressNewLayoutDtos[i].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
+                        <article data-image="/assets/img/pressnew/@Model.PressNewLayoutDtos[i].ImageUrl" class=" article-item  article-active">
+                          
+                            <p class="undertext">@Model.PressNewLayoutDtos[i].Description</p>
+                            <time class="time">
+                                <i class="bi bi-calendar-date"></i>@Model.PressNewLayoutDtos[i].CreationTime.ToString("dd MMMM yyyy HH:mm")
+                            </time>
                             <a href="/en/news/view/1255" class="mf-link"></a>
                         </article>
                     }
