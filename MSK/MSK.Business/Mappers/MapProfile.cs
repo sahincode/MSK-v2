@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using MSK.Business.DTOs.AccredationModelDTOs;
+using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.LegislationModelDTOs;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
+using MSK.Business.DTOs.SubDecisionModelDTOs;
 using MSK.Core.Models;
 
 namespace MSK.Business.Mappers
@@ -48,6 +50,16 @@ namespace MSK.Business.Mappers
             CreateMap<LegislationUpdateDto, Legislation>().ReverseMap();
             CreateMap<LegislationIndexDto, Legislation>().ReverseMap();
             CreateMap<LegislationLayoutDto, Legislation>().ReverseMap();
+            // decision model model mapping profile
+            CreateMap<DecisionCreateDto, Decision>().ReverseMap();
+            CreateMap<DecisionUpdateDto, Decision>().ReverseMap();
+            CreateMap<DecisionIndexDto, Decision>().ReverseMap();
+            CreateMap<DecisionLayoutDto, Decision>().ReverseMap();
+            // decision model model mapping profile
+            CreateMap<SubDecisionCreateDto, SubDecision>().ReverseMap();
+            CreateMap<SubDecisionUpdateDto, SubDecision>().ReverseMap();
+            CreateMap<SubDecisionIndexDto, SubDecision>().ReverseMap();
+            CreateMap<SubDecisionLayoutDto, SubDecision>().ReverseMap();
 
 
         }

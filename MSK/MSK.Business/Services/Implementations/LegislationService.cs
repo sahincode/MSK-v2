@@ -37,11 +37,11 @@ namespace MSK.Business.Services.Implementations
             Legislation Legislation = _mapper.Map<Legislation>(entity);
             if (entity.Pdf.ContentType != "application/pdf")
             {
-                throw new OutOfRangePdfSizeException("Image", "only pdf file!");
+                throw new OutOfRangePdfSizeException("Pdf", "only pdf file!");
             }
             if (entity.Pdf.Length > 104857600)
             {
-                throw new OutOfRangePdfSizeException("Image", "please upload less than 100 mg");
+                throw new OutOfRangePdfSizeException("Pdf", "please upload less than 100 mg");
             }
             Legislation.PdfUrl = await FileHelper.SavePdf(rootPath, passPath, entity.Pdf);
             await _legislationRepository.CreateAsync(Legislation);
@@ -107,11 +107,15 @@ namespace MSK.Business.Services.Implementations
 
             if (entity.Pdf is not null)
             {
-                if (entity.Pdf.ContentType != "image/jpeg" && entity.Pdf.ContentType != "image/png")
-                    throw new OutOfRangeImageSizeException("Image", "only pdf file!");
+                if (entity.Pdf.ContentType != "application/pdf")
+                {
+                    throw new OutOfRangePdfSizeException("Pdf", "only pdf file!");
+                }
                 if (entity.Pdf.Length > 104857600)
-                    throw new OutOfRangeImageSizeException("Image", "please upload less than 100 mg");
-                updatedLegislation.PdfUrl = await FileHelper.SaveImage(rootPath, passPath, entity.Pdf);
+                {
+                    throw new OutOfRangePdfSizeException("Pdf", "please upload less than 100 mg");
+                }
+                updatedLegislation.PdfUrl = await FileHelper.SavePdf(rootPath, passPath, entity.Pdf);
             }
 
             await _legislationRepository.CommitAsync();

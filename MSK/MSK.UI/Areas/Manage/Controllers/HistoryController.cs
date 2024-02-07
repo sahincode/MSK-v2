@@ -36,10 +36,10 @@ namespace MSK.UI.Areas.Manage.Controllers
                 HistoryIndexDto historyIndexDto = _mapper.Map<HistoryIndexDto>(slide);
                 historyIndexDtos.Add(historyIndexDto);
             }
-            PaginatedList<HistoryIndexDto> homeSlideIndexDtos = PaginatedList<HistoryIndexDto>.Create
+            PaginatedList<HistoryIndexDto> histroyIndexDtos = PaginatedList<HistoryIndexDto>.Create
                 (historyIndexDtos.AsQueryable(), page, 50);
 
-            return View(homeSlideIndexDtos);
+            return View(histroyIndexDtos);
         }
         public async Task<IActionResult> Create()
         {

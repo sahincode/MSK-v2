@@ -16,7 +16,8 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<IHistoryService, HistoryService>();
             services.AddScoped<INationalAttributeService, NationalAttributeService>();
             services.AddScoped<ILegislationService, LegislationService>();
-
+            services.AddScoped<IDecisionService, DecisionService>();
+            services.AddScoped<ISubDecisionService, SubDecisionService>();
             services.AddScoped<IAccredationService ,AccredationService>();
 
 

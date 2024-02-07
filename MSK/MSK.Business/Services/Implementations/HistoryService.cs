@@ -44,9 +44,9 @@ namespace MSK.Business.Services.Implementations
         {
 
 
-            var History = await this.GetById(id);
-            if (History is null) throw new NullEntityException("", $"History model does not exist in database with {id} id");
-
+            var history = await this.GetById(id);
+            if (history is null) throw new NullEntityException("", $"History model does not exist in database with {id} id");
+              _historyRepository.Delete(history);
 
             await _historyRepository.CommitAsync();
         }

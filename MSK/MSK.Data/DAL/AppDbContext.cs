@@ -20,6 +20,10 @@ namespace MSK.Data.DAL
         public DbSet<NationalAttribute> NationalAttributes { get; set; }
         public DbSet<Accredation> Accredations { get; set; }
         public DbSet<Legislation> Legislations { get; set; }
+        public DbSet<Decision> Decisions { get; set; }
+        public DbSet<SubDecision> SubDecisions { get; set; }
+
+
 
 
 
