@@ -62,14 +62,14 @@ const articleImg= document.querySelector('.image-article');
 
 articles.forEach(article => article.addEventListener('mouseover', function () {
 
-    var previouslyActive = document.querySelector('.active');
+    var previouslyActive = document.querySelector('.active-press');
     if (previouslyActive) {
-        previouslyActive.classList.remove('active');
+        previouslyActive.classList.remove('active-press');
     }
     articleContent.innerHTML = '';
     if (articleContent.innerHTML === '') {
         articleContent.innerHTML = article.innerHTML;
     }
     articleImg.src = article.getAttribute('data-image');
-    article.classList.add('active');
+    article.classList.add('active-press');
 }))

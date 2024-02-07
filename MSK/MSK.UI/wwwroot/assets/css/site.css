@@ -44,15 +44,21 @@ a {
 .mf-news .list-news article time {
     font-size: 14px;
 }
-.article-content {
-    color: white;
+.mf-news .list-news article {
+    
+    border-bottom: 1px dotted #CDD1D6;
 }
-.active {
+.mf-news .list-news article:hover{
+    border-color:darkblue;
+}
+ .article-content {
+        color: white;
+}
+.active-press {
     color: dodgerblue;
 }
-.active .undertext{
-    
-    text-decoration: underline;
+.article-active p:hover{
+    text-decoration:underline;
 }
 /*press news slide style end*/
 .mf-elections {
