@@ -18,6 +18,10 @@ namespace MSK.Data.RepositoryRegistrations
             services.AddScoped<ILegislationRepository, LegislationRepository>();
             services.AddScoped<IDecisionRepository, DecisionRepository>();
             services.AddScoped<ISubDecisionRepository, SubDecisionRepository>();
+            services.AddScoped<ISubInstructionRepository, SubInstructionRepository>();
+            services.AddScoped<IInstructionRepository, InstructionRepository>();
+
+
 
 
 

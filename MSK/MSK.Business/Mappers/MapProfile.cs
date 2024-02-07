@@ -3,11 +3,13 @@ using MSK.Business.DTOs.AccredationModelDTOs;
 using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.InstructionModelDTOs;
 using MSK.Business.DTOs.LegislationModelDTOs;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.DTOs.SubDecisionModelDTOs;
+using MSK.Business.DTOs.SubInstructionModelDTOs;
 using MSK.Core.Models;
 
 namespace MSK.Business.Mappers
@@ -55,11 +57,21 @@ namespace MSK.Business.Mappers
             CreateMap<DecisionUpdateDto, Decision>().ReverseMap();
             CreateMap<DecisionIndexDto, Decision>().ReverseMap();
             CreateMap<DecisionLayoutDto, Decision>().ReverseMap();
-            // decision model model mapping profile
+            // sub  decision model model mapping profile
             CreateMap<SubDecisionCreateDto, SubDecision>().ReverseMap();
             CreateMap<SubDecisionUpdateDto, SubDecision>().ReverseMap();
             CreateMap<SubDecisionIndexDto, SubDecision>().ReverseMap();
             CreateMap<SubDecisionLayoutDto, SubDecision>().ReverseMap();
+            //instruction model model mapping profile
+            CreateMap<InstructionCreateDto, Instruction>().ReverseMap();
+            CreateMap<InstructionUpdateDto, Instruction>().ReverseMap();
+            CreateMap<InstructionIndexDto, Instruction>().ReverseMap();
+            CreateMap<InstructionLayoutDto, Instruction>().ReverseMap();
+            // sub instruction model model mapping profile
+            CreateMap<SubInstructionCreateDto, SubInstruction>().ReverseMap();
+            CreateMap<SubInstructionUpdateDto, SubInstruction>().ReverseMap();
+            CreateMap<SubInstructionIndexDto, SubInstruction>().ReverseMap();
+            CreateMap<SubInstructionLayoutDto, SubInstruction>().ReverseMap();
 
 
         }

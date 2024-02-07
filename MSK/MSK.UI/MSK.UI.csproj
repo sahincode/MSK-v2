@@ -21,7 +21,6 @@
     <Folder Include="wwwroot\admin\img\homeslide\" />
     <Folder Include="wwwroot\assets\pdf\accredation\" />
     <Folder Include="wwwroot\assets\pdf\legislation\" />
-    <Folder Include="wwwroot\assets\pdf\decision\" />
   </ItemGroup>
 
 </Project>

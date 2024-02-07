@@ -22,14 +22,8 @@ namespace MSK.Data.DAL
         public DbSet<Legislation> Legislations { get; set; }
         public DbSet<Decision> Decisions { get; set; }
         public DbSet<SubDecision> SubDecisions { get; set; }
-
-
-
-
-
-
-
-
+        public DbSet<Instruction> Instructions { get; set; }
+        public DbSet<SubInstruction> SubInstructions { get; set; }
         public AppDbContext(DbContextOptions options):base(options){}
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

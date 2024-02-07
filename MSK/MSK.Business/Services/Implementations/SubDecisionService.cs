@@ -21,7 +21,7 @@ namespace MSK.Business.Services.Implementations
         private readonly ISubDecisionRepository _subDecisionRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
-        public const string passPath = "assets/pdf/subDecision";
+        public const string passPath = "assets/pdf/decision";
 
         public SubDecisionService(IMapper mapper, ISubDecisionRepository subDecisionRepository, IWebHostEnvironment env)
         {
