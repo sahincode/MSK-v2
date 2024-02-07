@@ -1,0 +1,16 @@
+﻿/*decision index page style*/
+.page-post-item a {
+    color: black;
+    font-weight: bold;
+}
+
+.page-post-item {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+    .page-post-item a:hover {
+        text-decoration: underline;
+        text-decoration-color: black;
+        color: #116E5C;
+    }

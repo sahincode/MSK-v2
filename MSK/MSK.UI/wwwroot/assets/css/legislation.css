@@ -1,0 +1,5 @@
+﻿/* index page style*/
+.legi-link a:hover{
+    text-decoration:underline;
+    color:darkblue;
+}
