@@ -13,7 +13,7 @@ namespace MSK.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<SubDecision> builder)
         {
-            builder.Property(c => c.Title).IsRequired().HasMaxLength(200);
+            builder.Property(c => c.Title).IsRequired().HasMaxLength(800);
             builder.Property(c => c.Url).IsRequired().HasMaxLength(100);
             builder.HasOne(c => c.Decision).WithMany(d => d.SubDecisions);
 

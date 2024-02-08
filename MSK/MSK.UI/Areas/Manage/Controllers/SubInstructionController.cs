@@ -8,6 +8,7 @@ using MSK.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
+    [Area("Manage")]
     public class SubInstructionController : Controller
     {
 

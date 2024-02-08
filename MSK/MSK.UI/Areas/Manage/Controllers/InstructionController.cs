@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.InstructionModelDTOs;
-using MSK.Business.DTOs.InstructionModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
+    [Area("Manage")]
+
     public class InstructionController : Controller
     {
         private readonly IInstructionService  _instructionService;

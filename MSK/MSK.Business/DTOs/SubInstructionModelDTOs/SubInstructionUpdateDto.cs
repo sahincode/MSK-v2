@@ -18,7 +18,7 @@ namespace MSK.Business.DTOs.SubInstructionModelDTOs
         {
             RuleFor(e => e.Title).NotNull().WithMessage("Can not be null").
                                   NotEmpty().WithMessage("Can not be empty").
-                                  MaximumLength(8000).WithMessage("Can not be greater than 8000 digits").
+                                  MaximumLength(800).WithMessage("Can not be greater than 800 digits").
                                   MinimumLength(3).WithMessage("Can not be less than 3 digits");
 
         }
