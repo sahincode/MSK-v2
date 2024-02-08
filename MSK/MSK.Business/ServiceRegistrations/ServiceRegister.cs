@@ -21,6 +21,8 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<ISubInstructionService, SubInstructionService>();
             services.AddScoped<IInstructionService, InstructonService>();
             services.AddScoped<IAccredationService ,AccredationService>();
+            services.AddScoped<IContactService, ContactService>();
+
 
 
 

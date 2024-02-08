@@ -102,10 +102,9 @@ namespace MSK.Business.Services.Implementations
             var decision = await this.GetById(decisionUpdateDto.Id);
 
             if (decision is null) throw new NullEntityException("", "Decision model does not exist in database with {id} id");
-         
 
-            decisionUpdateDto.Title = decision.Title;
-            
+
+            decision.Title = decisionUpdateDto.Title;
 
             await _decisionRepository.CommitAsync();
         }

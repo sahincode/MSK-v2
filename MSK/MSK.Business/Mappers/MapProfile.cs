@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MSK.Business.DTOs.AccredationModelDTOs;
+using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
@@ -72,6 +73,11 @@ namespace MSK.Business.Mappers
             CreateMap<SubInstructionUpdateDto, SubInstruction>().ReverseMap();
             CreateMap<SubInstructionIndexDto, SubInstruction>().ReverseMap();
             CreateMap<SubInstructionLayoutDto, SubInstruction>().ReverseMap();
+            // contact model model mapping profile
+            CreateMap<ContactCreateDto, Contact>().ReverseMap();
+            CreateMap<ContactUpdateDto, Contact>().ReverseMap();
+            CreateMap<ContactIndexDto, Contact>().ReverseMap();
+            CreateMap<ContactLayoutDto, Contact>().ReverseMap();
 
 
         }

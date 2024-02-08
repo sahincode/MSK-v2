@@ -404,3 +404,7 @@ a {
 .dropdown-toggle::after {
     display: none !important;
 }
+/*home contact page style*/
+.contact-container{
+    border-bottom:0.1px dotted black;
+}

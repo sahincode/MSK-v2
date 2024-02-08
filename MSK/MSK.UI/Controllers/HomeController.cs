@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
 using MSK.Business.Services.Interfaces;
@@ -13,12 +14,16 @@ namespace MSK.UI.Controllers
         private readonly IHomeSlideService _homeSlideService;
         private readonly IMapper _mapper;
         private readonly IPressNewService _pressNewService;
+        private readonly IContactService _contactService;
 
-        public HomeController(IHomeSlideService homeSlideService ,IMapper mapper ,IPressNewService pressNewService)
+        public HomeController(IHomeSlideService homeSlideService ,
+            IMapper mapper ,IPressNewService pressNewService ,
+            IContactService contactService)
         {
             this._homeSlideService = homeSlideService;
             this._mapper = mapper;
             this._pressNewService = pressNewService;
+            this._contactService = contactService;
         }
 
         public async Task< IActionResult> Index()
@@ -47,6 +52,19 @@ namespace MSK.UI.Controllers
             };
 
             return View(homeIndexViewModel);
+        }
+        public async Task<IActionResult> Contact()
+        {
+            var contacts =  _contactService.GetAll(c => c.IsDeleted == false).Result.ToList();
+            List<ContactLayoutDto> contactLayoutDtos = new List<ContactLayoutDto>();
+            if(contacts is not null){
+                foreach(var contact in contacts)
+                {
+                    var contactLayoutDto = _mapper.Map<ContactLayoutDto>(contact);
+                    contactLayoutDtos.Add(contactLayoutDto);
+                }
+            }
+            return View(contactLayoutDtos);
         }
 
         

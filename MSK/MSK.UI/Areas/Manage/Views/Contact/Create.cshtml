@@ -1,0 +1,39 @@
+﻿@model ContactCreateDto
+<div class="container-fluid">
+    <div class="table-title text-white  d-block d-sm-flex">
+        <div>
+            <h1 class="title">Contact<span>@ViewData["Title"]</span></h1>
+        </div>
+        <div>
+            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+    <form method="post" class="row" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <label asp-for="Info" class="control-label"></label>
+           <textarea id="contact-editor" asp-for="Info" class="control-label"></textarea>
+            <span asp-validation-for="Info" class="text-danger"></span>
+        </div>
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+</div>
+
+@section Scripts{
+   
+    <script src="~/ckeditor/styles.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script type="text/javascript">
+        CKEDITOR.replace('contact-editor')
+    </script>
+}
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
