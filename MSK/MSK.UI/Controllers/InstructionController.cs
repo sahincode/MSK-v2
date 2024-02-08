@@ -23,7 +23,7 @@ namespace MSK.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Instruction> instructions = _instructionService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreatedDate).ToList();
+            List<Instruction> instructions = _instructionService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreationTime).ToList();
             List<InstructionLayoutDto> instructionLayoutDtos = new List<InstructionLayoutDto>();
             if (instructions is not null)
             {
@@ -42,7 +42,7 @@ namespace MSK.UI.Controllers
             {
                 return NotFound();
             }
-          List<SubInstruction> subInstructions= _subInstructionService.GetAll(a => !a.IsDeleted&&a.InstructionId==id).Result.OrderBy(a => a.CreatedDate).ToList();
+          List<SubInstruction> subInstructions= _subInstructionService.GetAll(a => !a.IsDeleted&&a.InstructionId==id).Result.OrderBy(a => a.CreationTime).ToList();
             List<SubInstructionLayoutDto> subInstructionLayoutDtos = new List<SubInstructionLayoutDto>();
             if (subInstructions is not null)
             {

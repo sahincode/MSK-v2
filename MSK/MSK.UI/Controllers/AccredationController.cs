@@ -19,7 +19,7 @@ namespace MSK.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            Accredation accredation = _accredationService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreatedDate).FirstOrDefault();
+            Accredation accredation = _accredationService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreationTime).FirstOrDefault();
             AccredationLayoutDto accredationLayoutDto = new AccredationLayoutDto();
             if (accredation is not null) accredationLayoutDto = _mapper.Map<AccredationLayoutDto>(accredation);
             return View(accredationLayoutDto);

@@ -32,7 +32,7 @@ namespace MSK.UI.Controllers
 
             }
             List<PressNewLayoutDto> pressNewLayoutDtos = new List<PressNewLayoutDto>();
-            var news = _pressNewService.GetAll(s => s.IsDeleted == false).Result.OrderBy(n => n.CreatedDate);
+            var news = _pressNewService.GetAll(s => s.IsDeleted == false).Result.OrderBy(n => n.CreationTime);
             foreach (var neW in news)
             {
                 PressNewLayoutDto pressNewLayoutDto = _mapper.Map<PressNewLayoutDto>(neW);

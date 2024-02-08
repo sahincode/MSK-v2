@@ -32,23 +32,23 @@ namespace MSK.Data.DAL
             {
                 var entity = entry.Entity;
 
-                if (entity != null)
+                  if (entity != null)
                 {
                     switch (entry.State)
                     {
                         case EntityState.Added:
-                            entity.CreatedDate = DateTime.UtcNow.AddHours(4);
+                            entity.CreationTime = DateTime.UtcNow.AddHours(4);
                             break;
                         case EntityState.Modified:
-                            entity.UpdateDate = DateTime.UtcNow.AddHours(4);
+                            entity.UpdateTime = DateTime.UtcNow.AddHours(4);
 
                             break;
                         case EntityState.Deleted:
-                            entity.UpdateDate = DateTime.UtcNow.AddHours(4);
+                            entity.UpdateTime = DateTime.UtcNow.AddHours(4);
 
                             break;
                         case EntityState.Detached:
-                            entity.UpdateDate = DateTime.UtcNow.AddHours(4);
+                            entity.UpdateTime = DateTime.UtcNow.AddHours(4);
 
                             break;
                         case EntityState.Unchanged:

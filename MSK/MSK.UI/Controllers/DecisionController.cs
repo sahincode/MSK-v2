@@ -22,7 +22,7 @@ namespace MSK.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Decision> decisions = _decisionService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreatedDate).ToList();
+            List<Decision> decisions = _decisionService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreationTime).ToList();
             List<DecisionLayoutDto> decisionLayoutDtos = new List<DecisionLayoutDto>();
             if (decisions is not null)
             {

@@ -71,7 +71,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             InstructionUpdateDto instructionUpdateDto = _mapper.Map<InstructionUpdateDto>(instruction);
             return View(instructionUpdateDto);
         }
-
+        [HttpPost]
         public async Task<IActionResult> Update(InstructionUpdateDto instructionUpdateDto)
         {
             if (!ModelState.IsValid)

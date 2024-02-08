@@ -102,7 +102,7 @@ namespace MSK.Business.Services.Implementations
             if (instruction is null) throw new NullEntityException("", "Instruction model does not exist in database with {id} id");
 
 
-            instructionUpdateDto.Name = instruction.Name;
+            instruction.Name = instructionUpdateDto.Name;
 
 
             await _instructionRepository.CommitAsync();

@@ -70,6 +70,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             NationalAttributeUpdateDto historyUpdateDto = _mapper.Map<NationalAttributeUpdateDto>(slide);
             return View(historyUpdateDto);
         }
+        [HttpPost]
 
         public async Task<IActionResult> Update(NationalAttributeUpdateDto nationalAttributeUpdate)
         {

@@ -18,7 +18,7 @@ namespace MSK.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-           List<Legislation> legislations = _legislationService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreatedDate).ToList();
+           List<Legislation> legislations = _legislationService.GetAll(a => !a.IsDeleted).Result.OrderBy(a => a.CreationTime).ToList();
             List<LegislationLayoutDto> legislationLayoutDtos = new List<LegislationLayoutDto>();
             if (legislations is not null)
             {

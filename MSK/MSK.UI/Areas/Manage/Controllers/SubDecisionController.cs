@@ -87,6 +87,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SubDecisionUpdateDto subDecisionUpdateDto = _mapper.Map<SubDecisionUpdateDto>(subDecision);
             return View(subDecisionUpdateDto);
         }
+        [HttpPost]
 
         public async Task<IActionResult> Update(SubDecisionUpdateDto subDecisionUpdateDto)
         {

@@ -70,6 +70,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             LegislationUpdateDto legislationUpdateDto = _mapper.Map<LegislationUpdateDto>(legislation);
             return View(legislationUpdateDto);
         }
+        [HttpPost]
 
         public async Task<IActionResult> Update(LegislationUpdateDto legislationUpdateDto)
         {

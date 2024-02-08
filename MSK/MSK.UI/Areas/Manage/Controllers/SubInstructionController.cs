@@ -87,6 +87,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SubInstructionUpdateDto subInstructionUpdateDto = _mapper.Map<SubInstructionUpdateDto>(subInstruction);
             return View(subInstructionUpdateDto);
         }
+        [HttpPost]
 
         public async Task<IActionResult> Update(SubInstructionUpdateDto
             subInstructionUpdateDto)
