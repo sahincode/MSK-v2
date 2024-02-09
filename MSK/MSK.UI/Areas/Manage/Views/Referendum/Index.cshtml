@@ -11,17 +11,20 @@
 <div class="container-fluid">
     <div class="table-title text-white">
         <h1 class="title">Legislations<span>Table</span></h1>
-        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="subdecision">Create</a>
+        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="referendum">Create</a>
     </div>
     <table class="table table-hover table-striped shadow">
         <thead>
             <tr>
                 <th>NO</th>
                 <th>Name</th>
-                <th> Pdf</th>
-                <th>Controls</th>
+                <th> Instruction</th>
+                <th>Decision</th>
+                <th>Calendar plan</th>
+                
 
-               
+
+
             </tr>
         </thead>
         <tbody>
@@ -54,28 +57,51 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                              Name: @item.Title
+                                Name: @item.Name
                             </div>
                             <hr>
                             <div class="modal-body">
-                                En Pdf Url: @item.Url
+                                Decision: @item.Decision?.Title
                             </div>
-                            
+                            <hr>
+                            <div class="modal-body">
+                                Instruction: @item.Instruction?.Name
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+
+                                Calendar plan: @item.CalendarPlan?.Title
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+
+                                Essential Information:@foreach(var info in item.Infos)
+                                {
+                                    <div>@info.Name</div>
+
+                                }
+                            </div>
+
 
                         </div>
                     </div>
                 </div>
                 <tr>
                     <td class="about-info-td">@counter</td>
-                    <td class="about-info-td">@(item.Title.Substring(0, 30) + "...")</td>
 
-                    <td class="about-info-td">@(item.Url.Substring(0,30)+"...")</td>
+                    <td class="about-info-td">@(item.Name.Length <= 20 ? item.Name : item.Name.Substring(0, 20) + "...")</td>
+
+                    <td class="about-info-td">@(item.Instruction?.Name.Length <= 20 ? item.Instruction?.Name : item.Instruction?.Name.Substring(0, 20) + "...")</td>
+
+                    <td class="about-info-td">@(item.Decision?.Title.Length <= 20 ? item.Decision?.Title : item.Decision?.Title.Substring(0, 20) + "...")</td>
+                    <td class="about-info-td">@(item.CalendarPlan?.Title.Length <= 20 ? item.CalendarPlan?.Title : item.CalendarPlan?.Title.Substring(0, 20) + "...")</td>
+
                     <td class="td-min d-flex">
-                        <a class="btn btn-warning ms-1" asp-controller="subdecision" asp-action="Update" asp-route-id="@item.Id">
+                        <a class="btn btn-warning ms-1" asp-controller="referendum" asp-action="Update" asp-route-id="@item.Id">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="subdecision">
+                        <a class="btn btn-danger delete-btn" asp-action="Delete" asp-route-id="@item.Id" asp-controller="referendum">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">
@@ -90,6 +116,6 @@
 </div>
 
 @section jsFiles{
-    <script src="~/assets/js/main.js"></script>
+    <script src="~/admin/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
 }

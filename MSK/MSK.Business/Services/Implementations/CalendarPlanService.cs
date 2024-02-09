@@ -1,29 +1,24 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using MSK.Business.DTOs.CalendarPlanModelDTOs;
-using MSK.Business.Exceptions.SizeExceptions;
 using MSK.Business.Exceptions;
+using MSK.Business.Exceptions.SizeExceptions;
 using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MSK.Business.Services.Implementations
 {
-    public class CalendarplanService :ICalendarPlanService
+    public class CalendarPlanService :ICalendarPlanService
     {
         private readonly ICalendarPlanRepository _calendarPlanRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
         public const string passPath = "assets/pdf/calendarplan";
 
-        public CalendarplanService(IMapper mapper, ICalendarPlanRepository CalendarPlanRepository, IWebHostEnvironment env)
+        public CalendarPlanService(IMapper mapper, ICalendarPlanRepository CalendarPlanRepository, IWebHostEnvironment env)
         {
             this._mapper = mapper;
             this._calendarPlanRepository = CalendarPlanRepository;

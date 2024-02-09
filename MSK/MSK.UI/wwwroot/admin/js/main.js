@@ -17,6 +17,7 @@ deleteBtns.forEach(btn => btn.addEventListener("click", (e) => {
                 if (res.status == 200) {
                     window.location.reload(true);
                 } else {
+                    console.log(res);
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",

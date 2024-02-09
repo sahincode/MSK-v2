@@ -14,6 +14,7 @@ namespace MSK.Data.Configurations
         public void Configure(EntityTypeBuilder<CalendarPlan> builder)
         {
             builder.Property(c => c.Title).IsRequired().HasMaxLength(1000);
+            builder.Property(c => c.Description).IsRequired().HasMaxLength(1000);
             builder.Property(c => c.PdfUrl).IsRequired().HasMaxLength(100);
            
         }

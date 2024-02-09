@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MSK.Business.DTOs.ReferendumModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
+using MSK.Core.Models;
 using MSK.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
@@ -14,20 +15,37 @@ namespace MSK.UI.Areas.Manage.Controllers
         private readonly IReferendumService _referendumService;
         private readonly IMapper _mapper;
         private readonly IDecisionService _decisionService;
+        private readonly IInstructionService _instructionService;
+        private readonly ICalendarPlanService _calendarPlanService;
+        private readonly IInfoService _infoService;
 
         public ReferendumController(IReferendumService referendumService,
-            IMapper mapper, IDecisionService decisionService)
+            IMapper mapper, IDecisionService decisionService ,
+            IInstructionService instructionService, ICalendarPlanService calendarPlanService,
+            IInfoService infoService)
         {
             this._referendumService = referendumService;
             this._mapper = mapper;
             this._decisionService = decisionService;
+            this._instructionService = instructionService;
+            this._calendarPlanService = calendarPlanService;
+            this._infoService = infoService;
         }
         public async Task<IActionResult> Index(int page)
         {
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList decisionList = new SelectList(decisions, "Id", "Title");
             ViewData["decisions"] = decisionList;
-            var referendums = await _referendumService.GetAll(null, null);
+            var instructions = _instructionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList instructionList = new SelectList(instructions, "Id", "Name");
+            ViewData["instructions"] = instructionList;
+            var calendarPlans =_calendarPlanService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList calendarPlanList = new SelectList(calendarPlans, "Id", "Title");
+            ViewData["calendarPlans"] = calendarPlanList;
+            var infos = _infoService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList infoList = new SelectList(infos, "Id", "Name");
+            ViewData["infos"] = infoList;
+            var referendums = await _referendumService.GetAll(null, "Decision","Instruction" ,"Infos" ,"CalendarPlan");
             if (referendums is null)
             {
                 return NotFound();
@@ -48,6 +66,15 @@ namespace MSK.UI.Areas.Manage.Controllers
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList decisionList = new SelectList(decisions, "Id", "Title");
             ViewData["decisions"] = decisionList;
+            var instructions = _instructionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList instructionList = new SelectList(instructions, "Id", "Name");
+            ViewData["instructions"] = instructionList;
+            var calendarPlans =_calendarPlanService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList calendarPlanList = new SelectList(calendarPlans, "Id", "Title");
+            ViewData["calendarPlans"] = calendarPlanList;
+            var infos = _infoService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList infoList = new SelectList(infos, "Id", "Name");
+            ViewData["infos"] = infoList;
             return View();
         }
         [HttpPost]
@@ -56,6 +83,16 @@ namespace MSK.UI.Areas.Manage.Controllers
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList decisionList = new SelectList(decisions, "Id", "Title");
             ViewData["decisions"] = decisionList;
+            var instructions = _instructionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList instructionList = new SelectList(instructions, "Id", "Name");
+            ViewData["instructions"] = instructionList;
+            var calendarPlans = _calendarPlanService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList calendarPlanList = new SelectList(calendarPlans, "Id", "Title");
+            ViewData["calendarPlans"] = calendarPlanList;
+            var infos = _infoService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList infoList = new SelectList(infos, "Id", "Name");
+            ViewData["infos"] = infoList;
+            
             if (!ModelState.IsValid)
             {
                 return View(referendumCreateDto);
@@ -78,6 +115,15 @@ namespace MSK.UI.Areas.Manage.Controllers
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList decisionList = new SelectList(decisions, "Id", "Title");
             ViewData["decisions"] = decisionList;
+            var instructions = _instructionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList instructionList = new SelectList(instructions, "Id", "Name");
+            ViewData["instructions"] = instructionList;
+            var calendarPlans = _calendarPlanService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList calendarPlanList = new SelectList(calendarPlans, "Id", "Title");
+            ViewData["calendarPlans"] = calendarPlanList;
+            var infos = _infoService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList infoList = new SelectList(infos, "Id", "Name");
+            ViewData["infos"] = infoList;
             var referendum = await _referendumService.GetById(id);
             if (referendum is null)
             {
@@ -93,6 +139,16 @@ namespace MSK.UI.Areas.Manage.Controllers
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList decisionList = new SelectList(decisions, "Id", "Title");
             ViewData["decisions"] = decisionList;
+            var instructions = _instructionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList instructionList = new SelectList(instructions, "Id", "Name");
+            ViewData["instructions"] = instructionList;
+            var calendarPlans = _calendarPlanService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList calendarPlanList = new SelectList(calendarPlans, "Id", "Title");
+            ViewData["calendarPlans"] = calendarPlanList;
+            var infos = _infoService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList infoList = new SelectList(infos, "Id", "Name");
+            ViewData["infos"] = infoList;
+           
             if (!ModelState.IsValid)
             {
                 return View(referendumUpdateDto);

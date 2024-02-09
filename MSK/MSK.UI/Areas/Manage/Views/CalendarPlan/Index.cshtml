@@ -10,14 +10,15 @@
 
 <div class="container-fluid">
     <div class="table-title text-white">
-        <h1 class="title">Legislations<span>Table</span></h1>
-        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="subdecision">Create</a>
+        <h1 class="title">Calendar Plan<span>Table</span></h1>
+        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="calendarplan">Create</a>
     </div>
     <table class="table table-hover table-striped shadow">
         <thead>
             <tr>
                 <th>NO</th>
                 <th>Name</th>
+                <th>Description</th>
                 <th> Pdf</th>
                 <th>Controls</th>
 
@@ -58,7 +59,11 @@
                             </div>
                             <hr>
                             <div class="modal-body">
-                                En Pdf Url: @item.PdfUrl
+                                Description: @item.Description
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+                                Pdf Url: @item.PdfUrl
                             </div>
                             
 
@@ -68,14 +73,16 @@
                 <tr>
                     <td class="about-info-td">@counter</td>
                     <td class="about-info-td">@(item.Title.Length <= 30 ? item.Title : item.Title.Substring(0, 30) + "...")</td>
+                    <td class="about-info-td">@(item.Description?.Length <= 30 ? item.Description : (item.Description?.Substring(0, 30) + "..."))</td>
+
 
                     <td class="about-info-td">@(item.PdfUrl.Substring(0,30)+"...")</td>
                     <td class="td-min d-flex">
-                        <a class="btn btn-warning ms-1" asp-controller="info" asp-action="Update" asp-route-id="@item.Id">
+                        <a class="btn btn-warning ms-1" asp-controller="calendarplan" asp-action="Update" asp-route-id="@item.Id">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="info">
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="calendarplan">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">

@@ -12,8 +12,8 @@ namespace MSK.Business.DTOs.InfoModelDTOs
     {
         public string Name { get; set; }
         public IFormFile Pdf { get; set; }
+        public int? ReferendumId { get; set; }
 
-      
 
     }
     public class InfoCreateDtoValidator : AbstractValidator<InfoCreateDto>

@@ -15,6 +15,9 @@ namespace MSK.Data.Configurations
         public void Configure(EntityTypeBuilder<Info> builder)
         {
             builder.Property(c => c.Name).IsRequired().HasMaxLength(1000);
+          
+
+
             builder.Property(c => c.PdfUrl).IsRequired().HasMaxLength(100);
             builder.HasOne(c => c.Referendum).WithMany(r => r.Infos);
         }

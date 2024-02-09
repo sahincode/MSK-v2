@@ -48,10 +48,7 @@ namespace MSK.Data.DAL
                             entity.UpdateTime = DateTime.UtcNow.AddHours(4);
 
                             break;
-                        case EntityState.Deleted:
-                            entity.UpdateTime = DateTime.UtcNow.AddHours(4);
-
-                            break;
+                        
                         case EntityState.Detached:
                             entity.UpdateTime = DateTime.UtcNow.AddHours(4);
 

@@ -4,6 +4,7 @@ using MSK.Data.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSK.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240209180033_CalendarPlanModelUpdated")]
+    partial class CalendarPlanModelUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,11 +287,6 @@ namespace MSK.Data.Migrations
                     b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -481,13 +478,18 @@ namespace MSK.Data.Migrations
                     b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PdfUrl")
                         .IsRequired()
@@ -882,8 +884,7 @@ namespace MSK.Data.Migrations
                 {
                     b.HasOne("MSK.Core.Models.Referendum", "Referendum")
                         .WithOne("CalendarPlan")
-                        .HasForeignKey("MSK.Core.Models.CalendarPlan", "ReferendumId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("MSK.Core.Models.CalendarPlan", "ReferendumId");
 
                     b.Navigation("Referendum");
                 });
@@ -892,8 +893,7 @@ namespace MSK.Data.Migrations
                 {
                     b.HasOne("MSK.Core.Models.Referendum", "Referendum")
                         .WithOne("Decision")
-                        .HasForeignKey("MSK.Core.Models.Decision", "ReferendumId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("MSK.Core.Models.Decision", "ReferendumId");
 
                     b.Navigation("Referendum");
                 });
@@ -911,8 +911,7 @@ namespace MSK.Data.Migrations
                 {
                     b.HasOne("MSK.Core.Models.Referendum", "Referendum")
                         .WithOne("Instruction")
-                        .HasForeignKey("MSK.Core.Models.Instruction", "ReferendumId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("MSK.Core.Models.Instruction", "ReferendumId");
 
                     b.Navigation("Referendum");
                 });

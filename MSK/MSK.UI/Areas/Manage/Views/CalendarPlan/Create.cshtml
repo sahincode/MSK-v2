@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="table-title text-white  d-block d-sm-flex">
         <div>
-            <h1 class="title">Sub Decision<span>@ViewData["Title"]</span></h1>
+            <h1 class="title">Calendar Plan<span>@ViewData["Title"]</span></h1>
         </div>
         <div>
             <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
@@ -19,7 +19,11 @@
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-        
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
         <div class="form-group col-lg-7 col-xl-8 ">
             <label asp-for="Pdf" class="control-label"></label>
             <input asp-for="Pdf" class="form-control" />

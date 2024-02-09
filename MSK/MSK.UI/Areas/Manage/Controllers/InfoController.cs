@@ -8,24 +8,25 @@ using MSK.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
+    [Area("Manage")]
     public class InfoController : Controller
     {
         private readonly IInfoService _infoService;
         private readonly IMapper _mapper;
-        private readonly IDecisionService _decisionService;
+        private readonly IReferendumService _referendumService;
 
         public InfoController(IInfoService infoService,
-            IMapper mapper, IDecisionService decisionService)
+            IMapper mapper, IReferendumService referendumService)
         {
             this._infoService = infoService;
             this._mapper = mapper;
-            this._decisionService = decisionService;
+            this._referendumService = referendumService;
         }
         public async Task<IActionResult> Index(int page)
         {
-            var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList decisionList = new SelectList(decisions, "Id", "Title");
-            ViewData["decisions"] = decisionList;
+            var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList referendumList = new SelectList(referendums, "Id", "Name");
+            ViewData["referendums"] = referendumList;
             var Infos = await _infoService.GetAll(null, null);
             if (Infos is null)
             {
@@ -44,17 +45,17 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList decisionList = new SelectList(decisions, "Id", "Title");
-            ViewData["decisions"] = decisionList;
+            var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList referendumList = new SelectList(referendums, "Id", "Name");
+            ViewData["referendums"] = referendumList;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(InfoCreateDto InfoCreateDto)
         {
-            var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList decisionList = new SelectList(decisions, "Id", "Title");
-            ViewData["decisions"] = decisionList;
+            var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList referendumList = new SelectList(referendums, "Id", "Name");
+            ViewData["referendums"] = referendumList;
             if (!ModelState.IsValid)
             {
                 return View(InfoCreateDto);
@@ -74,9 +75,9 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList decisionList = new SelectList(decisions, "Id", "Title");
-            ViewData["decisions"] = decisionList;
+            var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList referendumList = new SelectList(referendums, "Id", "Name");
+            ViewData["referendums"] = referendumList;
             var Info = await _infoService.GetById(id);
             if (Info is null)
             {
@@ -89,9 +90,9 @@ namespace MSK.UI.Areas.Manage.Controllers
 
         public async Task<IActionResult> Update(InfoUpdateDto InfoUpdateDto)
         {
-            var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList decisionList = new SelectList(decisions, "Id", "Title");
-            ViewData["decisions"] = decisionList;
+            var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList referendumList = new SelectList(referendums, "Id", "Name");
+            ViewData["referendums"] = referendumList;
             if (!ModelState.IsValid)
             {
                 return View(InfoUpdateDto);

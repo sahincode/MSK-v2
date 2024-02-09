@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using MSK.Business.DTOs.AccredationModelDTOs;
+using MSK.Business.DTOs.CalendarPlanModelDTOs;
 using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
+using MSK.Business.DTOs.InfoModelDTOs;
 using MSK.Business.DTOs.InstructionModelDTOs;
 using MSK.Business.DTOs.LegislationModelDTOs;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
+using MSK.Business.DTOs.ReferendumModelDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.DTOs.SubDecisionModelDTOs;
 using MSK.Business.DTOs.SubInstructionModelDTOs;
@@ -78,8 +81,21 @@ namespace MSK.Business.Mappers
             CreateMap<ContactUpdateDto, Contact>().ReverseMap();
             CreateMap<ContactIndexDto, Contact>().ReverseMap();
             CreateMap<ContactLayoutDto, Contact>().ReverseMap();
-
-
+            //  Info  model model mapping profile
+            CreateMap<InfoCreateDto, Info>().ReverseMap();
+            CreateMap<InfoUpdateDto, Info>().ReverseMap();
+            CreateMap<InfoIndexDto,Info>().ReverseMap();
+            CreateMap<InfoLayoutDto, Info>().ReverseMap();
+            // CalendarPlan  model model mapping profile
+            CreateMap<CalendarPlanCreateDto, CalendarPlan>().ReverseMap();
+            CreateMap<CalendarPlanUpdateDto, CalendarPlan>().ReverseMap();
+            CreateMap<CalendarPlanIndexDto, CalendarPlan>().ReverseMap();
+            CreateMap<CalendarPlanLayoutDto, CalendarPlan>().ReverseMap();
+            // referendum model model mapping profile
+            CreateMap<ReferendumCreateDto, Referendum>().ReverseMap();
+            CreateMap<ReferendumUpdateDto, Referendum>().ReverseMap();
+            CreateMap<ReferendumIndexDto, Referendum>().ReverseMap();
+            CreateMap<ReferendumLayoutDto, Referendum>().ReverseMap();
         }
     }
 }

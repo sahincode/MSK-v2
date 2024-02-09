@@ -7,6 +7,7 @@ namespace MSK.Business.DTOs.CalendarPlanModelDTOs
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public IFormFile? Pdf { get; set; }
         public int? ReferendumId { get; set; }
 
@@ -20,7 +21,10 @@ namespace MSK.Business.DTOs.CalendarPlanModelDTOs
                                   NotEmpty().WithMessage("Can not be empty").
                                   MaximumLength(1000).WithMessage("Can not be greater than 1000 digits").
                                   MinimumLength(3).WithMessage("Can not be less than 3 digits");
-           
+            RuleFor(e => e.Description).NotNull().WithMessage("Can not be null").
+                                  NotEmpty().WithMessage("Can not be empty").
+                                  MaximumLength(1000).WithMessage("Can not be greater than 1000 digits").
+                                  MinimumLength(3).WithMessage("Can not be less than 3 digits");
         }
     }
 }

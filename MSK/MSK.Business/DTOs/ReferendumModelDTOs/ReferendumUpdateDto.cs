@@ -10,7 +10,6 @@ namespace MSK.Business.DTOs.ReferendumModelDTOs
         public string Name { get; set; }
         public int InstructionId { get; set; }
         public int DecisionId { get; set; }
-        public List<int> InfoIds { get; set; }
         public int CalendarPlanId { get; set; }
     }
     public class ReferendumUpdateDtoValidator : AbstractValidator<ReferendumUpdateDto>
