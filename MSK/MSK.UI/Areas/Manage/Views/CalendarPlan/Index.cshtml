@@ -1,4 +1,4 @@
-﻿@model PaginatedList<SubDecisionIndexDto>
+﻿@model PaginatedList<CalendarPlanIndexDto>
 @{
     int counter = 0;
 }
@@ -58,7 +58,7 @@
                             </div>
                             <hr>
                             <div class="modal-body">
-                                En Pdf Url: @item.Url
+                                En Pdf Url: @item.PdfUrl
                             </div>
                             
 
@@ -67,15 +67,15 @@
                 </div>
                 <tr>
                     <td class="about-info-td">@counter</td>
-                    <td class="about-info-td">@(item.Title.Substring(0, 30) + "...")</td>
+                    <td class="about-info-td">@(item.Title.Length <= 30 ? item.Title : item.Title.Substring(0, 30) + "...")</td>
 
-                    <td class="about-info-td">@(item.Url.Substring(0,30)+"...")</td>
+                    <td class="about-info-td">@(item.PdfUrl.Substring(0,30)+"...")</td>
                     <td class="td-min d-flex">
-                        <a class="btn btn-warning ms-1" asp-controller="subdecision" asp-action="Update" asp-route-id="@item.Id">
+                        <a class="btn btn-warning ms-1" asp-controller="info" asp-action="Update" asp-route-id="@item.Id">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="subdecision">
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-controller="info">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">

@@ -1,13 +1,15 @@
-﻿using System;
+﻿using MSK.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSK.Core.Models
+namespace MSK.Business.DTOs.ReferendumModelDTOs
 {
-    public class Referendum : BaseEntity
+    public class ReferendumLayoutDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int InstructionId { get; set; }
         public Instruction Instruction { get; set; }
@@ -16,6 +18,5 @@ namespace MSK.Core.Models
         public List<Info> Infos { get; set; }
         public CalendarPlan CalendarPlan { get; set; }
         public int CalendarPlanId { get; set; }
-
     }
 }

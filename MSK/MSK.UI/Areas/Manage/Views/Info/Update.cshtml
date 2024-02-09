@@ -1,0 +1,66 @@
+﻿@model InfoUpdateDto
+@{
+    var selectList = (SelectList)ViewData["decisions"];
+}
+<style>
+    .table-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 40px;
+        background-color: #435d7d !important;
+    }
+
+        .table-title .title {
+            font-weight: 700;
+        }
+
+        .table-title span {
+            font-weight: 300;
+        }
+
+    .create-btn {
+        width: 110px;
+    }
+
+</style>
+<div class="container-fluid">
+    <div class="table-title text-white  d-block d-sm-flex">
+        <div>
+            <h1 class="title"> Sub Decision <span>@ViewData["Title"]</span></h1>
+        </div>
+        <div>
+            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+    <form method="post" class="row" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <label asp-for="Pdf" class="control-label"></label>
+            <input asp-for="Pdf" class="form-control" />
+            <span asp-validation-for="Pdf" class="text-danger"></span>
+        </div>
+       
+
+        <div class="form-group col-lg-7 col-xl-8 ">
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+</div>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial", true);
+}
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
