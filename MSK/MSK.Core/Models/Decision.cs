@@ -11,5 +11,7 @@ namespace MSK.Core.Models
       public string Title { get; set; }
        
         public List<SubDecision> SubDecisions { get; set; }
+        public Referendum? Referendum { get;set; }
+        public int? ReferendumId { get; set; }
     }
 }

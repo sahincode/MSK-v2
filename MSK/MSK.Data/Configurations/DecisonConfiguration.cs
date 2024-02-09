@@ -14,7 +14,7 @@ namespace MSK.Data.Configurations
         public void Configure(EntityTypeBuilder<Decision> builder)
         {
             builder.Property(c => c.Title).IsRequired().HasMaxLength(200);
-            
+
             
         }
     }

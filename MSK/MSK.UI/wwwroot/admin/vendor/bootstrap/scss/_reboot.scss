@@ -153,10 +153,7 @@ blockquote {
   margin: 0 0 1rem;
 }
 
-b,
-strong {
-  font-weight: $font-weight-bolder; // Add the correct font weight in Chrome, Edge, and Safari
-}
+
 
 small {
   @include font-size(80%); // Add the correct font size in all browsers

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MSK.Core.Models
 {
-    public class Instruction : BaseEntity
+    public class Info :BaseEntity
     {
         public string Name { get; set; }
-        public List<SubInstruction> SubInstructions { get; set; }
+        public string PdfUrl { get;set; }
         public Referendum? Referendum { get; set; }
         public int? ReferendumId { get; set; }
     }

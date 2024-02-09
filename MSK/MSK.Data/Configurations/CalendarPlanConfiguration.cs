@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MSK.Data.Configurations
 {
-    public class InstructionCinfiguration : IEntityTypeConfiguration<Instruction>
+    public class CalendarPlanConfiguration : IEntityTypeConfiguration<CalendarPlan>
     {
-        public void Configure(EntityTypeBuilder<Instruction> builder)
+        public void Configure(EntityTypeBuilder<CalendarPlan> builder)
         {
-            builder.Property(c => c.Name).IsRequired().HasMaxLength(200);
+            builder.Property(c => c.Title).IsRequired().HasMaxLength(1000);
+            builder.Property(c => c.PdfUrl).IsRequired().HasMaxLength(100);
            
-
         }
     }
 }

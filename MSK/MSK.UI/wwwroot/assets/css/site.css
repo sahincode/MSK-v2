@@ -9,6 +9,9 @@ body {
 li {
     list-style: none;
 }
+b , strong {
+    font-weight:bold;
+}
 
 a {
     text-decoration: none;
