@@ -1,0 +1,55 @@
+﻿@model ReferendumLayoutDto
+<section class="mf-breadcrumb">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/en">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Referendum</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="page-post">
+                    <h3>Referendum</h3>
+                    <div class="page-post-items">
+                        @foreach(var info in Model.Infos)
+                        {
+                            <div class="page-post-item">
+                                <p class="post-title">
+                                    <a asp-action="info" asp-controller="referendum" asp-route-id="@info.Id" class="link-more"> @info.Name</a>
+                                </p><p class="post-time"><time>@info.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss")</time></p>
+                            </div>
+
+                        }
+                        
+                        <div class="page-post-item">
+                            <p class="post-title">
+                                <a asp-action="plan" asp-controller="referendum" asp-route-id="@Model.CalendarPlan.Id" class="link-more">@Model.CalendarPlan.Title</a>
+                            </p><p class="post-time"><time>@Model.CalendarPlan.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss")</time></p>
+                        </div>
+                        <div class="page-post-item">
+                            <p class="post-title">
+                                <a asp-action="decision" asp-controller="referendum" asp-route-id="@Model.Decision.Id" class="link-more">@Model.Decision.Title</a>
+                            </p><p class="post-time"><time>@Model.Decision.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss")</time></p>
+                        </div>
+                        <div class="page-post-item">
+                            <p class="post-title">
+                                <a asp-action="instruction" asp-controller="referendum" asp-route-id="@Model.Instruction.Id" class="link-more">@Model.Instruction.Name</a>
+                            </p><p class="post-time"><time>@Model.Instruction.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss")</time></p>
+                        </div>
+
+                        <br><br>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
