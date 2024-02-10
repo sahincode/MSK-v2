@@ -73,7 +73,10 @@ namespace MSK.Business.Services.Implementations
 
         public async Task<CalendarPlan> GetById(int? id)
         {
-            return await _calendarPlanRepository.Get(a => a.Id == id);
+             var calendarplan = await _calendarPlanRepository.Get(a => a.Id == id);
+            if (calendarplan is null) throw new EntityNotFoundException("", $"The entity with the ID equal to" +
+                $" {id} was not found in the database.");
+            return calendarplan;
         }
 
 

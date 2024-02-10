@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.PressNewDTOs;
+using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
+using MSK.Core.Models;
 using MSK.UI.ViewModels;
+
 using System.Diagnostics;
 
 namespace MSK.UI.Controllers
@@ -65,6 +69,28 @@ namespace MSK.UI.Controllers
                 }
             }
             return View(contactLayoutDtos);
+        }
+        public async Task<IActionResult> Search(string ?query  ,int page)
+        { if( query is null)
+            {
+                ModelState.AddModelError("", "Query can not be null or less than 3 charcters!");
+                return View("Search");
+
+            }
+            List<PressNew> pressNews=  _pressNewService.GetAll(pn=>pn.Title.Trim().ToLower() == query.Trim().ToLower()|| pn.Description.Trim().ToLower() == query.Trim().ToLower()).Result.ToList();
+            if(pressNews is null)
+            {
+                return NotFound();
+            }
+           List<PressNewLayoutDto> pressNewLayoutDtos= new List<PressNewLayoutDto>();
+             foreach(var neW in pressNews)
+            {
+                PressNewLayoutDto pressNewLayoutDto = _mapper.Map<PressNewLayoutDto>(neW);
+                pressNewLayoutDtos.Add(pressNewLayoutDto);
+            }
+            PaginatedList<PressNewLayoutDto> paginatedNews = PaginatedList<PressNewLayoutDto>.Create
+               (pressNewLayoutDtos.AsQueryable(), page, 50);
+            return View(paginatedNews);
         }
 
         

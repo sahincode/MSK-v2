@@ -5,7 +5,7 @@ using MSK.Business.DTOs.ReferendumModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
-using MSK.ViewModels;
+using MSK.UI.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {

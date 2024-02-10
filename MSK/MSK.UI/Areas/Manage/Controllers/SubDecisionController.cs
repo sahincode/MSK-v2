@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MSK.Business.DTOs.SubDecisionModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
-using MSK.ViewModels;
+using MSK.UI.ViewModels;
 using System.Linq;
 
 namespace MSK.UI.Areas.Manage.Controllers

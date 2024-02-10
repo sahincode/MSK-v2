@@ -1,4 +1,4 @@
-﻿namespace MSK.ViewModels
+﻿namespace MSK.UI.ViewModels
 {
     public class PaginatedList<T> : List<T> where T : class, new()
     {
@@ -8,7 +8,7 @@
         }
         public PaginatedList(List<T> datas, int pageSize, int dataCount, int page)
         {
-            CurrentPage = page != 0 ? page : 1;
+            CurrentPage = page >= 0 ? page : 1;
             PageCount = (int)Math.Ceiling(dataCount / (double)pageSize);
             this.AddRange(datas);
 

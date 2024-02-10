@@ -78,10 +78,12 @@ namespace MSK.Business.Services.Implementations
 
         public async Task<Info> GetById(int? id)
         {
-            return await _infoRepository.Get(a => a.Id == id);
+            var info = await _infoRepository.Get(a => a.Id == id);
+            if (info is null) throw new EntityNotFoundException("", "The entity with the ID equal to" +
+                $" {id} was not found in the database. ");
+            return info;
+
         }
-
-
 
         public async Task ToggleDelete(int id)
         {

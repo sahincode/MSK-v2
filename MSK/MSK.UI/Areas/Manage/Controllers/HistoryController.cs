@@ -5,7 +5,7 @@ using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
-using MSK.ViewModels;
+using MSK.UI.ViewModels;
 using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers

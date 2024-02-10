@@ -11,6 +11,7 @@ namespace MSK.Business.DTOs.CalendarPlanModelDTOs
     public class CalendarPlanLayoutDto
     {
         public int Id { get; set; }
+        public DateTime CreationTime { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string PdfUrl { get; set; }

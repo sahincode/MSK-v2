@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
-using MSK.ViewModels;
+using MSK.UI.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
