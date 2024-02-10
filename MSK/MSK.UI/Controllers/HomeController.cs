@@ -77,7 +77,7 @@ namespace MSK.UI.Controllers
                 return View("Search");
 
             }
-            List<PressNew> pressNews=  _pressNewService.GetAll(pn=>pn.Title.Trim().ToLower() == query.Trim().ToLower()|| pn.Description.Trim().ToLower() == query.Trim().ToLower()).Result.ToList();
+            List<PressNew> pressNews=  _pressNewService.GetAll(pn=>pn.Title.Trim().ToLower().Contains(query.Trim().ToLower()) || pn.Description.Trim().ToLower().Contains(query.Trim().ToLower()) ).Result.ToList();
             if(pressNews is null)
             {
                 return NotFound();
@@ -89,7 +89,7 @@ namespace MSK.UI.Controllers
                 pressNewLayoutDtos.Add(pressNewLayoutDto);
             }
             PaginatedList<PressNewLayoutDto> paginatedNews = PaginatedList<PressNewLayoutDto>.Create
-               (pressNewLayoutDtos.AsQueryable(), page, 50);
+               (pressNewLayoutDtos.AsQueryable(), page, 1 ,query);
             return View(paginatedNews);
         }
 

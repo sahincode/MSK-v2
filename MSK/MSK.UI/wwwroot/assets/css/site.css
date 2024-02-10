@@ -411,3 +411,12 @@ a {
 .contact-container{
     border-bottom:0.1px dotted black;
 }
+ /*layout search  section style start*/
+.pagination .page-item.active .page-link {
+    background-color: #004A7C;
+    border-color: #004A7C;
+}
+.page-link {
+    color: #004A7C;
+}
+/*layout search  section style end*/
