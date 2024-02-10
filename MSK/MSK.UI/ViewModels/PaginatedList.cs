@@ -18,6 +18,7 @@
         public bool HasNext { get => PageCount > CurrentPage; set { } }
         public bool HasPrev { get => CurrentPage != 1; set { } }
         public string ? Query { get; set; }
+       
 
         public static PaginatedList<T> Create(IQueryable<T> query, int page, int pageSize ,string ? q=null)
         {

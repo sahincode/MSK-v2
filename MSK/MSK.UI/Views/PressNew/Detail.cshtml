@@ -1,0 +1,50 @@
+﻿@model PressNewLayoutDto
+
+<section class="mf-breadcrumb">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Press-New</li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+
+
+
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="page-inner">
+                    <h3>@Model.Description</h3>
+
+                </div>
+                <div class="page-inner-item">
+                    <div class="mf-thumb">
+                        
+                        <a data-fancybox="gallery" href="~/assets/img/pressnew/@Model.ImageUrl" data-thumb="~/assets/img/pressnew/@Model.ImageUrl">
+                            <img src="~/assets/img/pressnew/@Model.ImageUrl" width="300" alt="press new @Model.Id">
+                        </a>
+                    </div>
+                    <div class="mf-text-justify">
+                        @Html.Raw(Model.Article)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+@section JS{
+    <script>
+        const options = {
+            Thumbs: {
+                type: "modern",
+            },
+        };
+    </script>
+ }

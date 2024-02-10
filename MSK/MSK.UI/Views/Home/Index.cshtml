@@ -70,7 +70,7 @@
                         </a>
                     </div>
                     <div class="col-md-3 mb-3 mb-md-0">
-                        <a href="/az/news" class="mf-current-item d-flex align-items-center">
+                        <a  asp-action="index" asp-controller="pressnew" class="mf-current-item d-flex align-items-center">
                             <p>Agenda news</p>
                             <i class="fa-regular fa-circle-right"></i>
                         </a>
@@ -87,7 +87,7 @@
     <div class="container">
         <div class="mf-block-header d-flex">
             <h2 class="mf-title me-auto">Press-release</h2>
-            <div class="mf-news-more d-flex align-items-center"><a href="/en/news" class="btn btn-primary">All news</a></div>
+            <div class="mf-news-more d-flex align-items-center"><a asp-action="index" asp-controller="pressnew" class="btn btn-primary">All news</a></div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7 d-flex flex-row">
@@ -98,7 +98,7 @@
                         <p>@Model.PressNewLayoutDtos[0].Description</p>
                         <time>@Model.PressNewLayoutDtos[0].CreationTime.ToString("dd MMMM yyyy HH:mm")</time>
                     </div>
-                    <a href="/en/news/view/1255" class="mf-link"></a>
+                    <a asp-action ="detail" asp-controller="pressnew" asp-route-id="@Model.PressNewLayoutDtos[0].Id" class="mf-link"></a>
                 </article>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-5 d-flex">
@@ -111,7 +111,7 @@
                             <time class="time">
                                 <i class="bi bi-calendar-date"></i>@Model.PressNewLayoutDtos[i].CreationTime.ToString("dd MMMM yyyy HH:mm")
                             </time>
-                            <a href="/en/news/view/1255" class="mf-link"></a>
+                            <a asp-action="detail" asp-controller="pressnew" asp-route-id="@Model.PressNewLayoutDtos[i].Id" class="mf-link"></a>
                         </article>
                     }
 
@@ -132,7 +132,7 @@
         <div class="row">
 
             <div class="col-lg-3 col-md-3 mb-3">
-                <a href="/en/referendum" class="election-item">
+                <a asp-action="index" asp-controller="referendum" class="election-item">
                     <span class="mf-title">Referendum</span>
                     <span class="mf-icon"><i class="bi bi-arrow-right"></i></span>
                 </a>
