@@ -1,4 +1,4 @@
-﻿<html lang="az">
+﻿<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,12 +106,16 @@
                         </ul>
                     </div>
                     <div class="mf-search d-flex flex-row justify-content-end">
-                        <form  asp-action="search" asp-controller="home"   method="get">
-                            <div class="layout__input">
-                                <input type="text" name="query" placeholder="Search" for="search" autocomplete="off">
-                                <button id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </form>
+                        <div  id="searchContainer" class="layout__input d-flex align-items-center">
+
+                            <form id="form-search" asp-action="search" class="d-flex align-items-center mt-2" asp-controller="home" method="get">
+                                <input type="text" id="search-input" name="query" placeholder="Search" for="search" autocomplete="off" autofocus />
+               
+                            </form>
+
+                            @*fa-stop*@
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -200,7 +204,7 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-3">
-                    <a   href="https://www.virtualkarabakh.az" target="_blank" rel="noopener noreferrer" class="useful-links-item d-flex align-items-center">
+                    <a href="https://www.virtualkarabakh.az" target="_blank" rel="noopener noreferrer" class="useful-links-item d-flex align-items-center">
                         <span class="mf-img"><img src="~/assets/img/usefull/45c6dfa95aa5e0d63937305f09492bf7_8721FB-87C73F-CECBA2-6B3708-2D46BF-C0D1A5.png" alt="Virtual Karabakh"></span>
                         <span class="mf-title">Virtual Karabakh</span>
                     </a>
@@ -291,7 +295,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
     <script src="~/assets/js/site.js"></script>
     @RenderSection("JS" ,false)
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </body>
 </html>

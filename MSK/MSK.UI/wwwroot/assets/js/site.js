@@ -42,7 +42,7 @@ const navButton = document.querySelector('.navbar-toggler');
 const navDiv = document.querySelector('.navbar-collapse');
 
 navButton.addEventListener("click", function () {
-  
+
     if (navButton.classList.contains('collapsed') && !navButton.classList.contains('show')) {
         navButton.classList.remove('collapsed')
         navDiv.classList.add('show');
@@ -57,7 +57,7 @@ navButton.addEventListener("click", function () {
 })
 const articles = document.querySelectorAll('.article-active');
 const articleContent = document.querySelector('.article-content');
-const articleImg= document.querySelector('.image-article');
+const articleImg = document.querySelector('.image-article');
 
 
 articles.forEach(article => article.addEventListener('mouseover', function () {
@@ -73,3 +73,71 @@ articles.forEach(article => article.addEventListener('mouseover', function () {
     articleImg.src = article.getAttribute('data-image');
     article.classList.add('active-press');
 }))
+// speech search functionality in layout 
+const searchForm = document.getElementById('form-search');
+const searchContainer = document.getElementById('searchContainer');
+
+const formInput = searchForm.querySelector('input');
+
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+    searchContainer.insertAdjacentHTML("beforeend", '<button><i class="fa-solid fa-microphone mb - 2"></i></button>');
+    const srcBtn = searchContainer.querySelector('button');
+    const micIcon = searchContainer.querySelector('i');
+    const recognition = new SpeechRecognition();
+    srcBtn.addEventListener('click', micBtnClick)
+    function micBtnClick(e) {
+        e.preventDefault();
+        if (micIcon.classList.contains("fa-microphone")) { //start speech recoginition 
+
+            recognition.start();
+
+        } else { //end speech recognition
+
+            recognition.stop();
+        }
+    }
+    recognition.addEventListener("start", startSpeechRecognition);
+    function startSpeechRecognition() {
+        micIcon.classList.remove("fa-microphone");
+        micIcon.classList.add("fa-stop");
+        console.log("start");
+
+    }
+    recognition.addEventListener("end", stopSpeechRecognition);
+    function stopSpeechRecognition() {
+        micIcon.classList.remove("fa-stop");
+        micIcon.classList.add("fa-microphone");
+        console.log("end");
+    }
+    recognition.addEventListener("result", resultOfSpeechRecognition);
+    function resultOfSpeechRecognition(event) {
+        const currentReslutIndex = event.resultIndex;
+        const transcript = event.results[currentReslutIndex][0].transcript;
+        const cleanResult = transcript.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').trim()
+        if (cleanResult.toLowerCase().trim() == "stop recording") {
+            recognition.stop();
+        }
+
+        else {
+            if (cleanResult.toLowerCase().trim() == "go") {
+                window.location.href = "https://www.google.com";
+                console.log('hello')
+            }
+            else if (cleanResult.toLowerCase().trim() === "open ai support") {
+                window.location.href = "https://localhost:7090/aisupport/index"
+            }
+            else {
+                formInput.value = cleanResult;
+                setTimeout(() => {
+                    searchForm.submit();
+                }, 1000)
+            }
+
+        }
+
+
+    }
+}
+
