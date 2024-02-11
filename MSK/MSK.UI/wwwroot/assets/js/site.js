@@ -121,9 +121,10 @@ if (SpeechRecognition) {
         }
 
         else {
-            if (cleanResult.toLowerCase().trim() == "go") {
-                window.location.href = "https://www.google.com";
-                console.log('hello')
+            if (cleanResult.toLowerCase().trim() == "go google") {
+               
+                window.open("https://www.google.com", "_blank");
+                
             }
             else if (cleanResult.toLowerCase().trim() === "open ai support") {
                 window.location.href = "https://localhost:7090/aisupport/index"
