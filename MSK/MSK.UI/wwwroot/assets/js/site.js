@@ -116,12 +116,14 @@ if (SpeechRecognition) {
         const currentReslutIndex = event.resultIndex;
         const transcript = event.results[currentReslutIndex][0].transcript;
         const cleanResult = transcript.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').trim()
-        if (cleanResult.toLowerCase().trim() == "stop recording") {
+        if (transcript.toLowerCase().trim() === "stop recording.") {
+            
             recognition.stop();
+      
         }
 
         else {
-            if (cleanResult.toLowerCase().trim() == "go google") {
+            if (cleanResult.toLowerCase().trim() === "go google") {
                
                 window.open("https://www.google.com", "_blank");
                 
@@ -141,4 +143,23 @@ if (SpeechRecognition) {
 
     }
 }
+//document.addEventListener("DOMContentLoaded", function () {
+
+//    responsiveVoice.speak("hello world", "UK English Male");
+//})
+//speech helper stoper (starter ) button configuration
+//const stopVoiceBtn = document.getElementById('voiceStoper');
+//stopVoiceBtn.addEventListener('click', function () {
+//    if (stopVoiceBtn.classList.contains('btn-warning')) {
+//        responsiveVoice?.pause();
+//        stopVoiceBtn.classList.add('btn-success');
+//        stopVoiceBtn.classList.remove('btn-warning');
+
+//    } else {
+//        stopVoiceBtn.classList.add('btn-warning');
+//        stopVoiceBtn.classList.remove('btn-success');
+//        responsiveVoice?.resume();
+//    }
+//});
+
 

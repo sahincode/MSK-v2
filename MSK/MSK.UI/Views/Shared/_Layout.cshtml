@@ -19,6 +19,8 @@
     <link href="~/assets/css/accredation.css" rel="stylesheet" />
     <link href="~/assets/css/decision.css" rel="stylesheet" />
     <link href="~/assets/css/legislation.css" rel="stylesheet" />
+    <link href="~/assets/css/ai-support.css" rel="stylesheet" />
+
 
 
 
@@ -104,16 +106,17 @@
                             <li><a href="/az/" class="nav-link">AZE</a></li>
                             <li><a href="/en/" class="nav-link">ENG</a></li>
                         </ul>
+                        <button class="btn btn-warning  d-none" id="voiceStoper"> Stop Voice Helper</button>
                     </div>
                     <div class="mf-search d-flex flex-row justify-content-end">
                         <div  id="searchContainer" class="layout__input d-flex align-items-center">
 
                             <form id="form-search" asp-action="search" class="d-flex align-items-center mt-2" asp-controller="home" method="get">
-                                <input type="text" id="search-input" name="query" placeholder="Search" for="search" autocomplete="off" autofocus />
+                                <input type="text" id="search-input" name="query" placeholder="Search" for="search" autocomplete="off" />
                
                             </form>
 
-                            @*fa-stop*@
+                           
                         </div>
 
                     </div>
@@ -177,7 +180,7 @@
                             <a asp-action="contact" asp-controller="home" class="nav-link">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/en/contact" class="nav-link">AI Support</a>
+                            <a asp-action="index" asp-controller="aisupport" class="nav-link">AI Support</a>
                         </li>
                     </ul>
 
@@ -290,10 +293,11 @@
             </div>
         </div>
     </section>
+    <script src="~/assets/js/site.js"></script>
+    @*<script class="" src="https://code.responsivevoice.org/responsivevoice.js?key=lCvPkluE"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
-    <script src="~/assets/js/site.js"></script>
     @RenderSection("JS" ,false)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
