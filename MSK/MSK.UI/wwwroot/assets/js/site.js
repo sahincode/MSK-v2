@@ -117,16 +117,16 @@ if (SpeechRecognition) {
         const transcript = event.results[currentReslutIndex][0].transcript;
         const cleanResult = transcript.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').trim()
         if (transcript.toLowerCase().trim() === "stop recording.") {
-            
+
             recognition.stop();
-      
+
         }
 
         else {
             if (cleanResult.toLowerCase().trim() === "go google") {
-               
+
                 window.open("https://www.google.com", "_blank");
-                
+
             }
             else if (cleanResult.toLowerCase().trim() === "open ai support") {
                 window.location.href = "https://localhost:7090/aisupport/index"
@@ -143,23 +143,29 @@ if (SpeechRecognition) {
 
     }
 }
-//document.addEventListener("DOMContentLoaded", function () {
 
-//    responsiveVoice.speak("hello world", "UK English Male");
-//})
-//speech helper stoper (starter ) button configuration
-//const stopVoiceBtn = document.getElementById('voiceStoper');
-//stopVoiceBtn.addEventListener('click', function () {
-//    if (stopVoiceBtn.classList.contains('btn-warning')) {
-//        responsiveVoice?.pause();
-//        stopVoiceBtn.classList.add('btn-success');
-//        stopVoiceBtn.classList.remove('btn-warning');
+//ai integration
+const token = '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';
+const chatInput = document.getElementById('chatInput');
+const chatBtn = document.getElementById('chatButton');
+const chanAns = document.getElementById('chatAnswer');
+chatBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify({
+            "model": "gpt-3.5-turbo",
+            "messages": [{ "role": "user", "content": chatInput.value }]
+        })
+    }).then(response => {
+        return response.json();
+        
+    }).then(data => {
+        chanAns.innerText = data.choices[0].message.content;
+    })
 
-//    } else {
-//        stopVoiceBtn.classList.add('btn-warning');
-//        stopVoiceBtn.classList.remove('btn-success');
-//        responsiveVoice?.resume();
-//    }
-//});
-
-
+})

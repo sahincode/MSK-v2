@@ -10,6 +10,9 @@
     .ai__textarea{
         width:350px;
     }
+    .ai__form {
+        width: 350px;
+    }
 }
 
 @media(max-width:412px) {
@@ -21,6 +24,9 @@
         font-size: 13px !important;
     }
     .ai__textarea {
+        width: 300px;
+    }
+    .ai__form {
         width: 300px;
     }
 }
@@ -46,9 +52,15 @@
     .ai__textarea {
         width: 475px;
     }
+    .ai__form{
+        width:475px;
+    }
 }
 @media (min-width:850px){
     .ai__textarea {
+        width: 750px;
+    }
+    .ai__form {
         width: 750px;
     }
 }

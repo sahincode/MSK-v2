@@ -56,13 +56,19 @@
     color:white;
 }
 
-.ai__form textarea{
+.ai__form {
     position:relative;
     
 
 }
 .ai__form button {
     position: absolute;
-    right:0 !important;
+    right:20px !important;
+    top:10px;
 
+}
+.ai-form-container{
+    display:flex;
+    justify-content:center;
+    text-align:center;
 }
