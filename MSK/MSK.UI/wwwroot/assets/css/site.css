@@ -9,8 +9,9 @@ body {
 li {
     list-style: none;
 }
-b , strong {
-    font-weight:bold;
+
+b, strong {
+    font-weight: bold;
 }
 
 a {
@@ -20,48 +21,56 @@ a {
 
 .carousel-caption {
     position: absolute;
-    opacity:0.8;
+    opacity: 0.8;
     bottom: 0;
-   right:0;
-   margin-left:10%;
+    right: 0;
+    margin-left: 10%;
     background: linear-gradient(90deg, rgba(92,73,62,1) 0%, rgba(31,40,54,1) 84%, rgba(31,18,36,1) 100%);
     height: 25%;
 }
-.carousel-indicators{
-    position:absolute;
-    justify-content:start;
-    margin-left:0;
-    left:30px;
+
+.carousel-indicators {
+    position: absolute;
+    justify-content: start;
+    margin-left: 0;
+    left: 30px;
 }
+
 .carousel-caption a {
     color: white;
 }
- /*press news slide style*/
-.article-content i{
-    visibility:hidden;
+/*press news slide style*/
+.article-content i {
+    visibility: hidden;
 }
-.article-active .bi{
-    position:static;
-    margin-right:4px;
+
+.article-active .bi {
+    position: static;
+    margin-right: 4px;
 }
+
 .mf-news .list-news article time {
     font-size: 14px;
 }
+
 .mf-news .list-news article {
-    
     border-bottom: 1px dotted #CDD1D6;
 }
-.mf-news .list-news article:hover{
-    border-color:darkblue;
+
+    .mf-news .list-news article:hover {
+        border-color: darkblue;
+    }
+
+.article-content {
+    color: white;
 }
- .article-content {
-        color: white;
-}
+
 .active-press {
     color: dodgerblue;
 }
-.article-active p:hover{
-    text-decoration:underline;
+
+.article-active p:hover {
+    text-decoration: underline;
 }
 /*press news slide style end*/
 .mf-elections {
@@ -89,9 +98,10 @@ a {
 .mf-nav {
     background-color: #E8F1F5;
 }
+
 .mf-news {
-    width:100%;
-    background-color:white;
+    width: 100%;
+    background-color: white;
 }
 
 .collapse:not(.show) {
@@ -374,8 +384,9 @@ a {
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     width: 100%;
-    min-height:100px;
+    min-height: 100px;
 }
+
 .useful-links-item:hover {
     border: 1px solid #54585A;
 }
@@ -408,15 +419,20 @@ a {
     display: none !important;
 }
 /*home contact page style*/
-.contact-container{
-    border-bottom:0.1px dotted black;
+.contact-container {
+    border-bottom: 0.1px dotted black;
 }
- /*layout search  section style start*/
+/*layout search  section style start*/
 .pagination .page-item.active .page-link {
     background-color: #004A7C;
     border-color: #004A7C;
 }
+
 .page-link {
     color: #004A7C;
 }
 /*layout search  section style end*/
+
+/*sign input sign sup page style start*/
+
+/*sign input sign up page  style end*/

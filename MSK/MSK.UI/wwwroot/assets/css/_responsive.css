@@ -13,6 +13,9 @@
     .ai__form {
         width: 350px;
     }
+    .chat-section{
+        display:block;
+    }
 }
 
 @media(max-width:412px) {

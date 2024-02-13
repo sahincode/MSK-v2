@@ -14,7 +14,7 @@
 
 .center-icon-div {
     margin-top: 30px;
-    min-height: 400px;
+    min-height: 350px;
 }
 
     .center-icon-div img {
@@ -71,4 +71,25 @@
     display:flex;
     justify-content:center;
     text-align:center;
+}
+.ai__form h5{
+    margin-bottom:0;
+}
+.chat_container{
+    margin-left:100px;
+    margin-right:100px;
+}
+h5{
+    margin:0;
+}
+.logo__container {
+    width:700px;
+    margin:auto;
+}
+.ai-profile{
+    display:none;
+}
+.logo__container{
+    min-height:400px;
+    display:none;
 }

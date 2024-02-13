@@ -2,7 +2,7 @@
 
 namespace MSK.Business.DTOs
 {
-    public class AdminLoginDto
+    public class LoginModelDto
     {
 
         [Required]

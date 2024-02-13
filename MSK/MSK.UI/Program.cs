@@ -34,7 +34,13 @@ builder.Services.RegisterRepos();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Manage/account/login";
+
 });
+builder.Services.AddAuthentication("DefaultCookie")
+    .AddCookie("DefaultCookie", options =>
+    {
+        options.LoginPath = "/Account/Login";
+    });
 
 var app = builder.Build();
 

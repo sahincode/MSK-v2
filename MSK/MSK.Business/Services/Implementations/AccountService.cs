@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
@@ -17,7 +18,7 @@ namespace MSK.Business.Services.Implementations
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public async Task Login(AdminLoginDto adminLoginViewModel)
+        public async Task Login(LoginModelDto adminLoginViewModel)
         {
             User admin = null;
 
@@ -32,6 +33,35 @@ namespace MSK.Business.Services.Implementations
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task Register(RegisterModelDto registerModelDto)
+        {
+            User user = await _userManager.FindByEmailAsync(registerModelDto.Email);
+            if (user is not null)
+            {
+                throw new InvalidUserCredentialException("Email", "The use rwith this email is already exist!");
+            }
+
+            user = new User()
+            {
+
+                Email = registerModelDto.Email,
+                UserName = registerModelDto.UserName,
+                FullName = registerModelDto.FullName,
+
+
+
+            };
+
+
+            var result = await _userManager.CreateAsync(user, registerModelDto.Password);
+
+            if (!result.Succeeded)
+            {
+
+            }
+
         }
     }
 }

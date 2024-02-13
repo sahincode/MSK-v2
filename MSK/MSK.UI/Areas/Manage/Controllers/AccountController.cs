@@ -21,7 +21,7 @@ namespace MSK.Areas.Manage.Controllers
             _roleManager = roleManager;
             _accountService = accountService;
         }
-    
+     
         [HttpGet]
         public IActionResult Login()
         {
@@ -29,7 +29,7 @@ namespace MSK.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AdminLoginDto adminLoginViewModel)
+        public async Task<IActionResult> Login(LoginModelDto adminLoginViewModel)
         {
             if (!ModelState.IsValid) return View(adminLoginViewModel);
 

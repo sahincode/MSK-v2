@@ -149,7 +149,12 @@ const token = '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';
 const chatInput = document.getElementById('chatInput');
 const chatBtn = document.getElementById('chatButton');
 const chanAns = document.getElementById('chatAnswer');
-chatBtn.addEventListener('click', function (e) {
+const aiLogo = document.getElementById('ai-logo');
+const answerCon = document.getElementById('answerContainer');
+chatBtn?.addEventListener('click', function (e) {
+    aiLogo.style.display = 'none';
+    answerCon.style.display = 'inline-block';
+   
     e.preventDefault();
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -167,5 +172,6 @@ chatBtn.addEventListener('click', function (e) {
     }).then(data => {
         chanAns.innerText = data.choices[0].message.content;
     })
+    chatInput.value = "";
 
 })
