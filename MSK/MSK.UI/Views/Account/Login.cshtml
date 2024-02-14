@@ -1,7 +1,5 @@
 ﻿@model LoginModelDto
 
-
-
     <div class="container">
 
         <!-- Outer Row -->
@@ -19,6 +17,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
+                                <div asp-validation-summary="ModelOnly"></div>
+
                                     <form  method="post">
                                         <div class="form-group">
                                             <input  asp-for="Email" type="email" class="form-control form-control-user"
@@ -67,6 +67,7 @@
 
     </div>
 
+ @section LoginJS{
     <!-- Bootstrap core JavaScript-->
     <script src="~/admin/vendorjquery/jquery.min.js"></script>
     <script src="~/admin/vendorbootstrap/js/bootstrap.bundle.min.js"></script>
@@ -76,3 +77,4 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/admin/js/sb-admin-2.min.js"></script>
+ }

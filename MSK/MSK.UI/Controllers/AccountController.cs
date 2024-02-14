@@ -36,6 +36,11 @@ namespace MSK.UI.Controllers
 
             return RedirectToAction("index", "home");
         }
+        public async Task<IActionResult> Register()
+        {
+            return View();
+        }
+        [HttpPost]
         public  async Task< IActionResult> Register(RegisterModelDto registerModelDto)
         {
 
@@ -50,7 +55,7 @@ namespace MSK.UI.Controllers
                 ModelState.AddModelError(ex.PropertyName, ex.Message);
                 return View();
             }
-            return View();
+            return RedirectToAction("login", "Account");
         }
         public async Task<IActionResult> Logout()
         {

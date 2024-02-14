@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MSK.UI.Controllers
 {
-    [Authorize(AuthenticationSchemes = "DefaultCookie")]
+    [CustomAuthorize]
     public class AISupportController : Controller
     {
         public IActionResult Index()
