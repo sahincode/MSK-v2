@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MSK.Business.DTOs.VoterModelDTOs;
 
 namespace MSK.UI.Controllers
 {
@@ -6,6 +7,11 @@ namespace MSK.UI.Controllers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+        public async Task<IActionResult> VoterLogin(VoterLoginDto voterLoginDto)
+        {
+
             return View();
         }
     }
