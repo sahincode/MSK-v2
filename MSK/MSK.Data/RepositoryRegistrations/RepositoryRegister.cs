@@ -24,6 +24,8 @@ namespace MSK.Data.RepositoryRegistrations
             services.AddScoped<IInfoRepository, InfoRepository>();
             services.AddScoped<ICalendarPlanRepository, CalendarPlanRepository>();
             services.AddScoped<IReferendumRepository, ReferendumRepository>();
+            services.AddScoped<IVoterRepository, VoterRepository>();
+
 
 
 

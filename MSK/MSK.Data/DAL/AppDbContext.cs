@@ -28,6 +28,7 @@ namespace MSK.Data.DAL
         public DbSet<Info> Infos{ get; set; }
         public DbSet<Referendum> Referendums { get; set; }
         public DbSet<CalendarPlan> CalendarPlans { get; set; }
+        public DbSet<Voter>  Voters { get; set; }
 
         public AppDbContext(DbContextOptions options):base(options){}
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -35,6 +35,13 @@
 }
 
 @media only screen and (max-width: 575px) {
+    .center-icon-div h3{
+        font-size:14px;
+
+    }
+    .chat_container {
+        margin-left: 60px;
+    }
     .mf-nav .mf-logo .mf-logo-img {
         margin-right: 10px;
     }
@@ -52,14 +59,27 @@
         }
 }
 @media (min-width:575.0025px){
+    .center-icon-div h3 {
+        font-size: 16px;
+    }
+    .chat_container {
+        margin-left: 200px;
+        
+    }
     .ai__textarea {
         width: 475px;
     }
     .ai__form{
         width:475px;
     }
+    #ai-logo {
+        margin-left: 150px;
+    }
 }
 @media (min-width:850px){
+    .center-icon-div h3 {
+        font-size: 25px;
+    }
     .ai__textarea {
         width: 750px;
     }

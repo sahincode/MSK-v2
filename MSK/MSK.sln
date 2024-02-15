@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSK.Data", "MSK.Data\MSK.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSK.Business", "MSK.Business\MSK.Business.csproj", "{A15F498D-A8C3-48A0-9AED-112A85F727EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSK.UI", "MSK.UI\MSK.UI.csproj", "{45DC9216-11F1-4362-A74B-FD15881E1388}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSK.UI", "MSK.UI\MSK.UI.csproj", "{45DC9216-11F1-4362-A74B-FD15881E1388}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,35 +1,50 @@
-﻿<div class="chat-section">
+﻿
+
+<div class="chat-section">
     <div class="ai-container">
         <h5 class="header__text">AlfaHELP 1.0</h5>
     </div>
     <section id="ai-input-form">
         <div class="container  d-flex justify-content-center align-items-center chat_container">
-       <div class="w-100 d-flex align-items-center justify-content-center" >
-                <div id="ai-logo" class="center-icon-div   ">
+            <div class="w-100 d-flex align-items-center justify-content-center">
+                <div id="ai-logo " class="center-icon-div mt-5">
                     <div class="icon__container">
                         <img style="min-width:89x;max-width:100px;" src="~/assets/img/ai-icon.png" />
                     </div>
                     <div class="w-100 d-flex justify-content-center">
                         <h3>How can I help you today?</h3>
-                   </div>
+                    </div>
                 </div>
-
-                <div class=" logo__container" id="answerContainer">
-                   <div class="d-flex jusify-content-center w-75">
-                        <div class="d-flex align-items-center justify-content-start text-align-center ai-profile">
-                            <img style="max-width:25px;" src="~/assets/img/ai-icon.png" />
-                            <h5>AlfaHELP</h5>
+                <div class="question-answer-area">
+                    <div class="user__container " id="userAnsContainer">
+                        <div class="d-flex jusify-content-center w-75">
+                            <div class="d-flex align-items-center justify-content-start text-align-center ai-profile">
+                                <div id="userProImage"></div>
+                                <h5 class="ms-2" id="UserName">@User.Identity.Name</h5>
+                            </div>
                         </div>
-                   </div>
-                    <div id="chatAnswer"></div>
+                        <div class="ms-3" id="userQuestion"></div>
+                    </div>
+
+                    <div class=" logo__container" id="answerContainer">
+                        <div class="d-flex jusify-content-center w-75">
+                            <div class="d-flex align-items-center justify-content-start text-align-center ai-profile">
+                                <img style="max-width:25px;" src="~/assets/img/ai-icon.png" />
+                                <h3 class="ms-2">AlfaHELP</h3>
+                            </div>
+                        </div>
+                        <div class="ms-3 mb-5" id="chatAnswer"></div>
+                    </div>
                 </div>
-       </div>
-    </div>
+            </div>
+        </div>
         <div class="container ">
             <div class="ai-form-container">
                 <div class="  ai__form">
-                    <textarea id="chatInput" class="ai__textarea" placeholder="Message AlfaHELP..." type="text" autocomplete="off"></textarea>
-                    <button id="chatButton" class="ai-input-btn"><i class="fa-solid fa-arrow-up "></i></button>
+                    <form id="aiForm">
+                        <textarea id="chatInput" class="ai__textarea" placeholder="Message AlfaHELP..." autocomplete="off"></textarea>
+                        <button id="chatButton" class="ai-input-btn"><i class="fa-solid fa-arrow-up "></i></button>
+                    </form>
                 </div>
             </div>
             <div class="container d-flex justify-content-center align-items-center mt-3">
@@ -38,3 +53,6 @@
         </div>
     </section>
 </div>
+@section  AIJs{
+    <script src="~/assets/js/ai.js"></script>   
+}

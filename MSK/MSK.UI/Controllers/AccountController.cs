@@ -34,7 +34,7 @@ namespace MSK.UI.Controllers
                 return View();
             }
 
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "aisupport");
         }
         public async Task<IActionResult> Register()
         {

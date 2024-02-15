@@ -35,6 +35,9 @@
     font-size:14px;
     padding-left: 20px;
     padding-top: 15px;
+    overflow:hidden;
+    resize:none;
+    padding-right:55px;
 }
 
 .ai__textarea:focus {
@@ -75,21 +78,41 @@
 .ai__form h5{
     margin-bottom:0;
 }
-.chat_container{
-    margin-left:100px;
-    margin-right:100px;
-}
+
 h5{
     margin:0;
 }
 .logo__container {
-    width:700px;
-    margin:auto;
+    width: 700px;
+    margin: auto;
+    min-height: 400px;
+    display: none;
 }
-.ai-profile{
-    display:none;
+.user__container {
+
+    min-height: 170px;
+    display: none;
 }
-.logo__container{
-    min-height:400px;
-    display:none;
+.ai-profile {
+    display: none;
 }
+#userProImage {
+
+    width: 27px;
+    height:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 50%;
+    background: #512DA8;
+    font-size: 13.5px;
+    color: #fff;
+    text-align: center;
+    line-height: 10px;
+ 
+}
+.question-answer-area {
+    margin-left:200px ;
+    margin-top:100px;
+}
+ /*ai sidebar style start*/

@@ -25,7 +25,7 @@ namespace MSK.Business.Services.Implementations
             admin = await _userManager.FindByEmailAsync(adminLoginViewModel.Email);
             if (admin == null) throw new InvalidUserCredentialException("", "Username or password is wrong!");
 
-            var result = await _signInManager.PasswordSignInAsync(admin, adminLoginViewModel.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(admin, adminLoginViewModel.Password, adminLoginViewModel.RememberMe, false);
 
             if (!result.Succeeded) throw new InvalidUserCredentialException("", "Username or password is wrong!");
         }
@@ -45,7 +45,7 @@ namespace MSK.Business.Services.Implementations
 
             user = new User()
             {
-
+                
                 Email = registerModelDto.Email,
                 UserName = registerModelDto.UserName,
                 FullName = registerModelDto.FullName,
