@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="table-title text-white  d-block d-sm-flex">
         <div>
-            <h1 class="title">News <span>@ViewData["Title"]</span></h1>
+            <h1 class="title">Voter<span>@ViewData["Title"]</span></h1>
         </div>
         <div>
             <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
@@ -18,17 +18,17 @@
         </div>
         <div class="form-group col-lg-7 col-xl-8 ">
             <label asp-for="FinCode" class="control-label">FIN</label>
-            <textarea asp-for="FinCode" class="form-control"></textarea>
+            <input asp-for="FinCode" class="form-control"/>
             <span asp-validation-for="FinCode" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-7 col-xl-8">
             <label asp-for="BirthOfDate" class="control-label">Birthday</label>
-            <textarea id="news-editor" asp-for="BirthOfDate" class="form-control"></textarea>
+            <input  asp-for="BirthOfDate" class="form-control"/>
             <span asp-validation-for="BirthOfDate" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-7 col-xl-8">
-            <label asp-for="Address" class="control-label">Birthday</label>
-            <textarea id="news-editor" asp-for="Address" class="form-control"></textarea>
+            <label asp-for="Address" class="control-label">Address</label>
+            <input  asp-for="Address" class="form-control"/>
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <div class="form-group col-md-3 position-relative">
@@ -58,12 +58,7 @@
             });
         });
     </script>
-    <script src="~/ckeditor/styles.js"></script>
-    <script src="~/ckeditor/ckeditor.js"></script>
 
-    <script type="text/javascript">
-        CKEDITOR.replace('news-editor')
-    </script>
 }
 @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

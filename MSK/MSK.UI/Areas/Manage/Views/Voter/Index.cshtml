@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="table-title text-white">
         <h1 class="title">News<span>Table</span></h1>
-        <a class="btn btn-success create-btn"  asp-action="Create" asp-controller="homeslide">Create</a>
+        <a class="btn btn-success create-btn"  asp-action="Create" asp-controller="voter">Create</a>
     </div>
     <table class="table table-hover table-striped shadow">
         <thead>
@@ -47,13 +47,15 @@
                                 <div>
                                     <h5 class="font-weight-bold">Updated Time:<span class="text-danger"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
                                 </div>
-                                <div class="border-bottom-1">
+                                <div >
                                     Deletion Status:
                                     <a asp-action="toggledelete" asp-controller="voter" asp-route-id="@item.Id" class="@(item.IsDeleted == true ? " btn btn-danger":" btn btn-success")" form="soft-delete-form">
                                         <i class="fa-solid @(item.IsDeleted == true ? "fa-check":"fa-x")"></i>
                                     </a>
 
                                 </div>
+                                <hr>
+
                             </div>
                             <div class="modal-body">
                                 Name: @item.FullName
@@ -71,7 +73,7 @@
                                 FIN code : @item.FinCode
                             </div>
                             <div>
-                                <img style="max-width:200px;" src="~/assets/img/homeslide/@item.ImageUrl" />
+                                <img style="max-width:200px; margin:20px;" src="~/assets/img/voter/@item.ImageUrl" />
                             </div>
 
                         </div>

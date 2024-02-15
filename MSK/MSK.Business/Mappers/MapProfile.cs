@@ -14,6 +14,7 @@ using MSK.Business.DTOs.ReferendumModelDTOs;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.DTOs.SubDecisionModelDTOs;
 using MSK.Business.DTOs.SubInstructionModelDTOs;
+using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Core.Models;
 
 namespace MSK.Business.Mappers
@@ -96,6 +97,11 @@ namespace MSK.Business.Mappers
             CreateMap<ReferendumUpdateDto, Referendum>().ReverseMap();
             CreateMap<ReferendumIndexDto, Referendum>().ReverseMap();
             CreateMap<ReferendumLayoutDto, Referendum>().ReverseMap();
+            // voter model model mapping profile
+            CreateMap<VoterCreateDto, Voter>().ReverseMap();
+            CreateMap<VoterUpdateDto, Voter>().ReverseMap();
+            CreateMap<VoterIndexDto, Voter>().ReverseMap();
+            CreateMap<VoterLayoutDto, Voter>().ReverseMap();
         }
     }
 }

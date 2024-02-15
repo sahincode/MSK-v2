@@ -61,3 +61,26 @@
 
 
 </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#ImageIN").change(function () {
+                const file = this.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#Imgpre").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+    <script src="~/ckeditor/styles.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script type="text/javascript">
+        CKEDITOR.replace('news-editor')
+    </script>
+}
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
