@@ -21,6 +21,8 @@
     <link href="~/assets/css/decision.css" rel="stylesheet" />
     <link href="~/assets/css/legislation.css" rel="stylesheet" />
     <link href="~/assets/css/ai-support.css" rel="stylesheet" />
+    <link href="~/assets/css/ivoting.css" rel="stylesheet" />
+
 
 
 
@@ -68,12 +70,12 @@
     </section>
 
     <!-- header -->
-    <section class="mf-header d-none d-lg-block">
+    <section id="navLogo" class="mf-header d-none d-lg-block">
         <div class="container">
             <!-- logo -->
             <div class="row">
                 <div class="col-lg-8 col-sm-7 col-xs-12">
-                    <a href="/en" class="mf-logo d-flex align-items-center">
+                    <a href="#navLogo" class="mf-logo d-flex align-items-center">
                         <span class="mf-logo-img"><img src="~/assets/img/logo.png" alt="logo"></span>
                         <span class="mf-big-title"><strong>Republic of Azerbaijan <br>Central Election Commission</strong></span>
                     </a>
@@ -103,10 +105,10 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="mf-langs d-flex flex-row align-items-center">
-                            <li><a href="/az/" class="nav-link">AZE</a></li>
-                            <li><a href="/en/" class="nav-link">ENG</a></li>
-                        </ul>
+                        @*  <ul class="mf-langs d-flex flex-row align-items-center">
+                        <li><a href="/" class="nav-link">AZE</a></li>
+                        <li><a href="/en/" class="nav-link">ENG</a></li>
+                        </ul>*@
                         <button class="btn btn-warning  d-none" id="voiceStoper"> Stop Voice Helper</button>
                     </div>
                     <div class="mf-search d-flex flex-row justify-content-end">
@@ -189,14 +191,15 @@
                                 <a asp-action="logout" asp-controller="account" class="nav-link">Logout</a>
                             </li>
                         }
-                       else{
-                        <li class="nav-item">
+                        else
+                        {
+                            <li class="nav-item">
                                 <a asp-action="register" asp-controller="account" class="nav-link">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-action="login" asp-controller="account" class="nav-link">Sign In</a>
-                        </li>
-                       }
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="login" asp-controller="account" class="nav-link">Sign In</a>
+                            </li>
+                        }
                     </ul>
 
                     <ul class="mf-mobile-langs d-flex d-lg-none flex-row align-items-center">
@@ -251,12 +254,12 @@
         </div>
     </section>
 
-    <section class="mf-footer">
+    <section id="mfFooterLogo" class="mf-footer">
         <div class="container">
             <!-- logo -->
             <div class="row">
                 <div class="col-lg-8 col-md-12">
-                    <a href="/en" class="mf-logo d-flex align-items-center">
+                    <a href="" class="mf-logo d-flex align-items-center">
                         <span class="mf-logo-img"><img src="~/assets/img/logo.png" alt="logo"></span>
                         <span class="mf-big-title"><strong>Republic of Azerbaijan <br>Central Election Commission</strong></span>
                     </a>
@@ -266,7 +269,7 @@
                         <ul class="mf-social-icons d-flex">
                             <li><a class="fb" target="_blank" href="https://www.facebook.com/msk.gov.az"></a></li>
                             <li><a class="tw" target="_blank" href="https://twitter.com/AzRes_MSK"></a></li>
-                            <li><a class="yt" target="_blank" href="https://www.youtube.com                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 /videos"></a></li>
+                            <li><a class="yt" target="_blank" href="https://www.youtube.com/videos"></a></li>
                             <li><a class="ins" target="_blank" href="https://www.instagram.com/"></a></li>
                         </ul>
                     </div>
@@ -308,19 +311,23 @@
             </div>
         </div>
     </section>
-    <script src="~/assets/js/site.js"></script>
   
+
 
     @*<script class="" src="https://code.responsivevoice.org/responsivevoice.js?key=lCvPkluE"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+    @RenderSection("siteJs" ,false)
+
     @RenderSection("JS" ,false)
+
     @RenderSection("LoginJS" ,false)
     @RenderSection("AIJs" ,false)
     <script src="~/admin/vendor/jquery/jquery.min.js"></script>
-  <script src="~/admin/js/sb-admin-2.min.js"></script>
+    <script src="~/admin/js/sb-admin-2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="~/assets/js/site.js"></script>
 </body>
 </html>

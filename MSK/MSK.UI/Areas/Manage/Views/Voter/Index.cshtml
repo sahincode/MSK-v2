@@ -47,14 +47,7 @@
                                 <div>
                                     <h5 class="font-weight-bold">Updated Time:<span class="text-danger"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
                                 </div>
-                                <div >
-                                    Deletion Status:
-                                    <a asp-action="toggledelete" asp-controller="voter" asp-route-id="@item.Id" class="@(item.IsDeleted == true ? " btn btn-danger":" btn btn-success")" form="soft-delete-form">
-                                        <i class="fa-solid @(item.IsDeleted == true ? "fa-check":"fa-x")"></i>
-                                    </a>
-
-                                </div>
-                                <hr>
+                              
 
                             </div>
                             <div class="modal-body">

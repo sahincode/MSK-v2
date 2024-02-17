@@ -61,18 +61,18 @@ namespace MSK.Areas.Manage.Controllers
 
         //    return Ok(result);
         //}
-        //public async Task<IActionResult> CreateRoles()
-        //{
-        //    IdentityRole role1 = new IdentityRole("Admin");
-        //    IdentityRole role2 = new IdentityRole("User");
-        //    IdentityRole role3 = new IdentityRole("SuperAdmin");
+        public async Task<IActionResult> CreateRoles()
+        {
+            //IdentityRole role1 = new IdentityRole("Admin");
+            //IdentityRole role2 = new IdentityRole("User");
+            IdentityRole role3 = new IdentityRole("Voter");
 
-        //    await _roleManager.CreateAsync(role1);
-        //    await _roleManager.CreateAsync(role2);
-        //    await _roleManager.CreateAsync(role3);
+            //await _roleManager.CreateAsync(role1);
+            //await _roleManager.CreateAsync(role2);
+            await _roleManager.CreateAsync(role3);
 
-        //    return Ok("Roles is Created");
-        //}
+            return Ok("Roles is Created");
+        }
         public async Task<IActionResult> Logout()
         {
             await _accountService.Logout();

@@ -38,10 +38,10 @@ chatBtn?.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
     var firstName = document.getElementById('UserName')?.textContent;
 
-    var initials = firstName?.charAt(0);
+  
 
     var profileImage = document.getElementById('userProImage');
-    profileImage?.textContent = initials;
+    profileImage.innerText = firstName.charAt(0);
 });
 document.addEventListener('DOMContentLoaded', function () {
     var textarea = document.getElementById('chatInput');

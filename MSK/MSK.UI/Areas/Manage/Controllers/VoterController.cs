@@ -22,19 +22,19 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Index(int page)
         {
-            var slides = await _VoterService.GetAll(null, null);
-            if (slides is null)
+            var voters = await _VoterService.GetAll(null,null);
+            if (voters is null)
             {
                 return NotFound();
             }
-            List<VoterIndexDto> listSlides = new List<VoterIndexDto>();
-            foreach (var slide in slides)
+            List<VoterIndexDto> listvoters = new List<VoterIndexDto>();
+            foreach (var voter in voters)
             {
-                VoterIndexDto VoterIndexDto = _mapper.Map<VoterIndexDto>(slide);
-                listSlides.Add(VoterIndexDto);
+                VoterIndexDto VoterIndexDto = _mapper.Map<VoterIndexDto>(voter);
+                listvoters.Add(VoterIndexDto);
             }
             PaginatedList<VoterIndexDto> VoterIndexDtos = PaginatedList<VoterIndexDto>.Create
-                (listSlides.AsQueryable(), page, 50);
+                (listvoters.AsQueryable(), page, 50);
 
             return View(VoterIndexDtos);
         }
@@ -62,14 +62,14 @@ namespace MSK.UI.Areas.Manage.Controllers
 
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(string id)
         {
-            var slide = await _VoterService.GetById(id);
-            if (slide is null)
+            var voter = await _VoterService.GetById(id);
+            if (voter is null)
             {
                 return NotFound();
             }
-            VoterUpdateDto VoterUpdateDto = _mapper.Map<VoterUpdateDto>(slide);
+            VoterUpdateDto VoterUpdateDto = _mapper.Map<VoterUpdateDto>(voter);
             return View(VoterUpdateDto);
         }
         [ValidateAntiForgeryToken]
@@ -94,7 +94,7 @@ namespace MSK.UI.Areas.Manage.Controllers
 
         }
         [Authorize(Roles = "SuperAdmin")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
@@ -107,20 +107,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             }
             return RedirectToAction("index", "Voter");
         }
-        [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> ToggleDelete(int id)
-        {
-            try
-            {
-                await _VoterService.ToggleDelete(id);
-            }
-            catch (NullEntityException ex)
-            {
-                return NotFound();
-
-            }
-            return RedirectToAction("index", "Voter");
-        }
+        
     }
 }
 

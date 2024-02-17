@@ -1,0 +1,59 @@
+﻿@model VoterLoginDto
+<div class="login__container mb-5 mt-5 d-flex justify-content-center">
+    <section id="contact">
+
+        <h1 class="section-header">IVoting Login</h1>
+
+        <div class="contact-wrapper">
+
+            <!-- Left contact page -->
+
+            <form id="contact-form" class="form-horizontal"   method="post">
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input id="finCodeInput" asp-for="FinCode"  class="form-control"  placeholder="FIN" name="name" />
+                        <span asp-validation-for="FinCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        
+                        <canvas id="userLoginImage" style="display:none;" width="350" height="300"></canvas>
+                        <video id="camera"  autoplay ></video>
+                       <div class="photo-button">
+                            <button id="captureBtn" class="glow-on-hover">Capture Photo</button>
+                       </div>
+                        <span asp-validation-for="Image" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <button class="btn btn-primary send-button " id="ivoteringSubmit" type="submit" value="SEND">
+                    <div class="alt-send-button d-flex justify-content-center align-items-center">
+                        <span class="send-text">Login</span>
+                    </div>
+
+                </button>
+
+            </form>
+
+            <!-- Left contact page -->
+
+            <div class="direct-contact-container">
+               <div>
+                    <a class="play-icon" id="playIcon"><i class="fa-solid fa-circle-play"></i></a>
+                    <video id="helpVideo" class="ms-2" style="width:100%; ">
+                        <source style="height:700px;" src="~/assets/videos/ivotingLoginExplain.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+               </div>
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+

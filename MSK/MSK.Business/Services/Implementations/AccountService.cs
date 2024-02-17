@@ -59,7 +59,7 @@ namespace MSK.Business.Services.Implementations
 
             if (!result.Succeeded)
             {
-
+                throw new InvalidUserCredentialException("", "Something went wrong!");
             }
 
         }

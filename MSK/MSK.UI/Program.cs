@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.Mappers;
 using MSK.Core.Models;
@@ -21,13 +22,28 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 
     opts.UseSqlServer(builder.Configuration.GetConnectionString(connection));
 });
-builder.Services.AddIdentity<User, IdentityRole>(opts =>
+builder.Services.AddIdentity<User,IdentityRole>(opts =>
 {
     opts.Password.RequireNonAlphanumeric = false;
     opts.Password.RequiredLength = 8;
-    opts.Password.RequireUppercase = true;
+    opts.Password.RequireUppercase =true ;
     opts.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentityCore<Voter>(opts =>
+{
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.Password.RequiredLength = 6;
+    opts.Password.RequireUppercase = false;
+    opts.Password.RequireLowercase = false;
+    opts.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           .AddCookie(options =>
+           {
+               // Configure cookie options if needed
+               options.LoginPath = new PathString("/IVoting/Login"); // Set the login path
+           });
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
 builder.Services.RegisterServices();
 builder.Services.RegisterRepos();

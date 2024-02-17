@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using MSK.Business.Services.Implementations;
 using MSK.Business.Services.Interfaces;
+using MSK.Core.Models;
 
 namespace Pigga.Business.ServiceRegistrations
 {
@@ -26,6 +28,8 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<ICalendarPlanService, CalendarPlanService>();
             services.AddScoped<IReferendumService, ReferendumService>();
             services.AddScoped<IVoterService, VoterService>();
+            services.AddScoped<SignInManager<Voter>>();
+
 
 
 

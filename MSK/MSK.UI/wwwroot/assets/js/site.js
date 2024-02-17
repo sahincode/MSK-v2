@@ -145,10 +145,99 @@ if (SpeechRecognition) {
 }
 //Ivoting pages script
 
-document.querySelector('#contact-form').addEventListener('submit', (e) => {
+//document.querySelector('#contact-form').addEventListener('submit', (e) => {
+//    e.preventDefault();
+//    e.target.elements.name.value = '';
+//    e.target.elements.email.value = '';
+//    e.target.elements.message.value = '';
+//});
+
+// image  verification script
+const video = document.getElementById('camera');
+const captureBtn = document.getElementById('captureBtn');
+const userLoginImage = document.getElementById('userLoginImage');
+const finCodeinput = document.getElementById('finCodeInput')
+let cameraOn = false;
+let capturedImage;
+captureBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    e.target.elements.name.value = '';
-    e.target.elements.email.value = '';
-    e.target.elements.message.value = '';
+    if (!cameraOn) {
+        userLoginImage.style.display = 'none';
+        video.style.display = 'inline-block';
+
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+            video.srcObject = stream;
+            cameraOn = true;
+            video.play();
+        }).catch((error) => {
+            console.log('error accesing camera:', error);
+        })
+    }
+    else {
+
+        const context = userLoginImage.getContext('2d');
+         capturedImage = userLoginImage.toDataURL('image/png');
+        context.drawImage(video, 0, 0, userLoginImage.width, userLoginImage.height);
+
+        video.style.display = 'none';
+
+        userLoginImage.style.display = 'block';
+        const tracks = video.srcObject.getTracks();
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+        cameraOn = false;
+
+    }
+    
+})
+const ivoteringSubBtn = document.getElementById('ivoteringSubmit');
+
+function dataURLtoBlob(dataURL) {
+    const byteString = atob(dataURL.split(',')[1]);
+    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([arrayBuffer], { type: mimeString });
+}
+
+function blobToFormFile(blob, fileName) {
+    const formFile = new File([blob], fileName, { type: blob.type });
+    return formFile;
+}
+ivoteringSubBtn?.addEventListener('click', function (e) {
+    e.preventDefault();
+    const blob = dataURLtoBlob(capturedImage);
+    const formFile = blobToFormFile(blob, 'captured-image.png');
+    const formData = new FormData();
+    formData.append('Image', formFile);
+    formData.append('FinCode', finCodeinput.value);
+    fetch('/ivoting/login', {
+        method: 'POST',
+        body: formData,
+    });
 });
+//ivoting login page video helper script
+    var videoHelper = document.getElementById('helpVideo');
+var playIcon = document.getElementById('playIcon');
+let isPlaying = false;
+playIcon.addEventListener('click', function () {
+    if (!isPlaying) {
+        playIcon.style.opacity = '0';
+            videoHelper.controls = true;
+        videoHelper.play();
+        isPlaying = true;
+        }
+        else {
+            playIcon.style.opacity = '1';
+            videoHelper.controls = false;
+        videoHelper.pause();
+        isPlaying = false;
+        }
+    })
 

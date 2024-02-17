@@ -10,7 +10,7 @@ namespace MSK.Business.DTOs.VoterModelDTOs
 {
     public class VoterLayoutDto
     {
-        public int Id { get; set; }
+        public string  Id { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
         public string FinCode { get; set; }

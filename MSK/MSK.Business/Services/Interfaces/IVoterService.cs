@@ -1,5 +1,4 @@
-﻿
-using MSK.Business.DTOs.VoterModelDTOs;
+﻿using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -14,10 +13,12 @@ namespace MSK.Business.Services.Interfaces
     {
         Task CreateAsync(VoterCreateDto entity);
         Task UpdateAsync(VoterUpdateDto entity);
-        Task Delete(int id);
-        Task ToggleDelete(int id);
-        Task<Voter> GetById(int? id);
-        Task<Voter> Get(Expression<Func<Voter, bool>>? predicate, params string[]? includes);
-        Task<IEnumerable<Voter>> GetAll(Expression<Func<Voter, bool>>? predicate, params string[]? include);
+        Task Delete(string id);
+        
+        Task<Voter> GetById(string id);
+        Task<Voter> Get(Expression<Func<Voter
+            , bool>>? predicate, params string[]? includes);
+        Task<IEnumerable<Voter>> GetAll(Expression<Func<Voter
+            , bool>>? predicate, params string[]? includes);
     }
 }

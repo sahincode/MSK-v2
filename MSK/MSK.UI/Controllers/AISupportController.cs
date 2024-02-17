@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MSK.UI.Controllers
 {
-    [CustomAuthorize]
+    [UserAuthorize]
     public class AISupportController : Controller
     {
         public IActionResult Index()

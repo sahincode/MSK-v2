@@ -11,6 +11,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.16" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,10 +22,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\admin\img\homeslide\" />
+    <Folder Include="wwwroot\assets\img\icons\" />
     <Folder Include="wwwroot\assets\img\voter\" />
     <Folder Include="wwwroot\assets\pdf\accredation\" />
     <Folder Include="wwwroot\assets\pdf\legislation\" />
     <Folder Include="wwwroot\assets\pdf\calendarplan\" />
+    <Folder Include="wwwroot\assets\temp\" />
   </ItemGroup>
 
 </Project>

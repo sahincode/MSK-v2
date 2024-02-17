@@ -9,7 +9,7 @@ namespace MSK.Business.DTOs.VoterModelDTOs
 {
     public class VoterIndexDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime UpdateTime { get; set; }
