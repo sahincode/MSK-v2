@@ -335,14 +335,30 @@ a {
     
     font-size: 30px;
 }
-.favorite-icon{
-    position:absolute;
-    margin:auto;
-    top:40%;
-    bottom:60%;
-    right:20px;
-}
-.card-body{
-    position:relative;
 
+.candidate_section .container {
+    background: linear-gradient(90deg, rgba(201,239,238,1) 0%, rgba(228,244,244,0.9360994397759104) 31%, rgba(223,237,240,1) 100%);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom:20px;
+    padding-bottom:20px;
+}
+.candidate_info_btn {
+    position: absolute;
+    color: #1DFEA9;
+    right: 0%;
+    top: 0%;
+    border: none;
+}
+.favorite-icon{
+    margin-top:20px;
+    height:100%;
+    width:15%;
+}
+.favorite-icon a {
+    position:absolute;
+    margin: auto;
+    top: 50%;
+    bottom: 50%;
+    right: 20px;
+    color:brown;
 }
