@@ -70,7 +70,7 @@ namespace MSK.Business.Services.Implementations
                 $"to {id} was not found in the database.");
             File.Delete(Path.Combine(rootPath, passPath, Voter.ImageUrl));
             _voterRepository.Delete(Voter);
-
+             await _voterRepository.CommitAsync();
 
         }
 

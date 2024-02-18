@@ -59,19 +59,12 @@ namespace MSK.UI.Controllers
 
 
             string filePath1 = Path.Combine(rootPath, $"assets/img/voter/{voter.ImageUrl}");
-            byte[] fileBytes;
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var image = SixLabors.ImageSharp.Image.Load(voterLoginDto.Image.OpenReadStream()))
-                {
-                    image.Save(memoryStream, new JpegEncoder());
-                }
-                fileBytes = memoryStream.ToArray();
-            }
+
+
             string tempFile = await FileHelper.SaveImage(rootPath, "assets/temp", voterLoginDto.Image);
             string filePath2 = Path.Combine(rootPath, "assets/temp", tempFile);
             request.AddFile("file1", filePath1);
-            request.AddFile("file2", filePath2);
+            request.AddFile("file2", filePath1);
 
             request.AddParameter("response_as_dict", true);
             request.AddParameter("attributes_as_list", true);
@@ -106,15 +99,11 @@ namespace MSK.UI.Controllers
                             ModelState.AddModelError("", "Invalid credential!");
                             return View();
                         }
-                        var identity = new ClaimsIdentity(new[]
+                        else
                         {
-                         new Claim(ClaimTypes.Name, voter.UserName),
-                          new Claim(ClaimTypes.Role, "Voter"),
-                           }, CookieAuthenticationDefaults.AuthenticationScheme);
 
-
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-                        return RedirectToAction("vote");
+                            return RedirectToAction("vote");
+                        }
                     }
 
                 }
@@ -134,7 +123,7 @@ namespace MSK.UI.Controllers
             return View();
         }
         [VoterAuthorize]
-        public async Task<IActionResult> Vote(string id)
+        public IActionResult Vote()
         {
             return View();
         }

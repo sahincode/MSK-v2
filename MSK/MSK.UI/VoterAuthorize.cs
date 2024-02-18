@@ -27,8 +27,10 @@ namespace MSK.UI
             }
             if (context.HttpContext.User.Identity.IsAuthenticated)
             {
-                var roles = context.HttpContext.User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).ToList();
-                if(!roles.Any(r=>r=="Voter"))
+                var user = context.HttpContext.User;
+               bool result = user.IsInRole("Voter");
+              
+                if(!result)
                 {
                     context.Result = new RedirectToActionResult("Login", "IVoting", new { area = Area }, permanent: false);
                     return;

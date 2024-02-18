@@ -36,14 +36,9 @@ builder.Services.AddIdentityCore<Voter>(opts =>
     opts.Password.RequireUppercase = false;
     opts.Password.RequireLowercase = false;
     opts.Password.RequireDigit = false;
-}).AddEntityFrameworkStores<AppDbContext>()
+}).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-           .AddCookie(options =>
-           {
-               // Configure cookie options if needed
-               options.LoginPath = new PathString("/IVoting/Login"); // Set the login path
-           });
+
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
 builder.Services.RegisterServices();
 builder.Services.RegisterRepos();

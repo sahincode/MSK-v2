@@ -300,11 +300,7 @@ a {
     text-decoration: none;
 }
 
-.bookmark-post .favorite-icon a, .job-box.bookmark-post .favorite-icon a {
-    background-color: #da3746;
-    color: #fff;
-    border-color: danger;
-}
+
 
 .favorite-icon a {
     display: inline-block;
@@ -321,11 +317,7 @@ a {
 }
 
 
-.candidate-list-box .favorite-icon {
-    position: absolute;
-    right: 22px;
-    top: 22px;
-}
+
 
 .fs-14 {
     font-size: 14px;
@@ -338,3 +330,19 @@ a {
 
 .mt-1 {
     margin-top: 0.25rem !important;
+}
+.favorite-icon i {
+    
+    font-size: 30px;
+}
+.favorite-icon{
+    position:absolute;
+    margin:auto;
+    top:40%;
+    bottom:60%;
+    right:20px;
+}
+.card-body{
+    position:relative;
+
+}
