@@ -28,6 +28,8 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<ICalendarPlanService, CalendarPlanService>();
             services.AddScoped<IReferendumService, ReferendumService>();
             services.AddScoped<IVoterService, VoterService>();
+            services.AddScoped<ICandidateService, CandidateService>();
+
             services.AddScoped<SignInManager<Voter>>();
 
 

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs;
+using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
@@ -23,13 +25,18 @@ namespace MSK.UI.Controllers
         private readonly IVoterService _voterService;
         private readonly IWebHostEnvironment _env;
         private readonly SignInManager<Voter> _signInManager;
+        private readonly ICandidateService _candidateService;
+        private readonly IMapper _mapper;
 
         public IvotingController(IVoterService voterService,
-            IWebHostEnvironment env, SignInManager<Voter> signInManager)
+            IWebHostEnvironment env, SignInManager<Voter> signInManager,
+            ICandidateService candidateService ,IMapper mapper)
         {
             this._voterService = voterService;
             this._env = env;
             this._signInManager = signInManager;
+            this._candidateService = candidateService;
+            this._mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -125,7 +132,19 @@ namespace MSK.UI.Controllers
         [VoterAuthorize]
         public IActionResult Vote()
         {
-            return View();
+            var candidates = _candidateService.GetAll(c => c.IsDeleted == false, null).Result.ToList();
+            List<CandidateLayoutDto> candidateLayoutDtos = new List<CandidateLayoutDto>();
+
+            if(candidates is not null)
+            {
+                foreach(var candidate in candidates)
+                {
+                    CandidateLayoutDto candidateLayoutDto = _mapper.Map<CandidateLayoutDto>(candidate);
+                    candidateLayoutDtos.Add(candidateLayoutDto);
+
+                }
+            }
+            return View(candidateLayoutDtos);
         }
     }
 }

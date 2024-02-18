@@ -1,4 +1,4 @@
-﻿
+﻿@model List<CandidateLayoutDto>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <section class="mf-breadcrumb">
     <div class="container">
@@ -19,50 +19,49 @@
                 
                 <div class="candidate-list">
                    
-                    <div class="candidate-list-box bookmark-post card mt-4">
+                    @foreach(var item in Model)
+                    {
+                        <div class="candidate-list-box bookmark-post card mt-4">
                         <div class="p-4 card-body">
                             <div class="align-items-center row">
                                 <div class="col-auto">
                                     <div class="candidate-list-images">
-                                        <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                        <a href="#"><img src="~/assets/img/candidate/@item.ImageUrl" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
-                                            Gabriel Palmer
+                                           @item.FullName
                                         </h5>
-                                        <p class="text-muted mb-2">HTML Developer</p>
+                                       
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Oakridge Lane California</li>
-                                            <li class="list-inline-item"><i class="mdi mdi-wallet"></i> $250 / hours</li>
+                                            
+                                            <li class="list-inline-item"><i class="mdi mdi-wallet"></i> @item.Party</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"><span class="badge bg-soft-secondary fs-14 mt-1">Design</span><span class="badge bg-soft-secondary fs-14 mt-1">Developer</span></div>
+                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1"><span class="badge bg-soft-secondary fs-14 mt-1">@item.Profession</span></div>
                                 </div>
                             </div>
                             <div class="favorite-icon">
-                                <button class="candidate_info_btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button class="candidate_info_btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop@(item.Id)">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade" id="staticBackdrop@(item.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="#staticBackdrop@(item.Id)Label" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                               
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ...
+                                                @Html.Raw(item.About)
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Understood</button>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -71,6 +70,7 @@
                         </div>
                     </div>
                     
+                    }
                 </div>
             </div>
         </div>
