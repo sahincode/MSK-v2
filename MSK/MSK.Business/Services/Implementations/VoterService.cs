@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.Exceptions;
@@ -12,22 +13,29 @@ using System.Linq.Expressions;
 
 namespace MSK.Business.Services.Implementations
 {
-    public class VoterService :IVoterService
+    public class VoterService : IVoterService
     {
         private readonly IMapper _mapper;
         private readonly UserManager<Voter> _userManager;
         private readonly IWebHostEnvironment _env;
         private readonly IVoterRepository _voterRepository;
+        private readonly IVoteRepository _voteRepository;
+        private readonly ICandidateService _candidateService;
+        private readonly IHttpContextAccessor _httpContext;
         public const string passPath = "assets/img/voter";
 
         public VoterService(IMapper mapper,
-            UserManager<Voter> userManager, IWebHostEnvironment env ,IVoterRepository voterRepository)
+            UserManager<Voter> userManager, IWebHostEnvironment env,
+            IVoterRepository voterRepository ,IVoteRepository voteRepository ,
+            ICandidateService candidateService ,IHttpContextAccessor httpContext)
         {
             this._mapper = mapper;
             this._userManager = userManager;
             this._env = env;
             this._voterRepository = voterRepository;
-
+            this._voteRepository = voteRepository;
+            this._candidateService = candidateService;
+            this._httpContext = httpContext;
         }
         public async Task CreateAsync(VoterCreateDto entity)
         {
@@ -49,7 +57,7 @@ namespace MSK.Business.Services.Implementations
             }
             voter.ImageUrl = await FileHelper.SaveImage(rootPath, passPath, entity.Image);
             voter.UserName = entity.FinCode;
-         
+
             var result = await _userManager.CreateAsync(voter, entity.FinCode);
 
             if (!result.Succeeded)
@@ -62,7 +70,7 @@ namespace MSK.Business.Services.Implementations
 
         }
 
-        public async Task Delete(string  id)
+        public async Task Delete(string id)
         {
             string rootPath = _env.WebRootPath;
             Voter Voter = await _voterRepository.Get(a => a.Id == id);
@@ -70,7 +78,7 @@ namespace MSK.Business.Services.Implementations
                 $"to {id} was not found in the database.");
             File.Delete(Path.Combine(rootPath, passPath, Voter.ImageUrl));
             _voterRepository.Delete(Voter);
-             await _voterRepository.CommitAsync();
+            await _voterRepository.CommitAsync();
 
         }
 
@@ -99,7 +107,7 @@ namespace MSK.Business.Services.Implementations
 
 
 
-       
+
 
         public async Task UpdateAsync(VoterUpdateDto entity)
         {
@@ -126,8 +134,34 @@ namespace MSK.Business.Services.Implementations
 
             await _voterRepository.CommitAsync();
 
+        }
+        public async Task VoteAsync(int candidateId)
+        {
+            var finCode =  _httpContext?.HttpContext?.User?.Identity?.Name; // You may need to adjust this depending on your authentication setup
+            var existingVote = _voteRepository.Table.FirstOrDefault(v => v.VoterFinCode == finCode);
+
+            if (existingVote != null)
+            {
+                // If the voter has already voted, update the vote to the new candidate
+                existingVote.CandidateId = candidateId;
+            }
+            else
+            {
+                // If the voter has not voted, create a new vote record
+                await _voteRepository.CreateAsync(new Vote { CandidateId = candidateId, VoterFinCode = finCode });
             }
 
-        
+            // Update the voted count for the selected candidate
+            var selectedCandidate = await _candidateService.GetById(candidateId);
+            if(selectedCandidate is null)
+            {
+                throw new NullEntityException();
+            }
+            selectedCandidate.VotedCount++;
+
+            await _voteRepository.CommitAsync();
+        }
+
+
     }
-    }
+}

@@ -9,5 +9,6 @@
         public string Party { get; set; }
          public double VotedPercent { get; set; }
         public string ImageUrl { get; set; }
+        public List<Vote> Votes { get; set; }
     }
 }

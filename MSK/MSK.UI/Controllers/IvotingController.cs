@@ -5,12 +5,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MSK.Business.DTOs;
 using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.DTOs.VoterModelDTOs;
+using MSK.Business.Exceptions;
 using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
+using MSK.Core.Repositories;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -27,16 +30,18 @@ namespace MSK.UI.Controllers
         private readonly SignInManager<Voter> _signInManager;
         private readonly ICandidateService _candidateService;
         private readonly IMapper _mapper;
+        private readonly IVoteRepository _voteRepository;
 
         public IvotingController(IVoterService voterService,
             IWebHostEnvironment env, SignInManager<Voter> signInManager,
-            ICandidateService candidateService ,IMapper mapper)
+            ICandidateService candidateService ,IMapper mapper ,IVoteRepository voteRepository )
         {
             this._voterService = voterService;
             this._env = env;
             this._signInManager = signInManager;
             this._candidateService = candidateService;
             this._mapper = mapper;
+            this._voteRepository = voteRepository;
         }
         public IActionResult Index()
         {
@@ -145,6 +150,21 @@ namespace MSK.UI.Controllers
                 }
             }
             return View(candidateLayoutDtos);
+        }
+        [VoterAuthorize]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> Vote([FromForm]int selectedCandidateId)
+        {
+            try
+            {
+                await _voterService.VoteAsync(selectedCandidateId);
+            }
+            catch(NullEntityException ex)
+            {
+                ModelState.AddModelError("", "Not exist canidate attempt!");
+            }
+            return RedirectToAction("Index");
         }
     }
 }

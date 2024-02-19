@@ -226,7 +226,7 @@ ivoteringSubBtn?.addEventListener('click', function (e) {
     var videoHelper = document.getElementById('helpVideo');
 var playIcon = document.getElementById('playIcon');
 let isPlaying = false;
-playIcon.addEventListener('click', function () {
+playIcon?.addEventListener('click', function () {
     if (!isPlaying) {
         playIcon.style.opacity = '0';
             videoHelper.controls = true;

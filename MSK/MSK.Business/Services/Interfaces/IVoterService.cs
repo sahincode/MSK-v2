@@ -14,7 +14,7 @@ namespace MSK.Business.Services.Interfaces
         Task CreateAsync(VoterCreateDto entity);
         Task UpdateAsync(VoterUpdateDto entity);
         Task Delete(string id);
-        
+        Task VoteAsync(int candidateId);
         Task<Voter> GetById(string id);
         Task<Voter> Get(Expression<Func<Voter
             , bool>>? predicate, params string[]? includes);
