@@ -8,6 +8,7 @@ using MSK.UI.ViewModels;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
+    [Area("manage")]
     public class ElectionController : Controller
     {
         private readonly IElectionService _electionService;

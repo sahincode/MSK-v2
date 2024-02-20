@@ -4,45 +4,48 @@
         <div>
             <h1 class="title">Candidate <span>@ViewData["Title"]</span></h1>
         </div>
-        <div>
-            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        <div class="back-to-list">
+            <a class="btn btn-success " title="back to list" asp-action="Index"><i class="fa-solid fa-list"></i></a>
         </div>
     </div>
 
-    <form method="post" class="row" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="FullName" class="control-label"></label>
-            <input asp-for="FullName" class="form-control" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="Party" class="control-label"></label>
-            <textarea asp-for="Party" class="form-control"></textarea>
-            <span asp-validation-for="Party" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="Profession" class="control-label"></label>
-            <textarea asp-for="Profession" class="form-control"></textarea>
-            <span asp-validation-for="Profession" class="text-danger"></span>
-        </div>
-        
-        <div class="form-group col-lg-7 col-xl-8">
-            <label asp-for="About" class="control-label"></label>
-            <textarea id="news-editor" asp-for="About" class="form-control"></textarea>
-            <span asp-validation-for="About" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3 position-relative">
-            <img width="200" height="300" id="Imgpre" src="https://fakeimg.pl/250x400/?text= Movies Image " alt="Movies Image " />
-            <br />
-            <br />
-            <input type="file" id="ImageIN" asp-for="Image" />
-        </div>
+    <div class="container shadow form-container mt-5">
 
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </form>
+        <form method="post"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="Party" class="control-label"></label>
+                <textarea asp-for="Party" class="form-control"></textarea>
+                <span asp-validation-for="Party" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="Profession" class="control-label"></label>
+                <textarea asp-for="Profession" class="form-control"></textarea>
+                <span asp-validation-for="Profession" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-lg-7 col-xl-8">
+                <label asp-for="About" class="control-label"></label>
+                <textarea id="news-editor" asp-for="About" class="form-control"></textarea>
+                <span asp-validation-for="About" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3 position-relative">
+                <img width="200" height="300" id="Imgpre" src="https://fakeimg.pl/250x400/?text= Movies Image " alt="Movies Image " />
+                <br />
+                <br />
+                <input type="file" id="ImageIN" asp-for="Image" />
+            </div>
+
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 
 
 </div>

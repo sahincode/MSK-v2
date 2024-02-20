@@ -1,15 +1,12 @@
 ﻿@model SettingUpdateDto
 
-<style>
-    .form-container {
-        padding: 50px;
-        max-width: 650px;
-        margin-top: 100px;
-    }
-</style>
+
 <div class="form-container container shadow">
     <div>
         <h1>Update Setting</h1>
+        <div class="back-to-list">
+            <a class="btn btn-success " title="back to list" asp-action="Index"><i class="fa-solid fa-list"></i></a>
+        </div>
     </div>
     <form method="post" enctype="multipart/form-data">
         <div class="mb-3">

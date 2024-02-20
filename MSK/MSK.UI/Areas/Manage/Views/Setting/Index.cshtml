@@ -29,19 +29,25 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var chef in Model)
+            @foreach (var setting in Model)
             {
                 counter++;
                 <tr>
                     <th scope="row">@counter</th>
-                    <td>@chef.Key</td>
-                    <td>@chef.Value</td>
+                    <td>@setting.Key</td>
+                    <td>@setting.Value</td>
 
                     <td>
-                        <a asp-action="update" asp-controller="setting" asp-route-id="@chef.Id" class="btn btn-success">Update</a>
-                        <a asp-action="toggledelete" asp-controller="setting" asp-route-id="@chef.Id" class="btn @(chef.IsDeleted ? "btn-success":"btn-danger")">Toggle Delete</a>
+                        <a class="btn btn-warning ms-1" asp-controller="referendum" asp-action="Update" asp-route-id="@setting.Id">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
 
-                        <a asp-action="Delete" asp-controller="setting" asp-route-id="@chef.Id" class="btn btn-danger delete-btn">Delete</a>
+                        <a class="btn btn-danger delete-btn ms-1" asp-action="Delete" asp-route-id="@setting.Id" asp-controller="referendum">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                        <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(setting.Id)Modal">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
                     </td>
                 </tr>
             }

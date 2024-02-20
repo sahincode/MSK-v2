@@ -4,44 +4,46 @@
         <div>
             <h1 class="title">Voter<span>@ViewData["Title"]</span></h1>
         </div>
-        <div>
-            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        <div class="back-to-list">
+            <a class="btn btn-success " title="back to list" asp-action="Index"><i class="fa-solid fa-list"></i></a>
         </div>
     </div>
+    <div class="container shadow form-container mt-5">
 
-    <form method="post" class="row" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="FullName" class="control-label"> Fullname</label>
-            <input asp-for="FullName" class="form-control" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="FinCode" class="control-label">FIN</label>
-            <input asp-for="FinCode" class="form-control"/>
-            <span asp-validation-for="FinCode" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8">
-            <label asp-for="BirthOfDate" class="control-label">Birthday</label>
-            <input  asp-for="BirthOfDate" class="form-control"/>
-            <span asp-validation-for="BirthOfDate" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8">
-            <label asp-for="Address" class="control-label">Address</label>
-            <input  asp-for="Address" class="form-control"/>
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3 position-relative">
-            <img width="200" height="300" id="Imgpre" src="https://fakeimg.pl/250x400/?text= Movies Image " alt="Movies Image " />
-            <br />
-            <br />
-            <input type="file" id="ImageIN" asp-for="Image" />
-        </div>
+        <form method="post"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="FullName" class="control-label"> Fullname</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="FinCode" class="control-label">FIN</label>
+                <input asp-for="FinCode" class="form-control" />
+                <span asp-validation-for="FinCode" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8">
+                <label asp-for="BirthOfDate" class="control-label">Birthday</label>
+                <input asp-for="BirthOfDate" class="form-control" />
+                <span asp-validation-for="BirthOfDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8">
+                <label asp-for="Address" class="control-label">Address</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3 position-relative">
+                <img width="200" height="300" id="Imgpre" src="https://fakeimg.pl/250x400/?text= Movies Image " alt="Movies Image " />
+                <br />
+                <br />
+                <input type="file" id="ImageIN" asp-for="Image" />
+            </div>
 
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </form>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 
 
 </div>

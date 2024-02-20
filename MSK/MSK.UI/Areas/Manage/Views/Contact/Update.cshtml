@@ -26,10 +26,12 @@
         <div>
             <h1 class="title"> Contact<span>@ViewData["Title"]</span></h1>
         </div>
-        <div>
-            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        <div class="back-to-list">
+            <a class="btn btn-success " title="back to list" asp-action="Index"><i class="fa-solid fa-list"></i></a>
         </div>
     </div>
+
+    <div class="container shadow form-container mt-5">
 
     <form method="post" class="row" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -42,6 +44,7 @@
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </form>
+    </div>
 
 
 </div>

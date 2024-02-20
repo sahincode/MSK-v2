@@ -1,0 +1,43 @@
+﻿.table-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background-color: #435d7d !important;
+}
+
+.table-title .title {
+   font-weight: 700;
+}
+
+.table-title span {
+    font-weight: 300;
+}
+
+.create-btn {
+    width: 110px;
+}
+.form-container {
+    max-width: 700px;
+    padding: 50px;
+    margin-bottom: 50px;
+    border-left: 7px solid #435d7d !important;
+    border-radius: 3px;
+}
+
+.td-min a {
+    width:25px;
+    height:25px;
+    padding:0 3px 5px 5px;
+    
+}
+
+.td-min a i{
+    font-size:12px;
+  
+
+}
+.sidebar__admin {
+    background: linear-gradient(0deg, rgba(43,244,211,1) 0%, rgba(59,226,221,1) 0%, rgba(46,124,135,1) 98%);
+}
+

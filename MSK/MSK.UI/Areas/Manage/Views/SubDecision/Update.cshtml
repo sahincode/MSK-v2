@@ -29,34 +29,36 @@
         <div>
             <h1 class="title"> Sub Decision <span>@ViewData["Title"]</span></h1>
         </div>
-        <div>
-            <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>
+        <div class="back-to-list">
+            <a class="btn btn-success " title="back to list" asp-action="Index"><i class="fa-solid fa-list"></i></a>
         </div>
     </div>
+    <div class="container shadow form-container mt-5">
 
-    <form method="post" class="row" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="Title" class="control-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="DecisionId" class="control-label">Decision</label>
-            <select asp-for="DecisionId" asp-items="@selectList"> </select>
-            <span asp-validation-for="DecisionId" class="text-danger"></span>
-        </div>
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <label asp-for="Pdf" class="control-label"></label>
-            <input asp-for="Pdf" class="form-control" />
-            <span asp-validation-for="Pdf" class="text-danger"></span>
-        </div>
-       
+        <form method="post"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="DecisionId" class="control-label">Decision</label>
+                <select asp-for="DecisionId" asp-items="@selectList"> </select>
+                <span asp-validation-for="DecisionId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <label asp-for="Pdf" class="control-label"></label>
+                <input asp-for="Pdf" class="form-control" />
+                <span asp-validation-for="Pdf" class="text-danger"></span>
+            </div>
 
-        <div class="form-group col-lg-7 col-xl-8 ">
-            <input type="submit" value="Update" class="btn btn-primary" />
-        </div>
-    </form>
+
+            <div class="form-group col-lg-7 col-xl-8 ">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 
 
 </div>
