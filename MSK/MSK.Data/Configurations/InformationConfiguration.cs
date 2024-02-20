@@ -20,6 +20,8 @@ namespace MSK.Data.Configurations
 
             builder.Property(c => c.PdfUrl).IsRequired().HasMaxLength(100);
             builder.HasOne(c => c.Referendum).WithMany(r => r.Infos);
+            builder.HasOne(c => c.Election).WithMany(r => r.Infos);
+
         }
     }
 }

@@ -13,6 +13,8 @@ namespace MSK.Core.Models
         public string PdfUrl { get; set; }
         public int? ReferendumId { get;set; }
         public Referendum? Referendum{ get; set; }
-        
+        public Election? Election { get; set; }
+        public int? ElectionId { get; set; }
+
     }
 }

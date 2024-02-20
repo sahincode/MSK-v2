@@ -1,4 +1,6 @@
 ﻿@model List<CandidateLayoutDto>
+@inject VoteControlService _voteControl
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <section class="mf-breadcrumb">
     <div class="container">
@@ -38,7 +40,7 @@
 
                                                 <ul class="list-inline mb-0 text-muted">
 
-                                                    <li class="list-inline-item"><i class="mdi mdi-wallet"></i> @item.Party</li>
+                                                    <li class="list-inline-item"><i class="fa-solid fa-handshake"></i> @item.Party</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -67,7 +69,7 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-label">
-                                            <input class="checkbox-input-candidate" type="checkbox" name="selectedCandidateId" value="@item.Id" />
+                                            <input class="checkbox-input-candidate" type="checkbox" name="selectedCandidateId" value="@item.Id" @(_voteControl.CheckCandidate(item.Id)) />
 
                                         </div>
                                        
@@ -79,7 +81,7 @@
                    </form>
                 </div>
                <div  class="candidate_submit_con">
-                    <button form="votingCandidate" class="candidate_submit_button mb-5 mt-5" style="--clr:#4C91F0"><span>Submit Election</span><i></i></button>
+                    <button form="votingCandidate" class="candidate_submit_button mb-5 mt-5" style="--clr:#4C91F0"><span>@(_voteControl.Voted() ? "Change Choice" : "Submit Choice")</span><i></i></button>
                </div>
             </div>
         </div>

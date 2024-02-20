@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MSK.Business.DTOs;
 using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.Exceptions;
@@ -14,12 +8,8 @@ using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using SixLabors.ImageSharp.Formats.Jpeg;
-using System.IO;
-using System.Security.Claims;
 
 namespace MSK.UI.Controllers
 {
