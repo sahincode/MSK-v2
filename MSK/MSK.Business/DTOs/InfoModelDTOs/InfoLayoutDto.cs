@@ -16,6 +16,7 @@ namespace MSK.Business.DTOs.InfoModelDTOs
         public string Description { get; set; }
         public string PdfUrl { get; set; }
         public Referendum Referendum { get; set; }
+        public Election Election { get; set; }
 
 
     }

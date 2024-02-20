@@ -1,11 +1,29 @@
-﻿@model ElectionCreateDto
+﻿@model ElectionUpdateDto
 @{
-    var selectDecision = (SelectList)ViewData["decisions"];
-    var selectinfos = (SelectList)ViewData["infos"];
-    var selectInstruction = (SelectList)ViewData["instructions"];
-    var selectCalendar = (SelectList)ViewData["calendarPlans"];
-
+    var selectList = (SelectList)ViewData["decisions"];
 }
+<style>
+    .table-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 40px;
+        background-color: #435d7d !important;
+    }
+
+        .table-title .title {
+            font-weight: 700;
+        }
+
+        .table-title span {
+            font-weight: 300;
+        }
+
+    .create-btn {
+        width: 110px;
+    }
+
+</style>
 <div class="container-fluid">
     <div class="table-title text-white  d-block d-sm-flex">
         <div>
@@ -25,27 +43,33 @@
         </div>
         <div class="form-group col-lg-3 col-xl-4">
             <label asp-for="DecisionId" class="control-label">Decision</label>
-            <select asp-for="DecisionId" asp-items="@selectDecision"> </select>
+            <select asp-for="DecisionId" asp-items="@selectList"> </select>
             <span asp-validation-for="DecisionId" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-3 col-xl-4 ">
             <label asp-for="InstructionId" class="control-label">Instruction</label>
-            <select asp-for="InstructionId" asp-items="@selectInstruction"> </select>
+            <select asp-for="InstructionId" asp-items="@selectList"> </select>
             <span asp-validation-for="InstructionId" class="text-danger"></span>
         </div>
-
+      
         <div class="form-group col-lg-3 col-xl-4 ">
             <label asp-for="CalendarPlanId" class="control-label"> Calendar Plan</label>
-            <select asp-for="CalendarPlanId" asp-items="@selectCalendar"> </select>
+            <input asp-for="CalendarPlanId" class="form-control" />
             <span asp-validation-for="CalendarPlanId" class="text-danger"></span>
         </div>
        
+
         <div class="form-group col-lg-7 col-xl-8 ">
             <input type="submit" value="Update" class="btn btn-primary" />
         </div>
     </form>
+
+
 </div>
 
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial", true);
+}
 
 @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -1,4 +1,4 @@
-﻿@model ElectionCreateDto
+﻿@model ReferendumCreateDto
 @{
     var selectDecision = (SelectList)ViewData["decisions"];
     var selectinfos = (SelectList)ViewData["infos"];
@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="table-title text-white  d-block d-sm-flex">
         <div>
-            <h1 class="title"> Referendum <span>@ViewData["Title"]</span></h1>
+            <h1 class="title"> Election <span>@ViewData["Title"]</span></h1>
         </div>
         <div>
             <a class="btn btn-success create-btn" style="min-width:150px !important;" asp-action="Index">Back to List</a>

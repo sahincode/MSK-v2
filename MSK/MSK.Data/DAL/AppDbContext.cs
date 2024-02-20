@@ -30,6 +30,8 @@ namespace MSK.Data.DAL
         public DbSet<CalendarPlan> CalendarPlans { get; set; }
         public DbSet<Voter>  Voters { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<Election> Elections { get; set; }
+
 
 
         public AppDbContext(DbContextOptions options):base(options){}

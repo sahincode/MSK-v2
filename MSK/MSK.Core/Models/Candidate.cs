@@ -10,8 +10,8 @@
         public double VotedPercent { get; set; }
         public string ImageUrl { get; set; }
         public List<Vote> Votes { get; set; }
-        public int ElectionId { get; set; }
-        public Election Election { get; set; }
+        public int? ElectionId { get; set; }
+        public Election? Election { get; set; }
 
 
 

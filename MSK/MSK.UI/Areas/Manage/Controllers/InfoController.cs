@@ -14,19 +14,24 @@ namespace MSK.UI.Areas.Manage.Controllers
         private readonly IInfoService _infoService;
         private readonly IMapper _mapper;
         private readonly IReferendumService _referendumService;
+        private readonly IElectionService _electionService;
 
         public InfoController(IInfoService infoService,
-            IMapper mapper, IReferendumService referendumService)
+            IMapper mapper, IReferendumService referendumService ,IElectionService electionService)
         {
             this._infoService = infoService;
             this._mapper = mapper;
             this._referendumService = referendumService;
+            this._electionService = electionService;
         }
         public async Task<IActionResult> Index(int page)
         {
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            ViewData["elections"] = electionList;
             var Infos = await _infoService.GetAll(null, null);
             if (Infos is null)
             {
@@ -48,6 +53,10 @@ namespace MSK.UI.Areas.Manage.Controllers
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            ViewData["elections"] = electionList;
+
             return View();
         }
         [HttpPost]
@@ -56,6 +65,9 @@ namespace MSK.UI.Areas.Manage.Controllers
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {
                 return View(InfoCreateDto);
@@ -78,6 +90,9 @@ namespace MSK.UI.Areas.Manage.Controllers
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            ViewData["elections"] = electionList;
             var Info = await _infoService.GetById(id);
             if (Info is null)
             {
@@ -93,6 +108,9 @@ namespace MSK.UI.Areas.Manage.Controllers
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {
                 return View(InfoUpdateDto);

@@ -1,0 +1,129 @@
+﻿@model PaginatedList<ElectionIndexDto>
+@{
+    int counter = 0;
+}
+@section cssFiles{
+    <link href="~/admin/css/Layout.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+}
+
+<div class="container-fluid">
+    <div class="table-title text-white">
+        <h1 class="title">Legislations<span>Table</span></h1>
+        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="referendum">Create</a>
+    </div>
+    <table class="table table-hover table-striped shadow">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Name</th>
+                <th> Instruction</th>
+                <th>Decision</th>
+                <th>Calendar plan</th>
+                
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                counter++;
+
+                <!-- Modal -->
+                <div class="modal fade" id="item@(item.Id)Modal" tabindex="-1" aria-labelledby="item@(item.Id)ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title btn btn-success" id="item@(item.Id)ModalLabel">About</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="border-bottom-info">
+                                <div>
+                                    <h5 class="font-weight-bold">Created Time:<span class="text-danger"> @(item.CreationTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
+                                </div>
+                                <div>
+                                    <h5 class="font-weight-bold">Updated Time:<span class="text-danger"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
+                                </div>
+                                <div class="border-bottom-1">
+
+                                    <a asp-action="toggledelete" asp-controller="subdecision" asp-route-id="@item.Id" class="@(item.IsDeleted == true ? " btn btn-danger":" btn btn-success")" form="soft-delete-form">
+                                        <i class="fa-solid @(item.IsDeleted == true ? "fa-check":"fa-x")"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                Name: @item.Name
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+                                Decision: @item.Decision?.Title
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+                                Instruction: @item.Instruction?.Name
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+
+                                Calendar plan: @item.CalendarPlan?.Title
+                            </div>
+                            <hr>
+                            <div class="modal-body">
+
+                                Essential Information:@foreach(var info in item.Infos)
+                                {
+                                    <div>@info.Name</div>
+
+                                }
+                            </div>
+                            <div class="modal-body">
+
+                                Participated Candidates:@foreach (var info in item.Candidates)
+                                {
+                                    <div>@info.FullName</div>
+
+                                }
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <tr>
+                    <td class="about-info-td">@counter</td>
+
+                    <td class="about-info-td">@(item.Name.Length <= 20 ? item.Name : item.Name.Substring(0, 20) + "...")</td>
+
+                    <td class="about-info-td">@(item.Instruction?.Name.Length <= 20 ? item.Instruction?.Name : item.Instruction?.Name.Substring(0, 20) + "...")</td>
+
+                    <td class="about-info-td">@(item.Decision?.Title.Length <= 20 ? item.Decision?.Title : item.Decision?.Title.Substring(0, 20) + "...")</td>
+                    <td class="about-info-td">@(item.CalendarPlan?.Title.Length <= 20 ? item.CalendarPlan?.Title : item.CalendarPlan?.Title.Substring(0, 20) + "...")</td>
+
+                    <td class="td-min d-flex">
+                        <a class="btn btn-warning ms-1" asp-controller="referendum" asp-action="Update" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                        <a class="btn btn-danger delete-btn" asp-action="Delete" asp-route-id="@item.Id" asp-controller="referendum">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                        <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section jsFiles{
+    <script src="~/admin/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
+}

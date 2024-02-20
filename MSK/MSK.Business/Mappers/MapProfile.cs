@@ -4,6 +4,7 @@ using MSK.Business.DTOs.CalendarPlanModelDTOs;
 using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.DecisionModelDTOs;
+using MSK.Business.DTOs.ElectionModelDTOs;
 using MSK.Business.DTOs.HistoryModelDTOs;
 using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.InfoModelDTOs;
@@ -108,6 +109,11 @@ namespace MSK.Business.Mappers
             CreateMap<CandidateUpdateDto, Candidate>().ReverseMap();
             CreateMap<CandidateIndexDto, Candidate>().ReverseMap();
             CreateMap<CandidateLayoutDto, Candidate>().ReverseMap();
+            // election model model mapping profile
+            CreateMap<ElectionCreateDto, Election>().ReverseMap();
+            CreateMap<ElectionIndexDto, Election>().ReverseMap();
+            CreateMap<ElectionLayoutDto, Election>().ReverseMap();
+            CreateMap<ElectionUpdateDto, Election>().ReverseMap();
         }
     }
 }
