@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSK.Core.enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,6 @@ namespace MSK.Core.Models
         public int CalendarPlanId { get; set; }
         public List<Candidate> Candidates { get; set; }
         public DateTime StartDate { get; set; }
+        public ElectionStatus ElectionStatus { get; set; } 
     }
 }

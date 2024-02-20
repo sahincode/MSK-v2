@@ -27,7 +27,7 @@
     <Folder Include="wwwroot\assets\pdf\accredation\" />
     <Folder Include="wwwroot\assets\pdf\legislation\" />
     <Folder Include="wwwroot\assets\pdf\calendarplan\" />
-    <Folder Include="wwwroot\assets\temp\" />
+    <Folder Include="wwwroot\assets\temp\"/>
   </ItemGroup>
 
 </Project>
