@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Exceptions.OutOfRangesExceptions;
+using MSK.Business.Exceptions.SizeExceptions;
 using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
@@ -22,12 +23,13 @@ namespace MSK.Business.Services.Implementations
         private readonly IVoteRepository _voteRepository;
         private readonly ICandidateService _candidateService;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly IElectionService _electionService;
         public const string passPath = "assets/img/voter";
 
         public VoterService(IMapper mapper,
             UserManager<Voter> userManager, IWebHostEnvironment env,
             IVoterRepository voterRepository ,IVoteRepository voteRepository ,
-            ICandidateService candidateService ,IHttpContextAccessor httpContext)
+            ICandidateService candidateService ,IHttpContextAccessor httpContext ,IElectionService electionService)
         {
             this._mapper = mapper;
             this._userManager = userManager;
@@ -36,6 +38,7 @@ namespace MSK.Business.Services.Implementations
             this._voteRepository = voteRepository;
             this._candidateService = candidateService;
             this._httpContext = httpContext;
+            this._electionService = electionService;
         }
         public async Task CreateAsync(VoterCreateDto entity)
         {
@@ -139,27 +142,38 @@ namespace MSK.Business.Services.Implementations
         {
             var finCode =  _httpContext?.HttpContext?.User?.Identity?.Name; // You may need to adjust this depending on your authentication setup
             var existingVote = _voteRepository.Table.FirstOrDefault(v => v.VoterFinCode == finCode);
-
-            if (existingVote != null)
+            var oldCandidate = await _candidateService.GetById(existingVote.CandidateId);
+            var election = await  _electionService.Get(e => e.Id == oldCandidate.ElectionId);
+            if (election.StartDate <= DateTime.UtcNow.AddHours(4) && election.StartDate.AddMinutes(15) >= DateTime.UtcNow.AddHours(4))
             {
-                // If the voter has already voted, update the vote to the new candidate
-                existingVote.CandidateId = candidateId;
+                if (existingVote != null)
+                {
+                    // If the voter has already voted, update the vote to the new candidate
+                    existingVote.CandidateId = candidateId;
+                }
+                else
+                {
+                    // If the voter has not voted, create a new vote record
+                    await _voteRepository.CreateAsync(new Vote { CandidateId = candidateId, VoterFinCode = finCode });
+                }
+
+                // Update the voted count for the selected candidate
+                var selectedCandidate = await _candidateService.GetById(candidateId);
+
+
+                if (selectedCandidate is null)
+                {
+                    throw new NullEntityException();
+                }
+                selectedCandidate.VotedCount++;
+                oldCandidate.VotedCount--;
+                await _voteRepository.CommitAsync();
             }
             else
             {
-                // If the voter has not voted, create a new vote record
-                await _voteRepository.CreateAsync(new Vote { CandidateId = candidateId, VoterFinCode = finCode });
+                throw new OutOfDateVotingException("", "Election  Time interval expired. You can not vote!");
             }
-
-            // Update the voted count for the selected candidate
-            var selectedCandidate = await _candidateService.GetById(candidateId);
-            if(selectedCandidate is null)
-            {
-                throw new NullEntityException();
-            }
-            selectedCandidate.VotedCount++;
-
-            await _voteRepository.CommitAsync();
+            
         }
 
 

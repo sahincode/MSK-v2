@@ -489,6 +489,17 @@ a {
         width: 20px;
         height: 25px;
     }
+    .checkbox-label .fa-check {
+        font-size:27px;
+        color:#189313;
+    }
+    .checkbox-label .fa-x {
+        font-size: 25px;
+        color: #ff0000;
+    }
     /*vote page ratio button style end*/
 
-
+.disabled-div {
+    pointer-events: none; /* Disable pointer events */
+    opacity: 0.6; /* Set opacity to make it visually disabled */
+}

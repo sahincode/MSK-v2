@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Matching;
 using MSK.Business.DTOs.CandidateModelDTOs;
+using MSK.Business.DTOs.ElectionModelDTOs;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.Exceptions;
+using MSK.Business.Exceptions.SizeExceptions;
 using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
+using MSK.Core.enums;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
 using Newtonsoft.Json.Linq;
@@ -21,10 +25,12 @@ namespace MSK.UI.Controllers
         private readonly ICandidateService _candidateService;
         private readonly IMapper _mapper;
         private readonly IVoteRepository _voteRepository;
+        private readonly IElectionService _electionService;
 
         public IvotingController(IVoterService voterService,
             IWebHostEnvironment env, SignInManager<Voter> signInManager,
-            ICandidateService candidateService ,IMapper mapper ,IVoteRepository voteRepository )
+            ICandidateService candidateService, IMapper mapper,
+            IVoteRepository voteRepository, IElectionService electionService)
         {
             this._voterService = voterService;
             this._env = env;
@@ -32,6 +38,7 @@ namespace MSK.UI.Controllers
             this._candidateService = candidateService;
             this._mapper = mapper;
             this._voteRepository = voteRepository;
+            this._electionService = electionService;
         }
         public IActionResult Index()
         {
@@ -125,34 +132,45 @@ namespace MSK.UI.Controllers
             return View();
         }
         [VoterAuthorize]
-        public IActionResult Vote()
+        public async Task<IActionResult> Vote()
         {
-            var candidates = _candidateService.GetAll(c => c.IsDeleted == false, null).Result.ToList();
-            List<CandidateLayoutDto> candidateLayoutDtos = new List<CandidateLayoutDto>();
-
-            if(candidates is not null)
+            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1)<=DateTime.UtcNow.AddHours(4), "Candidates");
+            ElectionLayoutDto electionLayoutDto = null;
+            if (election is not null)
             {
-                foreach(var candidate in candidates)
-                {
-                    CandidateLayoutDto candidateLayoutDto = _mapper.Map<CandidateLayoutDto>(candidate);
-                    candidateLayoutDtos.Add(candidateLayoutDto);
 
-                }
+                 electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
             }
-            return View(candidateLayoutDtos);
+
+            return View(electionLayoutDto);
         }
         [VoterAuthorize]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Vote([FromForm]int selectedCandidateId)
+        public async Task<IActionResult> Vote([FromForm] int selectedCandidateId)
         {
+            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4), "Candidates");
+            ElectionLayoutDto electionLayoutDto = null;
+            if (election is not null)
+            {
+
+                electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
+            }
             try
             {
                 await _voterService.VoteAsync(selectedCandidateId);
             }
-            catch(NullEntityException ex)
+            catch (NullEntityException ex)
             {
-                ModelState.AddModelError("", "Not exist canidate attempt!");
+                ModelState.AddModelError(ex.PropertyName,ex.Message);
+                return View(electionLayoutDto);
+            }
+            catch(OutOfDateVotingException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName ,ex.Message);
+                return View(electionLayoutDto);
+
+
             }
             return RedirectToAction("Index");
         }

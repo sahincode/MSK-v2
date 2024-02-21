@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MSK.Business.Services.Implementations;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
@@ -30,20 +31,10 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<IVoterService, VoterService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<IElectionService, ElectionService>();
-
+            services.AddHostedService<ElectionStatusService>();
+           
             services.AddScoped<VoteControlService>();
-
             services.AddScoped<SignInManager<Voter>>();
-
-
-
-
-
-
-
-
-
-
         }
     }
 }

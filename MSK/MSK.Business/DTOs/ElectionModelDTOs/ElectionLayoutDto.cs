@@ -1,4 +1,5 @@
-﻿using MSK.Core.Models;
+﻿using MSK.Core.enums;
+using MSK.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,7 @@ namespace MSK.Business.DTOs.ElectionModelDTOs
         public int CalendarPlanId { get; set; }
         public List<Candidate> Candidates { get; set; }
         public DateTime StartDate { get; set; }
+        public ElectionStatus ElectionStatus { get; set; }
+
     }
 }

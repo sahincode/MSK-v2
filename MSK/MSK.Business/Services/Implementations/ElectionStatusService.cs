@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MSK.Core.enums;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
+using MSK.Data.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +16,14 @@ namespace MSK.Business.Services.Implementations
     internal class ElectionStatusService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IElectionRepository _electionRepository;
 
-        public ElectionStatusService( IServiceProvider serviceProvider ,IElectionRepository electionRepository)
+
+
+        public ElectionStatusService(IServiceProvider serviceProvider)
         {
             this._serviceProvider = serviceProvider;
-            this._electionRepository = electionRepository;
+
+
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -26,34 +31,39 @@ namespace MSK.Business.Services.Implementations
             {
                 await CheckAndCloseElections();
 
-                await Task.Delay(TimeSpan.FromMilliseconds(30) , stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
         }
         private async Task CheckAndCloseElections()
         {
-            var electionsToOpen = _electionRepository.Table.Where(e => e.ElectionStatus == ElectionStatus.Pending && e.StartDate <= DateTime.UtcNow.AddHours(4)).ToList();
-             foreach(var electionToOpen in electionsToOpen)
+            using (var scope = _serviceProvider.CreateScope())
             {
-                OpenElection(electionToOpen);
+                var _appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                var electionsToOpen = _appDbContext.Elections.Where(e => e.ElectionStatus == ElectionStatus.Pending && e.StartDate <= DateTime.UtcNow.AddHours(4)).ToList();
+                foreach (var electionToOpen in electionsToOpen)
+                {
+                    OpenElection(electionToOpen);
+                }
+                var electionsToClose = _appDbContext.Elections.Where
+                    (e => e.ElectionStatus == Core.enums.ElectionStatus.Open && e.StartDate.AddMinutes(15) <= DateTime.UtcNow.AddHours(4)).ToList();
+                foreach (var election in electionsToClose)
+                {
+                    CloseElection(election);
+                }
+                await _appDbContext.SaveChangesAsync();
             }
-            var electionsToClose = _electionRepository.Table.Where
-                (e => e.ElectionStatus == Core.enums.ElectionStatus.Open && e.StartDate <= DateTime.UtcNow.AddHours(4)).ToList();
-                foreach(var election in electionsToClose)
-            {
-                CloseElection(election);
-            }
-             await _electionRepository.CommitAsync();
         }
-        private void CloseElection(Election election)
+        private async void CloseElection(Election election)
         {
             election.ElectionStatus = ElectionStatus.Closed;
-            _electionRepository.CommitAsync();
+            
         }
-        private void OpenElection(Election election)
+        private async void OpenElection(Election election)
         {
-            election.Status = ElectionStatus.Open;
-            election.StartDate = DateTime.UtcNow;
-            _electionRepository.CommitAsync();
+            election.ElectionStatus = ElectionStatus.Open;
+            election.StartDate = DateTime.UtcNow.AddHours(4);
+            
         }
     }
 }

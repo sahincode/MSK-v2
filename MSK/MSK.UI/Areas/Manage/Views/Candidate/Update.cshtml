@@ -1,4 +1,8 @@
 ﻿@model CandidateUpdateDto
+@{
+    var selectElection = (SelectList)ViewData["elections"];
+
+}
 <style>
     .table-title {
         display: flex;
@@ -56,6 +60,11 @@
                 <textarea id="news-editor" asp-for="About" class="form-control"></textarea>
                 <span asp-validation-for="About" class="text-danger"></span>
             </div>
+            <div class="form-group col-lg-3 col-xl-4">
+                <label asp-for="ElectionId" class="control-label">Election</label>
+                <select asp-for="ElectionId" asp-items="@selectElection"> </select>
+                <span asp-validation-for="ElectionId" class="text-danger"></span>
+            </div>
             <div class="form-group col-md-3 position-relative">
                 <img width="200" height="300" id="Imgpre" src="https://fakeimg.pl/250x400/?text= Movies Image " alt="Movies Image " />
                 <br />
@@ -64,7 +73,7 @@
             </div>
 
             <div class="form-group col-lg-7 col-xl-8 ">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </form>
     </div>

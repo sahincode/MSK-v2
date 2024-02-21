@@ -26,20 +26,20 @@ namespace MSK.Business.Services.Implementations
                 return true;
             }
         }
-        public string CheckCandidate(int canId)
+        public bool CheckCandidate(int canId)
         {
             var finCode = _httpContext?.HttpContext?.User?.Identity?.Name; // You may need to adjust this depending on your authentication setup
             var existingVote = _voteRepository.Table.FirstOrDefault(v => v.VoterFinCode == finCode);
             if (existingVote is not  null)
             {
                 if (existingVote.CandidateId == canId)
-                    return "checked";
+                    return true;
                 else
-                    return "";
+                    return false;
             }
             else
             {
-                return "";
+                return false;
             }
         }
     }

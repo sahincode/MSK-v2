@@ -22,5 +22,7 @@ namespace MSK.Business.DTOs.CandidateModelDTOs
         public string Party { get; set; }
         public double VotedPercent { get; set; }
         public string ImageUrl { get; set; }
+        public int ElectionId { get; set; }
+
     }
 }

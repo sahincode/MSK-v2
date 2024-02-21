@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.Exceptions;
+using MSK.Business.Services.Implementations;
 using MSK.Business.Services.Interfaces;
 using MSK.UI.ViewModels;
 
@@ -12,14 +14,20 @@ namespace MSK.UI.Areas.Manage.Controllers
     {
         private readonly ICandidateService _candidateService;
         private readonly IMapper _mapper;
+        private readonly IElectionService _electionService;
 
-        public CandidateController(ICandidateService candidateService, IMapper mapper)
+        public CandidateController(ICandidateService candidateService, 
+            IMapper mapper ,IElectionService electionService)
         {
             this._candidateService = candidateService;
             this._mapper = mapper;
+            this._electionService = electionService;
         }
         public async Task<IActionResult> Index(int page)
         {
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "Name");
+            ViewData["elections"] = electionList;
             var candidates = await _candidateService.GetAll(null, null);
             if (candidates is null)
             {
@@ -38,11 +46,17 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "Name");
+            ViewData["elections"] = electionList;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(CandidateCreateDto candidateCreateDto)
         {
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "Name");
+            ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {
                 return View(candidateCreateDto);
@@ -62,6 +76,9 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "Name");
+            ViewData["elections"] = electionList;
             var candidate = await _candidateService.GetById(id);
             if (candidate is null)
             {
@@ -73,6 +90,9 @@ namespace MSK.UI.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(CandidateUpdateDto candidateUpdateDto)
         {
+            var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
+            SelectList electionList = new SelectList(elections, "Id", "Name");
+            ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {
                 return View(candidateUpdateDto);
