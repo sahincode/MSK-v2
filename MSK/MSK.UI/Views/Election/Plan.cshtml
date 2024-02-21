@@ -1,0 +1,32 @@
+﻿@model CalendarPlanLayoutDto
+<section class="mf-breadcrumb">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Election</li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="page-inner">
+                    <h3>@Model.Description</h3>
+                    <div class="time">@Model.CreationTime</div>
+                    <div class="page-inner-item mt-5 mb-5 d-flex align-items-center">
+                        <img src="/assets/img/pdf.png" alt="" align="left" width="39" height="41">
+                        <a href="~/assets/pdf/info/@Model.PdfUrl" target="_blank" rel="noreferrer noopener">@(Model.Description.Length < 80 ? Model.Description : Model.Description.Substring(0, 80) + "...")</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

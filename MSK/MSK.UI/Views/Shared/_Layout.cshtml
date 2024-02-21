@@ -147,22 +147,10 @@
                         <li class="nav-item">
                             <a asp-action="index" asp-controller="referendum" class="nav-link">Referendum</a>
                         </li>
-                        <li class="nav-item dropdown">
-
-                            <a class=" dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Elections</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a href="/en/elections/pages/elections-milli-majlis" class="dropdown-item">Elections to the Milli Majlis</a>
-                                </li>
-                                <li>
-                                    <a href="/en/elections/pages/presidential-elections" class="dropdown-item">Presidential elections</a>
-                                </li>
-                                <li>
-                                    <a href="/en/elections/pages/municipal-elections" class="dropdown-item">Municipal elections</a>
-                                </li>
-                            </ul>
+                        <li class="nav-item">
+                            <a asp-action="index" asp-controller="election" class="nav-link">Elections</a>
                         </li>
-
+                      
                         <li class="nav-item">
                             <a asp-action="contact" asp-controller="home" class="nav-link">Contact</a>
                         </li>
