@@ -2,6 +2,7 @@
 using MSK.Business.DTOs.AccredationModelDTOs;
 using MSK.Business.DTOs.CalendarPlanModelDTOs;
 using MSK.Business.DTOs.CandidateModelDTOs;
+using MSK.Business.DTOs.ChatModelDTOs;
 using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.DTOs.ElectionModelDTOs;
@@ -114,7 +115,9 @@ namespace MSK.Business.Mappers
             CreateMap<ElectionIndexDto, Election>().ReverseMap();
             CreateMap<ElectionLayoutDto, Election>().ReverseMap();
             CreateMap<ElectionUpdateDto, Election>().ReverseMap();
-           
+            // chat model model mapping profile
+            CreateMap<ChatCreateDto, Chat>().ReverseMap();
+            CreateMap<ChatLayoutDto, Chat>().ReverseMap();
         }
     }
 }

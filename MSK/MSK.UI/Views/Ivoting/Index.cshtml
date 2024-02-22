@@ -1,12 +1,110 @@
-﻿@model ElectionLayoutDto
+﻿@model ElectionIndexViewModel
+@{
+    double votedPercent = 0;
+}
 <section class="mf-breadcrumb">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
 
-                <li class="breadcrumb-item active " aria-current="page">Voting Bulletein</li>
+                <li class="breadcrumb-item active " aria-current="page">Election</li>
             </ol>
         </nav>
+    </div>
+</section>
+<section class="mf-slider mb-4">
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
+                {
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i==0 ? "active":"")" aria-label="Slide @(i+1)"></button>
+                }
+
+
+            </div>
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
+                {
+                    <div class="carousel-item @(i==0 ? "active":"")">
+                        <img class="d-block w-100" src="~/assets/img/homeslide/@Model.HomeSlideLayoutDtos[i].ImageUrl" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>@Model.HomeSlideLayoutDtos[i].Title </h5>
+                            <h3>@Model.HomeSlideLayoutDtos[i].SubDescription</h3>
+                            <p>@Model.HomeSlideLayoutDtos[i].Description</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+<section class="mf-election mb-4">
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th scope="col">Name</th>
+                    <th scope="col">Voters Counts</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td scope="row">@Model.ElectionLayoutDto.Name</td>
+                    <td scope="row">@Model.ElectionLayoutDto.VotersCount</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section class="mf-election mb-4">
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th scope="col">Fullname</th>
+                    <th scope="col">Collected Vote</th>
+                    <th scope="col">Votes Percentage </th>
+                    <th scope="col">Result </th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var candidate in Model.ElectionLayoutDto.Candidates.OrderBy(c => c.VotedCount))
+                {
+                    if (Model.ElectionLayoutDto.VotersCount != 0)
+                        votedPercent = (100 / Model.ElectionLayoutDto.VotersCount) * candidate.VotedCount;
+                    <tr>
+                        <td scope="row">@candidate.FullName</td>
+                        <td scope="row">@candidate.VotedCount</td>
+                        <td scope="row">@(votedPercent)%</td>
+                        <td scope="row" class=" btn @(votedPercent>50 ?"btn-successo" :"btn-dangero")">@(votedPercent>50 ? "Elected" :"Rejected")</td>
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </section>

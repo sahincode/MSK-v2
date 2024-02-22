@@ -103,7 +103,7 @@
                     <span>Elections</span>
                 </a>
             </li><li class="nav-item">
-                <a class="nav-link"  asp-action="index" asp-controller="history">
+                <a class="nav-link"  asp-action="index" asp-controller="homeslide">
                     <i class="fa-solid fa-sliders"></i>
                     <span> Home page slides</span>
                 </a>
@@ -125,7 +125,7 @@
             </li><li class="nav-item">
                 <a class="nav-link" asp-action="index" asp-controller="nationalattribite">
                     <i class="fa-solid fa-building-flag"></i>
-                    <span>Natsional Attribites</span>
+                    <span>Nasional Attribites</span>
                 </a>
             </li><li class="nav-item">
                 <a class="nav-link" href="charts.html">
@@ -190,7 +190,7 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                         
-                                            @user.UserName 
+                                            @user?.UserName 
                                         
                                     </span>
                                     <img style="max-width:35px;" class="~/admin/img-profile rounded-circle"

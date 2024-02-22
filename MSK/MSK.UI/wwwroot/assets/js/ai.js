@@ -31,8 +31,10 @@ chatBtn?.addEventListener('click', function (e) {
         return response.json();
 
     }).then(data => {
-        chanAns.innerText = data.choices[0].message.content;
+        simulateChat(data.choices[0].message.content);
+        saveChat();
     })
+  
     chatInput.value = "";
 
 })
@@ -42,8 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
 
-    var profileImage = document.getElementById('userProImage');
-    profileImage.innerText = firstName.charAt(0);
+    var profileImage1 = document.getElementById('userProImage1');
+    var profileImage2 = document.getElementById('userProImage2');
+
+    profileImage1.innerText = firstName.charAt(0);
+    profileImage2.innerText = firstName.charAt(0);
+
 });
 document.addEventListener('DOMContentLoaded', function () {
     var textarea = document.getElementById('chatInput');
@@ -55,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             aiLogo.style.display = 'none';
             answerCon.style.display = 'inline-block';
             quesCon.style.display = 'block';
-            userQues.innerText = chatInput.value;
+            userQues.innerText += chatInput.value;
             quesAnsContainer.classList.add('scroll-answer')
 
             event.preventDefault();
@@ -73,12 +79,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
 
             }).then(data => {
-                chanAns.innerText = data.choices[0].message.content;
+                simulateChat(data.choices[0].message.content);
+                function saveChat() {
+                    const formData = new FormData();
+                    formData.append("Question", chatInput.value);
+                    formData.append("Answer", data.choices[0].message.content);
+                    formData.append("ChatterId", null);
+
+                    fetch('/aisupport/', {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                }
+                saveChat()
             })
             textarea.value = "";
         }
     });
 });
+function simulateChat(response) {
+    const lines = response.split('<br>');
+    let delay = 1000000; // Set your desired delay between lines (in milliseconds)
+
+    lines.forEach((line, index) => {
+        setTimeout(() => {
+            chanAns.innerText = `${line}`;
+            // Scroll to the bottom after each line (optional)
+            chanAns.scrollTop = chatDiv.scrollHeight;
+        }, delay * index);
+    });
+}
+
 
 ///sidebar  script start 
 //hamburger click action 
@@ -99,3 +131,4 @@ menuBtn?.addEventListener('click', function () {
     body.classList.toggle('o-hidden');
 
 })
+

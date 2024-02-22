@@ -31,6 +31,8 @@ namespace MSK.Data.DAL
         public DbSet<Voter>  Voters { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<Election> Elections { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+
 
 
 

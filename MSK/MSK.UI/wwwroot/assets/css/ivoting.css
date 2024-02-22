@@ -503,3 +503,18 @@ a {
     pointer-events: none; /* Disable pointer events */
     opacity: 0.6; /* Set opacity to make it visually disabled */
 }
+.btn-dangero {
+  
+    background-color: #e02d1b!important;
+    border-color: #d52a1a;
+    width:100px;
+    height:40px;
+    padding-bottom:10px;
+}
+.btn-successo {
+    background-color: #129d1d !important;
+    border-color: #206415;
+    width: 100px;
+    height: 40px;
+    padding-bottom: 10px;
+}

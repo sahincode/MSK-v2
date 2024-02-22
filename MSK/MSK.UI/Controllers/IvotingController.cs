@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Matching;
 using MSK.Business.DTOs.CandidateModelDTOs;
 using MSK.Business.DTOs.ElectionModelDTOs;
+using MSK.Business.DTOs.HomeSlideDTOs;
 using MSK.Business.DTOs.VoterModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Exceptions.SizeExceptions;
@@ -12,6 +13,7 @@ using MSK.Business.Services.Interfaces;
 using MSK.Core.enums;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
+using MSK.UI.ViewModels;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -26,11 +28,12 @@ namespace MSK.UI.Controllers
         private readonly IMapper _mapper;
         private readonly IVoteRepository _voteRepository;
         private readonly IElectionService _electionService;
+        private readonly IHomeSlideService _homeSlideService;
 
         public IvotingController(IVoterService voterService,
             IWebHostEnvironment env, SignInManager<Voter> signInManager,
             ICandidateService candidateService, IMapper mapper,
-            IVoteRepository voteRepository, IElectionService electionService)
+            IVoteRepository voteRepository, IElectionService electionService, IHomeSlideService homeSlideService)
         {
             this._voterService = voterService;
             this._env = env;
@@ -39,10 +42,37 @@ namespace MSK.UI.Controllers
             this._mapper = mapper;
             this._voteRepository = voteRepository;
             this._electionService = electionService;
+            this._homeSlideService = homeSlideService;
         }
         public IActionResult Index()
         {
-            return View();
+            List<HomeSlide> homeSlides = null;
+            ElectionLayoutDto electionLayoutDto = null;
+            List<HomeSlideLayoutDto> homeSlideLayoutDtos = new List<HomeSlideLayoutDto>();
+            try
+            {
+                var election = _electionService.GetAll(e => e.IsDeleted == false ,"Candidates").Result.OrderBy(e => e.CreationTime).FirstOrDefault();
+                 electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
+                 homeSlides = _homeSlideService.GetAll(hs => hs.IsDeleted == false).Result.ToList();
+
+
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound();
+            }
+            foreach (var item in homeSlides)
+            {
+                HomeSlideLayoutDto homeSlideLayoutDto = _mapper.Map<HomeSlideLayoutDto>(item);
+                homeSlideLayoutDtos.Add(homeSlideLayoutDto);
+
+            }
+            ElectionIndexViewModel electionIndexViewModel = new ElectionIndexViewModel()
+            {
+                ElectionLayoutDto = electionLayoutDto,
+                HomeSlideLayoutDtos = homeSlideLayoutDtos
+            };
+            return View(electionIndexViewModel);
         }
         public async Task<IActionResult> Login()
         {
@@ -73,7 +103,7 @@ namespace MSK.UI.Controllers
             string tempFile = await FileHelper.SaveImage(rootPath, "assets/temp", voterLoginDto.Image);
             string filePath2 = Path.Combine(rootPath, "assets/temp", tempFile);
             request.AddFile("file1", filePath1);
-            request.AddFile("file2", filePath1);
+            request.AddFile("file2", filePath2);
 
             request.AddParameter("response_as_dict", true);
             request.AddParameter("attributes_as_list", true);
@@ -134,12 +164,12 @@ namespace MSK.UI.Controllers
         [VoterAuthorize]
         public async Task<IActionResult> Vote()
         {
-            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1)<=DateTime.UtcNow.AddHours(4), "Candidates");
+            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4), "Candidates");
             ElectionLayoutDto electionLayoutDto = null;
             if (election is not null)
             {
 
-                 electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
+                electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
             }
 
             return View(electionLayoutDto);
@@ -162,12 +192,12 @@ namespace MSK.UI.Controllers
             }
             catch (NullEntityException ex)
             {
-                ModelState.AddModelError(ex.PropertyName,ex.Message);
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
                 return View(electionLayoutDto);
             }
-            catch(OutOfDateVotingException ex)
+            catch (OutOfDateVotingException ex)
             {
-                ModelState.AddModelError(ex.PropertyName ,ex.Message);
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
                 return View(electionLayoutDto);
 
 
