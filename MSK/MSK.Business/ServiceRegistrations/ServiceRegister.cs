@@ -31,8 +31,9 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<IVoterService, VoterService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<IElectionService, ElectionService>();
+            
             services.AddHostedService<ElectionStatusService>();
-           
+            
             services.AddScoped<VoteControlService>();
             services.AddScoped<SignInManager<Voter>>();
         }

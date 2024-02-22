@@ -122,7 +122,15 @@ a {
 .mf-social-icons li {
     list-style: none;
 }
-
+.ai__textarea {
+    border-block-color: #798788;
+    border-radius: 30px;
+    width: 100%;
+    max-height: 50px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-top: 15px;
+}
 .fa-brands {
     color: white;
     font-size: 26px;

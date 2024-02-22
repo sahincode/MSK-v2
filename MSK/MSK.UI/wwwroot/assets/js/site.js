@@ -240,4 +240,3 @@ playIcon?.addEventListener('click', function () {
         isPlaying = false;
         }
     })
-

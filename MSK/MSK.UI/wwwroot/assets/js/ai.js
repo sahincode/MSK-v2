@@ -8,11 +8,13 @@ const userQues = document.getElementById('userQuestion');
 const aiLogo = document.getElementById('ai-logo');
 const answerCon = document.getElementById('answerContainer');
 const quesCon = document.getElementById('userAnsContainer');
+const quesAnsContainer = document.getElementById('chatContainer');
 chatBtn?.addEventListener('click', function (e) {
     aiLogo.style.display = 'none';
     answerCon.style.display = 'inline-block';
     quesCon.style.display = 'block';
     userQues.innerText = chatInput.value;
+    quesAnsContainer.classList.add('scroll-answer')
 
     e.preventDefault();
     fetch('https://api.openai.com/v1/chat/completions', {
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             answerCon.style.display = 'inline-block';
             quesCon.style.display = 'block';
             userQues.innerText = chatInput.value;
+            quesAnsContainer.classList.add('scroll-answer')
 
             event.preventDefault();
             fetch('https://api.openai.com/v1/chat/completions', {
@@ -76,4 +79,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
 ///sidebar  script start 
+//hamburger click action 
+const menuBtn = document.querySelector('.hamburger');
+const menuDiv = document.querySelectorAll('.nav-mobile');
+const body = document.querySelector('.body-layout');
+const divOver = document.querySelector('.div-over');
+
+
+
+menuBtn?.addEventListener('click', function () {
+
+    menuBtn.classList.toggle('is-active');
+    menuDiv.forEach(menu => menu.classList.toggle('active'));
+
+    divOver.classList.toggle('dark-back');
+
+    body.classList.toggle('o-hidden');
+
+})

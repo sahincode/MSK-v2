@@ -1,15 +1,11 @@
-﻿textarea {
+﻿
+textarea {
     resize: none;
-}
-
-.ai-container {
-    position: absolute;
 }
 
 .header__text {
     position: relative;
-    top: 20px;
-    left: 30px;
+   
 }
 
 .center-icon-div {
@@ -27,18 +23,6 @@
     align-items: center;
 }
 
-.ai__textarea {
-    border-block-color: #798788;
-    border-radius: 30px;
-    min-width: 250px;
-    max-height: 50px;
-    font-size:14px;
-    padding-left: 20px;
-    padding-top: 15px;
-    overflow:hidden;
-    resize:none;
-    padding-right:55px;
-}
 
 .ai__textarea:focus {
     outline:none;
@@ -119,23 +103,11 @@ textarea {
     resize: none;
 }
 
-.chat-section {
-    border-bottom: 1px solid #798788;
-    margin-bottom: 25px;
-}
 
-.ai-container {
-    position: absolute;
-    display: grid;
-    max-width: 280px;
-    width: 100%;
-    height: 477px;
-    background-color: #f5f5f5;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
+
 
 .questions__container {
-    padding: 20px;
+  
     position: relative;
 }
 
@@ -144,6 +116,7 @@ textarea {
         overflow-y: scroll;
         overflow-x: hidden;
         margin-top: 20px;
+        margin-bottom:20px;
     }
 
 .questions .list {
@@ -188,12 +161,17 @@ textarea {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    font-size:20px;
+    margin-bottom:10px;
+}
+.header__text img{
+width:32px;
 }
 
-.center-icon-div {
-    margin-top: 30px;
-    min-height: 350px;
-}
+    .center-icon-div {
+        margin-top: 30px;
+        min-height: 350px;
+    }
 
     .center-icon-div img {
         margin: auto;
@@ -239,15 +217,6 @@ textarea {
     background-color: #eeeded;
 }
 
-.ai__textarea {
-    border-block-color: #798788;
-    border-radius: 30px;
-    min-width: 250px;
-    max-height: 50px;
-    font-size: 14px;
-    padding-left: 20px;
-    padding-top: 15px;
-}
 
     .ai__textarea:focus {
         outline: none;
@@ -299,5 +268,83 @@ h5 {
 .ai-profile {
     display: none;
 }
+/*hamburger menu design start
+*/
+/*hamburger menu*/
+.hamburger {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 33px;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    color:black;
+    outline: none;
+    border: none;
+    z-index:20;
+}
 
+    .hamburger .bar, .hamburger:after, .hamburger:before {
+        content: "";
+        width: 100%;
+        height: 3px;
+        display: block;
+        background-color: black;
+        color:black;
+        margin: 6px 0px;
+        transition: 0.4s;
+        opacity:0.5;
+    }
+
+    .hamburger.is-active:before {
+        transform: rotate(-45deg) translate(-8px,4px);
+    }
+
+    .hamburger.is-active:after {
+        transform: rotate(45deg) translate(-6px,-6px);
+    }
+
+    .hamburger.is-active .bar {
+        opacity: 0;
+    }
+
+
+
+.nav-mobile.active {
+    left: 0;
+}
+
+
+.o-hidden{
+    overflow:hidden;
+    opacity:0.5;
+}
+
+.dark-back {
+    content: "";
+    background-color: black;
+    position: fixed;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.scroll-answer {
+    height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.ai-bottom{
+    position:fixed;
+     bottom:0px;
+}
+.chat-section{
+    position:absolute;
+    left:200px;
+   
+
+}
 

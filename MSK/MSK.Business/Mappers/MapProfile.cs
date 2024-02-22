@@ -114,6 +114,7 @@ namespace MSK.Business.Mappers
             CreateMap<ElectionIndexDto, Election>().ReverseMap();
             CreateMap<ElectionLayoutDto, Election>().ReverseMap();
             CreateMap<ElectionUpdateDto, Election>().ReverseMap();
+           
         }
     }
 }
