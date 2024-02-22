@@ -217,7 +217,7 @@ ivoteringSubBtn?.addEventListener('click', function (e) {
     const formData = new FormData();
     formData.append('Image', formFile);
     formData.append('FinCode', finCodeinput.value);
-    fetch('/ivoting/SaveUserSection', {
+    fetch('/ivoting/login', {
         method: 'POST',
         body: formData,
     });

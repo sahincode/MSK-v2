@@ -8,6 +8,7 @@ using MSK.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,13 @@ namespace MSK.Business.Services.Implementations
             this._httpContextAccessor = httpContextAccessor;
             this._userManager = userManager;
         }
+
+        public async Task< List<Chat>> GetAll()
+        {
+            var user = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);
+            return    _chatRepository.GetAll(c => c.IsDeleted == false && c.ChatterId == user.Email).Result.ToList();
+        }
+
         public async  Task SaveUserSection(ChatCreateDto entity)
         {
             var user =await  _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);

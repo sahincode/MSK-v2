@@ -15,7 +15,7 @@ namespace MSK.Data.Configurations
         {
             builder.Property(c => c.Question).IsRequired().HasMaxLength(3000);
             builder.Property(c => c.Answer).IsRequired().HasColumnType("varchar").HasMaxLength(8000);
-            builder.Property(c => c.ChatterId).IsRequired().HasMaxLength(7);
+            builder.Property(c => c.ChatterId).IsRequired().HasMaxLength(100);
 
 
         }

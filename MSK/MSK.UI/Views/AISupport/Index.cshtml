@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ChatLayoutDto>
+@{
     Layout = "_EmptyLayout";
 }
 <div class=" navbar navbar-light">
@@ -19,90 +20,17 @@
 
         <div class="questions">
             <ul class="list">
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
-                <li class="list-item">
-                    Lorem Ipsum Dolor
-                    <div class="question-buttons">
-                        <i class="fa-solid fa-trash"></i>
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </div>
-                </li>
+                @foreach(var item in Model)
+                {
+                    <li class="list-item">
+                        @(item.Question.Length>20 ?item.Question.Substring(0,19) : item.Question)
+                        <div class="question-buttons">
+                            <i class="fa-solid fa-trash"></i>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                    </li>
+                }
+
             </ul>
         </div>
         <div class="questions__footer">

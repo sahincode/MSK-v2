@@ -32,6 +32,18 @@ chatBtn?.addEventListener('click', function (e) {
 
     }).then(data => {
         simulateChat(data.choices[0].message.content);
+         async function saveChat() {
+            const formData = new FormData();
+             formData.append("Question", userQues.innerText);
+             formData.append("Answer", await data.choices[0].message.content);
+            formData.append("ChatterId", null);
+
+            fetch('/aisupport/SaveUserSection', {
+                method: 'POST',
+                body: formData,
+            });
+
+        }
         saveChat();
     })
   
@@ -61,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             aiLogo.style.display = 'none';
             answerCon.style.display = 'inline-block';
             quesCon.style.display = 'block';
-            userQues.innerText += chatInput.value;
+            userQues.innerText = chatInput.value;
             quesAnsContainer.classList.add('scroll-answer')
 
             event.preventDefault();
@@ -80,13 +92,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             }).then(data => {
                 simulateChat(data.choices[0].message.content);
-                function saveChat() {
+               async  function saveChat() {
                     const formData = new FormData();
-                    formData.append("Question", chatInput.value);
-                    formData.append("Answer", data.choices[0].message.content);
+                   formData.append("Question", userQues.innerText);
+                    formData.append("Answer",  await data.choices[0].message.content);
                     formData.append("ChatterId", null);
 
-                    fetch('/aisupport/', {
+                    fetch('/aisupport/SaveUserSection', {
                         method: 'POST',
                         body: formData,
                     });
@@ -106,7 +118,7 @@ function simulateChat(response) {
         setTimeout(() => {
             chanAns.innerText = `${line}`;
             // Scroll to the bottom after each line (optional)
-            chanAns.scrollTop = chatDiv.scrollHeight;
+            chanAns.scrollTop = chanAns.scrollHeight;
         }, delay * index);
     });
 }
