@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authentication;
+using System.ComponentModel.DataAnnotations;
 
 namespace MSK.Business.DTOs
 {
@@ -12,5 +13,6 @@ namespace MSK.Business.DTOs
         [DataType(DataType.EmailAddress)]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }

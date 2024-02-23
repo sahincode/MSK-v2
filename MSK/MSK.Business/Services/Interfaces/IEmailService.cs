@@ -10,5 +10,6 @@ namespace MSK.Business.Services.Interfaces
     public interface IEmailService
     {
         Task SendEmailToUserForConfirmation(UserEmailOption uSerEmailOptions);
+        Task SendEmailForForgetPassword(UserEmailOption uSerEmailOptions);
     }
 }

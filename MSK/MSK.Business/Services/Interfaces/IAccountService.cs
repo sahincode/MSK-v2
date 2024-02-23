@@ -1,4 +1,6 @@
-﻿using MSK.Business.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using MSK.Business.DTOs;
+using MSK.Core.Models;
 
 namespace MSK.Business.Services.Interfaces
 {
@@ -7,7 +9,7 @@ namespace MSK.Business.Services.Interfaces
         public Task Register(RegisterModelDto registerModelDto);
         public Task Login(LoginModelDto adminLoginViewModel);
         public Task Logout();
-
-
+        public Task GenerateForgetPasswordTokenAsync(User user);
+        Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
     }
 }

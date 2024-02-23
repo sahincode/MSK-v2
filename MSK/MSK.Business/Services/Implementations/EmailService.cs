@@ -22,6 +22,12 @@ namespace MSK.Business.Services.Implementations
             uSerEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), uSerEmailOptions.PlaceHolders);
             await SendEmail(uSerEmailOptions);
         }
+        public async Task SendEmailForForgetPassword(UserEmailOption uSerEmailOptions)
+        {
+            uSerEmailOptions.Subject = UpdatePlaceHolders($"hello //UserName// , forget your password", uSerEmailOptions.PlaceHolders);
+            uSerEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("ForgetPassword"), uSerEmailOptions.PlaceHolders);
+            await SendEmail(uSerEmailOptions);
+        }
         public EmailService(IOptions<SMTPConfigModel> sMTPConfig)
         {
             _sMTPConfig = sMTPConfig.Value;

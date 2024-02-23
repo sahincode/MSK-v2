@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -7,6 +8,7 @@ using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
 using MSK.UI.ViewModels;
+using NuGet.Common;
 using System.Text;
 
 namespace MSK.UI.Controllers
@@ -15,22 +17,31 @@ namespace MSK.UI.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IAccountService accountService, 
-            UserManager<User> userManager )
+        public AccountController(IAccountService accountService,
+            UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this._accountService = accountService;
             this._userManager = userManager;
+            this._signInManager = signInManager;
         }
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-            return View();
+            LoginModelDto loginModelDto = new LoginModelDto()
+            {
+
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            return View(loginModelDto);
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginModelDto adminLoginViewModel)
         {
+            adminLoginViewModel.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (!ModelState.IsValid) return View(adminLoginViewModel);
 
             try
@@ -40,7 +51,7 @@ namespace MSK.UI.Controllers
             catch (InvalidUserCredentialException ex)
             {
                 ModelState.AddModelError(ex.PropertyName, ex.Message);
-                return View();
+                return View(adminLoginViewModel);
             }
 
             return RedirectToAction("index", "aisupport");
@@ -101,6 +112,60 @@ namespace MSK.UI.Controllers
                 }
             }
             return View(confirmEmailViewModel);
+        }
+        [AllowAnonymous]
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordDto passwordDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(passwordDto.Email);
+                if (user is not null)
+                {
+                    await _accountService.GenerateForgetPasswordTokenAsync(user);
+                }
+                ModelState.Clear();
+                passwordDto.EmailSent = true;
+            }
+            return View(passwordDto);
+        }
+        [AllowAnonymous, HttpGet]
+        public IActionResult ResetPassword(string uid, string token)
+        {
+            ResetPasswordDto resetPasswordDto = new ResetPasswordDto
+            {
+                Token = token,
+                UserId = uid
+            };
+            return View(resetPasswordDto);
+        }
+        [AllowAnonymous, HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            if (ModelState.IsValid)
+            {
+                resetPasswordDto.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(resetPasswordDto.Token));
+                var result = await _accountService.ResetPasswordAsync(resetPasswordDto);
+                if (result.Succeeded)
+                {
+                    ModelState.Clear();
+
+                    resetPasswordDto.Succeeded = true;
+                    return View(resetPasswordDto);
+
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(resetPasswordDto);
         }
     }
 }

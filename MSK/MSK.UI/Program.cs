@@ -12,6 +12,13 @@ using Pigga.Business.ServiceRegistrations;
 
 var builder = WebApplication.CreateBuilder(args);
 const string connection = "default";
+var configuration = builder.Configuration;
+builder.Services.AddAuthentication().AddGoogle(gOptions =>
+{
+    gOptions.ClientId = configuration["Authentication:Google:ClientId"];
+    gOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddFluentValidation(opt =>
 {

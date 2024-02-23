@@ -50,7 +50,7 @@ namespace MSK.Business.Services.Implementations
             User user = await _userManager.FindByEmailAsync(registerModelDto.Email);
             if (user is not null)
             {
-                throw new InvalidUserCredentialException("Email", "The use rwith this email is already exist!");
+                throw new InvalidUserCredentialException("Email", "The use with this email is already exist!");
             }
 
             user = new User()
@@ -85,6 +85,17 @@ namespace MSK.Business.Services.Implementations
             }
         }
 
+        public async Task GenerateForgetPasswordTokenAsync(User user)
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+
+                if (!string.IsNullOrEmpty(encodedToken))
+                {
+                    await SendResetPasswordEmail(user, encodedToken);
+                }
+        }
         private IUserEmailStore<User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -113,6 +124,32 @@ namespace MSK.Business.Services.Implementations
             };
 
             await _emailService.SendEmailToUserForConfirmation(options);
+        }
+        private async Task SendResetPasswordEmail(User user, string token)
+        {
+            string appdomain = _configuration.GetSection("Application:AppDomain").Value;
+            string confirmLink = _configuration.GetSection("Application:ForgetPassword").Value;
+
+            UserEmailOption options = new UserEmailOption()
+            {
+                ToEmails = new List<string>()
+                {
+                    user.Email
+                },
+                PlaceHolders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}",user.UserName),
+                    new KeyValuePair<string, string>("//UserName//",user.UserName),
+                    new KeyValuePair<string, string>("{{Link}}",string.Format(appdomain+confirmLink,user.Id,token ,user.Email))
+                }
+            };
+
+            await _emailService.SendEmailForForgetPassword(options);
+        }
+
+       public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+        {
+          return  await _userManager.ResetPasswordAsync(await _userManager.FindByIdAsync(resetPasswordDto.UserId),resetPasswordDto.Token,resetPasswordDto.NewPassword);
         }
         
     }

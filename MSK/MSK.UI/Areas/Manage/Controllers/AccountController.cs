@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
@@ -22,7 +23,7 @@ namespace MSK.Areas.Manage.Controllers
             _roleManager = roleManager;
             _accountService = accountService;
         }
-     
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -79,6 +80,6 @@ namespace MSK.Areas.Manage.Controllers
             await _accountService.Logout();
             return RedirectToAction("login", "Account");
         }
-       
+        
     }
 }
