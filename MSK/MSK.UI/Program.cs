@@ -22,25 +22,33 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 
     opts.UseSqlServer(builder.Configuration.GetConnectionString(connection));
 });
-builder.Services.AddIdentity<User,IdentityRole>(opts =>
-{
-    opts.Password.RequireNonAlphanumeric = false;
-    opts.Password.RequiredLength = 8;
-    opts.Password.RequireUppercase =true ;
-    opts.Password.RequireDigit = false;
-}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-builder.Services.AddIdentityCore<Voter>(opts =>
+builder.Services.AddIdentity<Voter, IdentityRole>(opts =>
 {
     opts.Password.RequireNonAlphanumeric = false;
     opts.Password.RequiredLength = 6;
     opts.Password.RequireUppercase = false;
     opts.Password.RequireLowercase = false;
     opts.Password.RequireDigit = false;
-}).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+   
+}).AddEntityFrameworkStores<AppDbContext>().
+                AddDefaultTokenProviders();
+
+builder.Services.AddIdentityCore<User>(opts =>
+{
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.Password.RequiredLength = 8;
+    opts.Password.RequireUppercase = true;
+    opts.Password.RequireDigit = false;
+    opts.SignIn.RequireConfirmedEmail = true;
+
+}).AddRoles<IdentityRole>().
+                AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<User, IdentityRole>>().
+                AddEntityFrameworkStores<AppDbContext>().
+                AddDefaultTokenProviders();
+               
 
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
-builder.Services.RegisterServices();
+builder.Services.RegisterServices(builder.Configuration);
 builder.Services.RegisterRepos();
 builder.Services.ConfigureApplicationCookie(options =>
 {

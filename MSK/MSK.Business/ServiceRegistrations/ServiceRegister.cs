@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MSK.Business.Services.Implementations;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
+using MSK.Data.DAL;
 
 namespace Pigga.Business.ServiceRegistrations
 {
     public static class ServiceRegister
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ISettingService, SettingService>();
@@ -31,13 +34,19 @@ namespace Pigga.Business.ServiceRegistrations
             services.AddScoped<IVoterService, VoterService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddScoped<IElectionService, ElectionService>();
+            services.AddScoped<IEmailService, EmailService>();
+
             services.AddScoped<IAiService, AiService>();
 
-
+           
             services.AddHostedService<ElectionStatusService>();
             
             services.AddScoped<VoteControlService>();
             services.AddScoped<SignInManager<Voter>>();
+            services.AddScoped<SignInManager<User>>();
+
+            services.Configure<SMTPConfigModel>(configuration.GetSection("SMTPConfig"));
+
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model ConfirmEmailViewModel
+
+<div class="container justify-content-center align-items-cente" style="min-height:400px; margin-top:100px;">
+    <div class="row text-center"></div>
+    @if (Model.EmailVerified)
+    {
+        <div class=" alert alert-success " role="alert">
+
+            <p>
+                Your account Verified succesfully
+
+            </p>
+            <a  asp-action="login" asp-controller="account" class="btn btn-success" style="max-width:250px;height:50px">
+                Go to Login Page
+            </a>
+        </div>
+    }
+    else
+    {
+        <p>Something went wrong or your token is expired</p>
+    }
+</div>

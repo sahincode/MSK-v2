@@ -15,15 +15,15 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="p-5">
-                                
+
                                 <div asp-validation-summary="ModelOnly"></div>
                                 <form method="post">
                                     <div class="form-group">
-                                        <input asp-for="FullName"  class="form-control form-control-user"placeholder="Fullname">
+                                        <input asp-for="FullName" class="form-control form-control-user" placeholder="Fullname">
                                         <span asp-validation-for="FullName"></span>
                                     </div>
                                     <div class="form-group">
-                                        <input asp-for="UserName"  class="form-control form-control-user"
+                                        <input asp-for="UserName" class="form-control form-control-user"
                                                placeholder="Username">
                                         <span asp-validation-for="UserName"></span>
 
@@ -47,17 +47,14 @@
                                                placeholder="Confirm Password">
                                         <span asp-validation-for="ConfirmPassword"></span>
                                     </div>
-                                  
+
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Register
                                     </button>
-                                    <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
+                                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                                    {
+                                        <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+                                    }
                                 </form>
                             </div>
                         </div>

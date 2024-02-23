@@ -136,12 +136,22 @@
     background: url(../../img/icons/twitter.svg) no-repeat center;
 }
 
-.mf-footer .mf-social-icons a.yt {
-    background: url(../../img/icons/youtube.svg) no-repeat center;
-}
 
 .mf-footer .mf-social-icons a.ins {
     background: url( https://www.msk.gov.az/assets/img/icons/instagram.svg) no-repeat center;
+   
+}
+.mf-footer .mf-social-icons a.fb {
+    background: url( https://www.msk.gov.az/assets/img/icons/facebook.svg ) no-repeat center;
+    margin-left: 6px;
+}
+.mf-footer .mf-social-icons a.tw {
+    background: url( https://www.msk.gov.az/assets/img/icons/twitter.svg ) no-repeat center;
+    margin-left: 6px;
+}
+.mf-footer .mf-social-icons a.yt {
+    background: url(https://www.msk.gov.az/assets/img/icons/youtube.svg ) no-repeat center;
+    margin-left: 10px;
 }
 
 .mf-footer .mf-social-icons a {

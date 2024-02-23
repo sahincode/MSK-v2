@@ -268,7 +268,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accredations");
+                    b.ToTable("Accredations", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.CalendarPlan", b =>
@@ -322,7 +322,7 @@ namespace MSK.Data.Migrations
                         .IsUnique()
                         .HasFilter("[ReferendumId] IS NOT NULL");
 
-                    b.ToTable("CalendarPlans");
+                    b.ToTable("CalendarPlans", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Candidate", b =>
@@ -383,7 +383,7 @@ namespace MSK.Data.Migrations
 
                     b.HasIndex("ElectionId");
 
-                    b.ToTable("Candidate");
+                    b.ToTable("Candidate", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Chat", b =>
@@ -423,7 +423,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Contact", b =>
@@ -453,7 +453,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Decision", b =>
@@ -497,7 +497,7 @@ namespace MSK.Data.Migrations
                         .IsUnique()
                         .HasFilter("[ReferendumId] IS NOT NULL");
 
-                    b.ToTable("Decisions");
+                    b.ToTable("Decisions", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Election", b =>
@@ -545,7 +545,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Elections");
+                    b.ToTable("Elections", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.History", b =>
@@ -582,7 +582,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Histories");
+                    b.ToTable("Histories", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.HomeSlide", b =>
@@ -627,7 +627,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeSlides");
+                    b.ToTable("HomeSlides", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Info", b =>
@@ -672,7 +672,7 @@ namespace MSK.Data.Migrations
 
                     b.HasIndex("ReferendumId");
 
-                    b.ToTable("Infos");
+                    b.ToTable("Infos", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Instruction", b =>
@@ -716,7 +716,7 @@ namespace MSK.Data.Migrations
                         .IsUnique()
                         .HasFilter("[ReferendumId] IS NOT NULL");
 
-                    b.ToTable("Instructions");
+                    b.ToTable("Instructions", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Legislation", b =>
@@ -751,7 +751,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Legislations");
+                    b.ToTable("Legislations", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.NationalAttribute", b =>
@@ -788,7 +788,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NationalAttributes");
+                    b.ToTable("NationalAttributes", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.PressNew", b =>
@@ -833,7 +833,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PressNews");
+                    b.ToTable("PressNews", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Referendum", b =>
@@ -872,7 +872,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Referendums");
+                    b.ToTable("Referendums", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Setting", b =>
@@ -907,7 +907,7 @@ namespace MSK.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.SubDecision", b =>
@@ -947,7 +947,7 @@ namespace MSK.Data.Migrations
 
                     b.HasIndex("DecisionId");
 
-                    b.ToTable("SubDecisions");
+                    b.ToTable("SubDecisions", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.SubInstruction", b =>
@@ -987,7 +987,7 @@ namespace MSK.Data.Migrations
 
                     b.HasIndex("InstructionId");
 
-                    b.ToTable("SubInstructions");
+                    b.ToTable("SubInstructions", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.Vote", b =>
@@ -1021,7 +1021,7 @@ namespace MSK.Data.Migrations
 
                     b.HasIndex("CandidateId");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Votes", (string)null);
                 });
 
             modelBuilder.Entity("MSK.Core.Models.User", b =>

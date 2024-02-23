@@ -4,6 +4,7 @@ using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
+using MSK.UI.ViewModels;
 
 namespace MSK.Areas.Manage.Controllers
 {
@@ -78,6 +79,6 @@ namespace MSK.Areas.Manage.Controllers
             await _accountService.Logout();
             return RedirectToAction("login", "Account");
         }
-
+       
     }
 }

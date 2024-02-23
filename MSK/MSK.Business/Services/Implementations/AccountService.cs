@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
-
+using System.Text;
 
 namespace MSK.Business.Services.Implementations
 {
@@ -12,11 +14,19 @@ namespace MSK.Business.Services.Implementations
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
+        private readonly IUserStore<User> _userStore;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountService(UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IConfiguration configuration, IEmailService emailService, IUserStore<User> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this._configuration = configuration;
+            this._emailService = emailService;
+            this._userStore = userStore;
         }
         public async Task Login(LoginModelDto adminLoginViewModel)
         {
@@ -45,7 +55,7 @@ namespace MSK.Business.Services.Implementations
 
             user = new User()
             {
-                
+
                 Email = registerModelDto.Email,
                 UserName = registerModelDto.UserName,
                 FullName = registerModelDto.FullName,
@@ -57,11 +67,53 @@ namespace MSK.Business.Services.Implementations
 
             var result = await _userManager.CreateAsync(user, registerModelDto.Password);
 
-            if (!result.Succeeded)
+
+            if (result.Succeeded)
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+
+                if (!string.IsNullOrEmpty(encodedToken))
+                {
+                    await UserConfirmationEmail(user, encodedToken);
+                }
+            }
+            foreach (var error in result.Errors)
             {
                 throw new InvalidUserCredentialException("", "Something went wrong!");
             }
-
         }
+
+        private IUserEmailStore<User> GetEmailStore()
+        {
+            if (!_userManager.SupportsUserEmail)
+            {
+                throw new NotSupportedException("The default UI requires a user store with email support.");
+            }
+            return (IUserEmailStore<User>)_userStore;
+        }
+        private async Task UserConfirmationEmail(User user, string token)
+        {
+            string appdomain = _configuration.GetSection("Application:AppDomain").Value;
+            string confirmLink = _configuration.GetSection("Application:EmailConfirmation").Value;
+
+            UserEmailOption options = new UserEmailOption()
+            {
+                ToEmails = new List<string>()
+                {
+                    user.Email
+                },
+                PlaceHolders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}",user.UserName),
+                    new KeyValuePair<string, string>("//UserName//",user.UserName),
+                    new KeyValuePair<string, string>("{{Link}}",string.Format(appdomain+confirmLink,user.Id,token ,user.Email))
+                }
+            };
+
+            await _emailService.SendEmailToUserForConfirmation(options);
+        }
+        
     }
 }

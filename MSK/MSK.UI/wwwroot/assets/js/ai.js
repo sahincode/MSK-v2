@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
             userQues.innerText = chatInput.value;
             quesAnsContainer.classList.add('scroll-answer')
 
-            event.preventDefault();
             fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -123,6 +122,46 @@ function simulateChat(response) {
     });
 }
 
+var oldQuestions = document.querySelectorAll(".old-question");
+
+oldQuestions.forEach(q => q.addEventListener('click', function (e) {
+    e.preventDefault();
+    aiLogo.style.display = 'none';
+    answerCon.style.display = 'inline-block';
+    quesCon.style.display = 'block';
+    userQues.innerText = q.innerText;
+    quesAnsContainer.classList.add('scroll-answer')
+    fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify({
+            "model": "gpt-3.5-turbo",
+            "messages": [{ "role": "user", "content": chatInput.value }]
+        })
+    }).then(response => {
+        return response.json();
+
+    }).then(data => {
+        simulateChat(data.choices[0].message.content);
+        async function saveChat() {
+            const formData = new FormData();
+            formData.append("Question", userQues.innerText);
+            formData.append("Answer", await data.choices[0].message.content);
+            formData.append("ChatterId", null);
+
+            fetch('/aisupport/SaveUserSection', {
+                method: 'POST',
+                body: formData,
+            });
+
+        }
+        saveChat()
+    })
+    textarea.value = "";
+}))
 
 ///sidebar  script start 
 //hamburger click action 
