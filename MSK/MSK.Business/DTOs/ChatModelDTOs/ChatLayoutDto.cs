@@ -11,5 +11,6 @@ namespace MSK.Business.DTOs.ChatModelDTOs
         public string Question { get; set; }
         public string Answer { get; set; }
         public string ChatterId { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }

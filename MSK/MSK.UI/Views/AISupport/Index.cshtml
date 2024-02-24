@@ -1,4 +1,4 @@
-﻿@model List<ChatLayoutDto>
+﻿@model List<IGrouping<DateTime ,ChatLayoutDto>>
 @{
     Layout = "_EmptyLayout";
 }
@@ -20,18 +20,22 @@
 
         <div class="questions">
             <ul class="list">
-                @foreach(var item in Model)
+                @foreach(var group in Model)
                 {
-                    <li class="list-item  old-question">
-                        
-                        @(item.Question.Length>20 ?item.Question.Substring(0,19) : item.Question)
-                        <div class="question-buttons">
-                            
+
+                    <p>@(DateTime.UtcNow.AddHours(4).AddDays(-6)<group.Key ? group.Key.ToString("dddd"):group.Key.ToString("dd MMMM yyyy"))</p>
+                    @foreach(var item in group)
+                    {
+                        <li class="list-item  old-question">
+
+                            @(item.Question.Length > 20 ? item.Question.Substring(0, 19) : item.Question)
+                            <div class="question-buttons">
+
                                 <i class="fa-solid fa-trash  delete__question"></i>
-                            
-                            <i class="fa-solid fa-box-archive"></i>
-                        </div>
-                    </li>
+                                <i class="fa-solid fa-box-archive"></i>
+                            </div>
+                        </li>
+                    }
                 }
 
             </ul>
