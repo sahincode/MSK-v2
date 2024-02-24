@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="table-title text-white">
         <h1 class="title">Calendar Plan<span>Table</span></h1>
-        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="calendarplan">Create</a>
+        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="calendarplan"><i class="fa-solid fa-plus"></i></a>
     </div>
     <table class="table table-hover table-striped shadow">
         <thead>
@@ -82,7 +82,7 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger ms-1" asp-action="Delete" asp-route-id="@item.Id" asp-controller="calendarplan">
+                        <a class="btn btn-danger ms-1 delete-btn" asp-action="Delete" asp-route-id="@item.Id" asp-controller="calendarplan">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">
@@ -96,3 +96,7 @@
     </table>
 </div>
 
+@section jsFiles{
+    <script src="~/admin/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
+}

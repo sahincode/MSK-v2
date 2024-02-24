@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.ContactModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.UI.ViewModels;
+using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -41,6 +44,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ContactCreateDto contactCreateDto)
         {
             if (!ModelState.IsValid)
@@ -70,7 +74,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             ContactUpdateDto contactUpdateDto = _mapper.Map<ContactUpdateDto>(contact);
             return View(contactUpdateDto);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(ContactUpdateDto contactUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -89,6 +94,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "Contact");
 
         }
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

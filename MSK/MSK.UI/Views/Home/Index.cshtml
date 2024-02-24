@@ -3,7 +3,7 @@
     <div class="container">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
-                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
+                @for (int i = 0; i < Model.PressNewLayoutDtos.Count; i++)
                 {
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i==0 ? "active":"")" aria-label="Slide @(i+1)"></button>
                 }
@@ -11,14 +11,14 @@
 
             </div>
             <div class="carousel-inner">
-                @for (int i = 0; i < Model.HomeSlideLayoutDtos.Count; i++)
+                @for (int i = 0; i < Model.PressNewLayoutDtos.Count; i++)
                 {
                     <div class="carousel-item @(i==0 ? "active":"")">
-                        <img class="d-block w-100" src="~/assets/img/homeslide/@Model.HomeSlideLayoutDtos[i].ImageUrl" alt="First slide">
+                        <img class="d-block w-100" src="~/assets/img/pressnew/@Model.PressNewLayoutDtos[0].ImageUrl" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5><a href="">@Model.HomeSlideLayoutDtos[i].Title </a></h5>
-                            <h3><a href="">@Model.HomeSlideLayoutDtos[i].SubDescription</a></h3>
-                            <p><a href="">@Model.HomeSlideLayoutDtos[i].Description</a></p>
+                            <h5><a asp-action="detail" asp-controller="pressnew" asp-route-id="@Model.PressNewLayoutDtos[i].Id">@Model.PressNewLayoutDtos[i].Title </a></h5>
+                            <h3><a asp-action="detail" asp-controller="pressnew" asp-route-id="@Model.PressNewLayoutDtos[i].Id">@Model.PressNewLayoutDtos[i].Description</a></h3>
+                           
                         </div>
                     </div>
                 }

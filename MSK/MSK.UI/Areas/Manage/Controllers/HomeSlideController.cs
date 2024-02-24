@@ -11,6 +11,8 @@ using System.Data;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+   
     public class HomeSlideController : Controller
     {
         private readonly IHomeSlideService _homeSlideService;
@@ -44,6 +46,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HomeSlideCreateDto homeSlideCreateDto)
         {
             if (!ModelState.IsValid)
@@ -75,7 +78,7 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+       
         public async Task<IActionResult> Update(HomeSlideUpdateDto homeSlideUpdateDto)
         {
             if (!ModelState.IsValid)

@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.DecisionModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.UI.ViewModels;
+using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class DecisionController : Controller
     {
         private readonly IDecisionService _decisionService;
@@ -41,6 +44,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DecisionCreateDto DecisionCreateDto)
         {
             if (!ModelState.IsValid)
@@ -70,7 +74,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             DecisionUpdateDto DecisionUpdateDto = _mapper.Map<DecisionUpdateDto>(Decision);
             return View(DecisionUpdateDto);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(DecisionUpdateDto DecisionUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -89,6 +94,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "Decision");
 
         }
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

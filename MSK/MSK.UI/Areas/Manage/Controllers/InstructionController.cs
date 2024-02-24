@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.InstructionModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.UI.ViewModels;
+using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
 
     public class InstructionController : Controller
     {
@@ -42,6 +45,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(InstructionCreateDto instructionCreateDto)
         {
             if (!ModelState.IsValid)
@@ -72,6 +76,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View(instructionUpdateDto);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(InstructionUpdateDto instructionUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -90,6 +95,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "Instruction");
 
         }
+        [Authorize(Roles = "SuperAdmin")]
+
         public async Task<IActionResult> Delete(int id)
         {
             try

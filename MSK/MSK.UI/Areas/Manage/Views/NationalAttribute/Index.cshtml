@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="table-title text-white">
         <h1 class="title">National Atributes<span>Table</span></h1>
-        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="nationalattribute">Create</a>
+        <a class="btn btn-success create-btn" asp-action="Create" asp-controller="nationalattribute"><i class="fa-solid fa-plus"></i></a>
     </div>
     <table class="table table-hover table-striped shadow">
         <thead>
@@ -80,7 +80,7 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a class="btn btn-danger ms-1" asp-action="Delete" asp-route-id="@item.Id" asp-controller="history">
+                        <a class="btn btn-danger ms-1 delete-btn" asp-action="Delete" asp-route-id="@item.Id" asp-controller="history">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                         <a class="btn btn-info ms-1" data-bs-toggle="modal" data-bs-target="#item@(item.Id)Modal">

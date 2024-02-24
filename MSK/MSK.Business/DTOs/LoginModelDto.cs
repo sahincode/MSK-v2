@@ -13,6 +13,6 @@ namespace MSK.Business.DTOs
         [DataType(DataType.EmailAddress)]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IList<AuthenticationScheme> ? ExternalLogins { get; set; }
     }
 }

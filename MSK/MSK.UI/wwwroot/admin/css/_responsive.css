@@ -1,18 +1,105 @@
-﻿
-@media (max-width:768px){
-    .back-to-list a{
-        width:50px;
-    }
-    .back-to-list a i{
-        font-size:25px;
-    }
-}
-@media (min-width:768.005px) {
-    .back-to-list a {
-        width: 100px;
+﻿@media (min-width: 0px) and (max-width: 399.99px) {
+    .title {
+        font-size: 16px;
     }
 
         .back-to-list a i {
-            font-size: 30px;
+            font-size: 12px;
         }
+
+    .table-title a i {
+        font-size: 12px;
+       
+    }
+
+    
+    table td, table th {
+        font-size: 8px;
+    }
+    .td-min{
+        display:block !important;
+    }
+    .table-title a {
+        width: 25px;
+        height: 25px !important;
+    }
+}
+@media (min-width: 400px) and (max-width: 599.99px) {
+
+    .title {
+        font-size: 20px;
+    }
+
+        .back-to-list a i {
+            font-size: 16px;
+        }
+
+    .table-title a i {
+        font-size: 16px;
+        
+    }
+
+    .table-title a {
+        width: 30px;
+        height:30px !important;
+      
+    }
+
+    table td, table th {
+        font-size: 12px;
+    }
+    .td-min {
+        display: block !important;
+    }
+}
+@media  (min-width: 600px) and (max-width: 900px) {
+    .title {
+        font-size: 25px;
+    }
+    table td, table th {
+        font-size: 16px;
+    }
+    .back-to-list a {
+        width: 50px;
+    }
+
+        .back-to-list a i {
+            font-size: 25px;
+        }
+
+    .table-title a i {
+        font-size: 25px;
+    }
+
+    .table-title a {
+        width: 50px;
+    }
+
+    table td, table th {
+        font-size: 16px;
+    }
+}
+
+@media (min-width:900.005px) {
+     .back-to-list a {
+       width: 100px;
+   }
+
+   .back-to-list a i {
+       font-size: 30px;
+   }
+
+   .title {
+      font-size: 35px;
+   }
+    .table-title a i {
+        font-size: 30px;
+    }
+
+    .table-title a {
+        width: 100px;
+    }
+    table td ,table th {
+        font-size:20px;
+    }
 }

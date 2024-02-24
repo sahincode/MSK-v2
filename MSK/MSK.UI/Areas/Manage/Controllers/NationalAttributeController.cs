@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MSK.Business.DTOs.NationalAttributeModelDTOs;
 using MSK.Business.Exceptions;
@@ -8,6 +9,8 @@ using MSK.UI.ViewModels;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class NationalAttributeController : Controller
     {
         private readonly INationalAttributeService _nationalAttributeService;
@@ -41,6 +44,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NationalAttributeCreateDto nACreateDto)
         {
             if (!ModelState.IsValid)
@@ -71,7 +75,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View(historyUpdateDto);
         }
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(NationalAttributeUpdateDto nationalAttributeUpdate)
         {
             if (!ModelState.IsValid)
@@ -90,7 +94,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "nationalattribute");
 
         }
-       
+        [Authorize(Roles = "SuperAdmin")]
+
         public async Task<IActionResult> Delete(int id)
         {
             try

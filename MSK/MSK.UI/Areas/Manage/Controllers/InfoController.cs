@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MSK.Business.DTOs.InfoModelDTOs;
@@ -9,6 +10,8 @@ using MSK.UI.ViewModels;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class InfoController : Controller
     {
         private readonly IInfoService _infoService;
@@ -60,6 +63,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(InfoCreateDto InfoCreateDto)
         {
             var referendums = _referendumService.GetAll(d => !d.IsDeleted).Result.ToList();
@@ -102,6 +106,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View(InfoUpdateDto);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
 
         public async Task<IActionResult> Update(InfoUpdateDto InfoUpdateDto)
         {
@@ -127,6 +132,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "Info");
 
         }
+        [Authorize(Roles = "SuperAdmin")]
+
         public async Task<IActionResult> Delete(int id)
         {
             try

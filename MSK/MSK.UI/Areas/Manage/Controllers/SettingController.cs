@@ -8,6 +8,8 @@ using MSK.Business.Services.Interfaces;
 namespace MSK.Areas.Manage.Controllers
 {
     [Area("Manage")]
+            [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class SettingController : Controller
     {
         private readonly ISettingService _settingService;
@@ -41,7 +43,7 @@ namespace MSK.Areas.Manage.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+
         public async Task<IActionResult> Update(SettingUpdateDto settingUpdateDto)
         {
             if (!ModelState.IsValid)

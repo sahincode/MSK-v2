@@ -10,6 +10,8 @@ using System.Data;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class VoterController : Controller
     {
         private readonly IVoterService _VoterService;
@@ -43,6 +45,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VoterCreateDto VoterCreateDto)
         {
             if (!ModelState.IsValid)
@@ -74,7 +77,7 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+
         public async Task<IActionResult> Update(VoterUpdateDto VoterUpdateDto)
         {
             if (!ModelState.IsValid)

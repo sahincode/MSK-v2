@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MSK.Business.DTOs.ElectionModelDTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
 using MSK.UI.ViewModels;
+using System.Data;
 
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class ElectionController : Controller
     {
         private readonly IElectionService _electionService;
@@ -77,6 +80,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ElectionCreateDto ElectionCreateDto)
         {
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
@@ -132,7 +136,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View(ElectionUpdateDto);
         }
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(ElectionUpdateDto ElectionUpdateDto)
         {
             var decisions = _decisionService.GetAll(d => !d.IsDeleted).Result.ToList();
@@ -164,6 +168,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return RedirectToAction("index", "Election");
 
         }
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

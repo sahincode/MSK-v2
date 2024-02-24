@@ -99,8 +99,7 @@ namespace MSK.UI.Areas.Manage.Controllers
 
         }
         [Authorize(Roles = "SuperAdmin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -114,8 +113,8 @@ namespace MSK.UI.Areas.Manage.Controllers
             }
             return RedirectToAction("index", "history");
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+     
+        
         public async Task<IActionResult> ToggleDelete(int id)
         {
             try

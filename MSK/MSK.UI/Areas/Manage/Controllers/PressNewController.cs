@@ -12,6 +12,8 @@ using System.Data;
 namespace MSK.UI.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class PressNewController : Controller
     {
         private readonly IPressNewService _pressNewService;
@@ -45,6 +47,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PressNewCreateDto pressNewCreateDto)
         {
             if (!ModelState.IsValid)
@@ -76,7 +79,7 @@ namespace MSK.UI.Areas.Manage.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+       
         public async Task<IActionResult> Update(PressNewUpdateDto pressNewUpdateDto)
         {
             if (!ModelState.IsValid)
