@@ -19,9 +19,7 @@
 }
 
 .contact-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+   
     margin: 0 auto;
     padding: 20px;
     position: relative;
@@ -259,12 +257,8 @@
 /*
     login page video helper desing
 */
-.direct-contact-container {
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+   
+
 .play-icon{
     position:absolute;
     width:40px;

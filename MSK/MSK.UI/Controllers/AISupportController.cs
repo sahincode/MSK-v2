@@ -40,5 +40,14 @@ namespace MSK.UI.Controllers
             }
 
         }
+        [HttpPost]
+        public async Task DeleteUserSection(ChatCreateDto chatCreateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _aiService.DeleteUserSection(chatCreateDto);
+            }
+
+        }
     }
 }

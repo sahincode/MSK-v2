@@ -228,4 +228,23 @@
         left: 0px;
         right: 40px;
     }
+   
+}
+@media (max-width:1200px){
+    .direct-contact-container {
+        display: none;
+    }
+}
+@media (min-width:1200.0099px){
+    .direct-contact-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }

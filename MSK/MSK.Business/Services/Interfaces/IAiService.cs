@@ -13,5 +13,6 @@ namespace MSK.Business.Services.Interfaces
     {
         public Task SaveUserSection(ChatCreateDto entity);
         public Task< List<Chat>> GetAll();
+        public  Task DeleteUserSection(ChatCreateDto entity);
     }
 }

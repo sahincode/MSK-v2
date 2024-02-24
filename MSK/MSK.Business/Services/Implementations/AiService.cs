@@ -46,5 +46,18 @@ namespace MSK.Business.Services.Implementations
             await _chatRepository.CommitAsync();
           
         }
+        public async Task DeleteUserSection(ChatCreateDto entity)
+        {
+            var user = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);
+
+            entity.ChatterId = user.Email;
+            var chat =  await _chatRepository.Get(c => c.Question.Contains(entity.Question) && c.ChatterId == user.Id);
+            if(chat is not null)
+            {
+                _chatRepository.Delete(chat);
+            }
+            await _chatRepository.CommitAsync();
+
+        }
     }
 }

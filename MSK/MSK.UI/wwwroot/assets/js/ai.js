@@ -9,12 +9,14 @@ const aiLogo = document.getElementById('ai-logo');
 const answerCon = document.getElementById('answerContainer');
 const quesCon = document.getElementById('userAnsContainer');
 const quesAnsContainer = document.getElementById('chatContainer');
+const userSec = document.getElementById('userSection');
 chatBtn?.addEventListener('click', function (e) {
     aiLogo.style.display = 'none';
     answerCon.style.display = 'inline-block';
     quesCon.style.display = 'block';
     userQues.innerText = chatInput.value;
     quesAnsContainer.classList.add('scroll-answer')
+    userSec.classList.remove('d-none');
 
     e.preventDefault();
     fetch('https://api.openai.com/v1/chat/completions', {
@@ -74,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
             answerCon.style.display = 'inline-block';
             quesCon.style.display = 'block';
             userQues.innerText = chatInput.value;
-            quesAnsContainer.classList.add('scroll-answer')
+            quesAnsContainer.classList.add('scroll-answer');
+            userSec.classList.remove('d-none');
+
 
             fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
@@ -105,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 saveChat()
             })
-            textarea.value = "";
+            chatInput.value = "";
         }
     });
 });
@@ -123,13 +127,13 @@ function simulateChat(response) {
 }
 
 var oldQuestions = document.querySelectorAll(".old-question");
-
 oldQuestions.forEach(q => q.addEventListener('click', function (e) {
     e.preventDefault();
     aiLogo.style.display = 'none';
     answerCon.style.display = 'inline-block';
     quesCon.style.display = 'block';
     userQues.innerText = q.innerText;
+    userSec.classList.remove('d-none');
     quesAnsContainer.classList.add('scroll-answer')
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -139,7 +143,7 @@ oldQuestions.forEach(q => q.addEventListener('click', function (e) {
         },
         body: JSON.stringify({
             "model": "gpt-3.5-turbo",
-            "messages": [{ "role": "user", "content": chatInput.value }]
+            "messages": [{ "role": "user", "content": q.innerText }]
         })
     }).then(response => {
         return response.json();
@@ -160,7 +164,7 @@ oldQuestions.forEach(q => q.addEventListener('click', function (e) {
         }
         saveChat()
     })
-    textarea.value = "";
+    chatInput.value = "";
 }))
 
 ///sidebar  script start 
@@ -181,5 +185,26 @@ menuBtn?.addEventListener('click', function () {
 
     body.classList.toggle('o-hidden');
 
-})
+});
+//var deleteQuestions = document.querySelectorAll(".delete__question");
+
+//deleteQuestions.forEach(dq => {
+    
+//    async function deleteChat(e) {
+//        var parent = dq.parentElement;
+//        var grandParent = parent.parentElement;
+//        e.preventDefault();
+//        const formData = new FormData();
+//        formData.append("Question", userQues.innerText);
+//        formData.append("Question", grandParent.innerText);
+//        formData.append("Answer", await data.choices[0].message.content);
+//        formData.append("ChatterId", null);
+
+//        fetch('/aisupport/DeleteUserSection', {
+//            method: 'POST',
+//            body: formData,
+//        });
+//    }
+//    dq.addEventListener('click', deleteChat)
+//})
 

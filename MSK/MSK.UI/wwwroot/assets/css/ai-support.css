@@ -117,7 +117,7 @@ textarea {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 8px 15px;
+      padding-left:10px;
         margin-bottom: 5px;
         border-radius: 10px;
         transition: all 0.4s ease;
