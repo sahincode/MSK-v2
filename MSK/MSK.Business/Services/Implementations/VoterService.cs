@@ -10,6 +10,7 @@ using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
 using MSK.Core.Repositories;
+using MSK.Data.Repositories;
 using System.Linq.Expressions;
 
 namespace MSK.Business.Services.Implementations
@@ -28,8 +29,8 @@ namespace MSK.Business.Services.Implementations
 
         public VoterService(IMapper mapper,
             UserManager<Voter> userManager, IWebHostEnvironment env,
-            IVoterRepository voterRepository ,IVoteRepository voteRepository ,
-            ICandidateService candidateService ,IHttpContextAccessor httpContext ,IElectionService electionService)
+            IVoterRepository voterRepository, IVoteRepository voteRepository,
+            ICandidateService candidateService, IHttpContextAccessor httpContext, IElectionService electionService)
         {
             this._mapper = mapper;
             this._userManager = userManager;
@@ -140,40 +141,53 @@ namespace MSK.Business.Services.Implementations
         }
         public async Task VoteAsync(int candidateId)
         {
-            var finCode =  _httpContext?.HttpContext?.User?.Identity?.Name; // You may need to adjust this depending on your authentication setup
-            var existingVote = _voteRepository.Table.FirstOrDefault(v => v.VoterFinCode == finCode);
-            var oldCandidate = await _candidateService.GetById(existingVote.CandidateId);
-            var election = await  _electionService.Get(e => e.Id == oldCandidate.ElectionId);
-            if (election.StartDate <= DateTime.UtcNow.AddHours(4) && election.StartDate.AddMinutes(15) >= DateTime.UtcNow.AddHours(4))
+
+            var voteElection = await _electionService.Get(e => e.Candidates.Any(c => c.Id == candidateId));
+            if (voteElection is not null)
             {
-                if (existingVote != null)
-                {
-                    // If the voter has already voted, update the vote to the new candidate
-                    existingVote.CandidateId = candidateId;
-                }
-                else
-                {
-                    // If the voter has not voted, create a new vote record
-                    await _voteRepository.CreateAsync(new Vote { CandidateId = candidateId, VoterFinCode = finCode });
-                }
 
-                // Update the voted count for the selected candidate
-                var selectedCandidate = await _candidateService.GetById(candidateId);
-
-
-                if (selectedCandidate is null)
+                if (voteElection.ElectionStatus == Core.enums.ElectionStatus.Open)
                 {
-                    throw new NullEntityException();
+                    var finCode = _httpContext?.HttpContext?.User?.Identity?.Name;
+                    var existingVotes = _voteRepository.Table.Where(v => v.VoterFinCode == finCode).ToList();
+                   if(existingVotes.Any(ev=> voteElection.Candidates.Any(c => c.Id == ev.CandidateId)))
+                    {
+                        foreach (var eVote in existingVotes)
+                        {
+                            if (voteElection.Candidates.Any(c => c.Id == eVote.CandidateId))
+                            {
+                                eVote.CandidateId = candidateId;
+                                var selectedCandidate = await _candidateService.GetById(candidateId);
+
+
+                                if (selectedCandidate is null)
+                                {
+                                    throw new NullEntityException();
+                                }
+                                var oldCandidate = await _candidateService.GetById(eVote.CandidateId);
+                                oldCandidate.VotedCount--;
+                                selectedCandidate.VotedCount++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        await _voteRepository.CreateAsync(new Vote { CandidateId = candidateId, VoterFinCode = finCode });
+                        var selectedCandidate = await _candidateService.GetById(candidateId);
+
+
+                        if (selectedCandidate is null)
+                        {
+                            throw new NullEntityException();
+                        }
+                      
+                        selectedCandidate.VotedCount++;
+                    }
                 }
-                selectedCandidate.VotedCount++;
-                oldCandidate.VotedCount--;
-                await _voteRepository.CommitAsync();
             }
-            else
-            {
-                throw new OutOfDateVotingException("", "Election  Time interval expired. You can not vote!");
-            }
-            
+
+            await _voteRepository.CommitAsync();
+
         }
 
 

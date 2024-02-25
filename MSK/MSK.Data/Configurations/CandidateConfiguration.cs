@@ -19,7 +19,7 @@ namespace MSK.Data.Configurations
             builder.Property(c => c.About).IsRequired().HasMaxLength(5000);
             builder.Property(c => c.Party).IsRequired().HasMaxLength(100);
             builder.Property(c => c.ImageUrl).IsRequired().HasMaxLength(100);
-            builder.HasOne(c => c.Election).WithMany(e => e.Candidates);
+            builder.HasOne(c => c.Election).WithMany(e => e.Candidates).HasForeignKey(c=>c.ElectionId).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

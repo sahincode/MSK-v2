@@ -59,6 +59,7 @@ namespace MSK.UI
                 context.Result = new RedirectToActionResult("Login", "IVoting", new { area = Area }, permanent: false);
                 return;
             }
+            return;
         }
     }
 }

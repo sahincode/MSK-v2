@@ -93,11 +93,11 @@
                 @foreach (var candidate in Model.ElectionLayoutDto.Candidates.OrderBy(c => c.VotedCount))
                 {
                     if (Model.ElectionLayoutDto.VotersCount != 0)
-                        votedPercent = (100 / Model.ElectionLayoutDto.VotersCount) * candidate.VotedCount;
+                        votedPercent = (100 / (double)Model.ElectionLayoutDto.VotersCount) * candidate.VotedCount;
                     <tr>
                         <td scope="row">@candidate.FullName</td>
                         <td scope="row">@candidate.VotedCount</td>
-                        <td scope="row">@(votedPercent)%</td>
+                        <td scope="row">@(votedPercent.ToString("0.#######"))%</td>
                         <td scope="row" class=" btn @(votedPercent>50 ?"btn-successo" :"btn-dangero")">@(votedPercent>50 ? "Elected" :"Rejected")</td>
 
 

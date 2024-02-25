@@ -57,7 +57,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
             var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            SelectList electionList = new SelectList(elections, "Id", "Name");
             ViewData["elections"] = electionList;
 
             return View();
@@ -70,7 +70,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
             var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            SelectList electionList = new SelectList(elections, "Id", "Name");
             ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
             var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            SelectList electionList = new SelectList(elections, "Id", "Name");
             ViewData["elections"] = electionList;
             var Info = await _infoService.GetById(id);
             if (Info is null)
@@ -114,7 +114,7 @@ namespace MSK.UI.Areas.Manage.Controllers
             SelectList referendumList = new SelectList(referendums, "Id", "Name");
             ViewData["referendums"] = referendumList;
             var elections = _electionService.GetAll(d => !d.IsDeleted).Result.ToList();
-            SelectList electionList = new SelectList(elections, "Id", "FullName");
+            SelectList electionList = new SelectList(elections, "Id", "Name");
             ViewData["elections"] = electionList;
             if (!ModelState.IsValid)
             {

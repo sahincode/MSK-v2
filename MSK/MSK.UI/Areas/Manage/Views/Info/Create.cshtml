@@ -28,12 +28,14 @@
 
             <div class="form-group col-lg-7 col-xl-8 ">
                 <label asp-for="ReferendumId" class="control-label">Referendum</label>
-                <select asp-for="ReferendumId" asp-items="@referendumList"> </select>
+                <select asp-for="ReferendumId" asp-items="@referendumList">  <option value="">Select an option</option></select>
                 <span asp-validation-for="ReferendumId" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-7 col-xl-8 ">
-                <label asp-for="ElectionId" class="control-label">Referendum</label>
-                <select asp-for="ElectionId" asp-items="@electionList"> </select>
+                <label asp-for="ElectionId" class="control-label">ELection</label>
+                <select asp-for="ElectionId" asp-items="@electionList">
+                    <option value="">Select an option</option>
+                </select>
                 <span asp-validation-for="ElectionId" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-7 col-xl-8 ">

@@ -51,7 +51,7 @@ namespace MSK.UI.Controllers
             List<HomeSlideLayoutDto> homeSlideLayoutDtos = new List<HomeSlideLayoutDto>();
             try
             {
-                var election = _electionService.GetAll(e => e.IsDeleted == false ,"Candidates").Result.OrderBy(e => e.CreationTime).FirstOrDefault();
+                var election = _electionService.GetAll(e => e.IsDeleted == false ,"Candidates").Result.OrderByDescending(e => e.CreationTime).FirstOrDefault();
                  electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
                  homeSlides = _homeSlideService.GetAll(hs => hs.IsDeleted == false).Result.ToList();
 
@@ -164,8 +164,9 @@ namespace MSK.UI.Controllers
         [VoterAuthorize]
         public async Task<IActionResult> Vote()
         {
-            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4), "Candidates");
-            ElectionLayoutDto electionLayoutDto = null;
+            var election =  _electionService.
+                GetAll(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4) , "Candidates").Result.OrderByDescending(e=>e.CreationTime).FirstOrDefault();
+            ElectionLayoutDto electionLayoutDto =  new ElectionLayoutDto();
             if (election is not null)
             {
 
@@ -179,7 +180,9 @@ namespace MSK.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Vote([FromForm] int selectedCandidateId)
         {
-            var election = await _electionService.Get(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4), "Candidates");
+            var election = _electionService.
+     GetAll(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4)
+     , "Candidates").Result.OrderBy(e => e.CreationTime).FirstOrDefault();
             ElectionLayoutDto electionLayoutDto = null;
             if (election is not null)
             {

@@ -69,18 +69,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if (Model.StartDate <= DateTime.UtcNow.AddHours(4) && Model.StartDate.AddMinutes(15) >= DateTime.UtcNow.AddHours(4))
+                                        @if (Model.ElectionStatus == MSK.Core.enums.ElectionStatus.Open || Model.ElectionStatus == MSK.Core.enums.ElectionStatus.Pending)
                                         {
 
                                             <div class="checkbox-label">
-                                                <input class="checkbox-input-candidate" type="checkbox" name="selectedCandidateId" value="@item.Id" @(_voteControl.CheckCandidate(item.Id) ?"check" :"") />
+                                                <input class="checkbox-input-candidate" type="checkbox" name="selectedCandidateId" value="@item.Id" @(await _voteControl.CheckCandidate(item.Id) ?"check" :"") />
 
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="checkbox-label">
-                                                <i class="fa-solid fa-@(_voteControl.CheckCandidate(item.Id) ?"check" :"x")"></i>
+                                                <i class="fa-solid fa-@( await _voteControl.CheckCandidate(item.Id) ?"check" :"x")"></i>
 
                                             </div>
                                            
@@ -92,13 +92,13 @@
                             </div>
 
                         }
-                    </form>
+                        </form>
                 </div>
                 @if (Model.StartDate <= DateTime.UtcNow.AddHours(4) && Model.StartDate.AddMinutes(15) >= DateTime.UtcNow.AddHours(4))
                 {
 
                     <div class="candidate_submit_con">
-                        <button form="votingCandidate" class="candidate_submit_button mb-5 mt-5" style="--clr:#4C91F0"><span>@(_voteControl.Voted() ? "Change Choice" : "Submit Choice")</span><i></i></button>
+                        <button form="votingCandidate" class="candidate_submit_button mb-5 mt-5" style="--clr:#4C91F0"><span>@(await _voteControl.Voted(Model.Id) ? "Change Choice" : "Submit Choice")</span><i></i></button>
                     </div>
                 }
             </div>
