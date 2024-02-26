@@ -1,5 +1,34 @@
 ﻿@model List<IGrouping<DateTime ,ChatLayoutDto>>
 @{
+    Dictionary<char, string> charColor = new Dictionary<char, string>()
+        {
+            {'A', "#ff0000"},
+            {'B', "#00ff00"},
+            {'C', "#0000ff"},
+            {'D', "#ff9900"},
+            {'E', "#9900ff"},
+            {'F', "#00ffff"},
+            {'G', "#ffcc00"},
+            {'H', "#cc00ff"},
+            {'I', "#33cc33"},
+            {'J', "#cc3300"},
+            {'K', "#3366cc"},
+            {'L', "#cc3366"},
+            {'M', "#66cc33"},
+            {'N', "#cc6600"},
+            {'O', "#0066cc"},
+            {'P', "#cc0066"},
+            {'Q', "#0099cc"},
+            {'R', "#cc3399"},
+            {'S', "#3399cc"},
+            {'T', "#cc3333"},
+            {'U', "#33cc99"},
+            {'V', "#cc3399"},
+            {'W', "#996633"},
+            {'X', "#9966cc"},
+            {'Y', "#6699cc"},
+            {'Z', "#cc9966"}
+        };
     Layout = "_EmptyLayout";
 }
 <div class=" navbar navbar-light">
@@ -43,7 +72,7 @@
         <div class="questions__footer">
             <hr />
             <div class="profile__block">
-                <div id="userProImage1"></div>
+                <div id="userProImage1" style="background:@(charColor[User.Identity.Name.First()])"></div>
                 <h5 class="ms-2" id="UserName">@User.Identity.Name</h5>
             </div>
         </div>
@@ -67,7 +96,7 @@
                         <div class="user__container " id="userAnsContainer">
                             <div class="d-flex jusify-content-center w-75">
                                 <div class="d-flex align-items-center justify-content-start text-align-center ai-profile">
-                                    <div id="userProImage2"></div>
+                                    <div id="userProImage2" style="background:@(charColor[User.Identity.Name.First()])"></div>
                                     <h5 class="ms-2" id="UserName">@User.Identity.Name</h5>
                                 </div>
                             </div>
