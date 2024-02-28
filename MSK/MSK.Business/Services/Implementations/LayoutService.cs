@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MSK.Business.DTOs.SettingModelDTOs;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
@@ -14,15 +15,17 @@ namespace MSK.Business.Services.Implementations
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<User> _userManager;
         private readonly IElectionService _electionService;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public LayoutService(ISettingService settingService,
             IHttpContextAccessor httpContextAccessor, UserManager<User> userManager
-            ,IElectionService electionService)
+            ,IElectionService electionService ,RoleManager<IdentityRole> roleManager)
         {
             this._settingService = settingService;
             this._httpContextAccessor = httpContextAccessor;
             this._userManager = userManager;
             this._electionService = electionService;
+            this._roleManager = roleManager;
         }
         public async Task<IEnumerable<SettingGetDto>> GetSettings()
         {
@@ -92,6 +95,11 @@ namespace MSK.Business.Services.Implementations
 
             return arrays;
 
+        }
+        public async Task<List<IdentityRole>> GetRoles()
+        {
+            var roles = await _roleManager.Roles.ToListAsync();
+            return roles;
         }
     }
 }

@@ -60,13 +60,21 @@ namespace MSK.UI.Controllers
         public async Task<IActionResult> Details(int id)
         {
             Election election = null;
-            try
+            if (id is 0)
             {
-                election = await _electionService.Get(r => r.Id == id && !r.IsDeleted, "Decision", "Instruction", "Infos", "CalendarPlan" , "Candidates");
+                var elections = await _electionService.GetAll(e => !e.IsDeleted, "Decision", "Instruction", "Infos", "CalendarPlan", "Candidates");
+                election = elections.OrderByDescending(e => e.CreationTime).FirstOrDefault();
             }
-            catch (EntityNotFoundException ex)
+            else
             {
-                return NotFound();
+                try
+                {
+                    election = await _electionService.Get(r => r.Id == id && !r.IsDeleted, "Decision", "Instruction", "Infos", "CalendarPlan", "Candidates");
+                }
+                catch (EntityNotFoundException ex)
+                {
+                    return NotFound();
+                }
             }
             ElectionLayoutDto electionLayoutDto = _mapper.Map<ElectionLayoutDto>(election);
 

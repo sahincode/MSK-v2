@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\admin\img\homeslide\" />
+    <Folder Include="wwwroot\admin\img\user\" />
     <Folder Include="wwwroot\assets\img\icons\" />
     <Folder Include="wwwroot\assets\img\voter\" />
     <Folder Include="wwwroot\assets\pdf\accredation\" />

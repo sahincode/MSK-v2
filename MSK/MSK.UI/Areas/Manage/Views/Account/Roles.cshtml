@@ -1,0 +1,57 @@
+﻿@model List<UserWithRoleDto>
+@inject LayoutService layoutservice
+@{
+    int counter = 0;
+    var roles =await  layoutservice.GetRoles();
+}
+@section cssFiles{
+    <link href="~/admin/css/Layout.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+}
+
+<div class="container-fluid">
+    <div class="table-title text-white">
+        <h1 class="title">Roles<span>Table</span></h1>
+       
+    </div>
+    <div asp-validation-summary="ModelOnly"></div>
+    <table class="table table-hover table-striped shadow">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var  user in Model)
+            { 
+
+                counter++;
+                <tr>
+                    <td class="about-info-td">@counter</td>
+                    <td class="about-info-td">@user.UserName</td>
+                    <td class="about-info-td">@user.Email</td>
+                    <td class="td-min d-flex">
+                        @foreach(var role in roles.Where(r=>r.Name!="Voter"))
+                        {
+                            <a class="btn @(user.Roles.Any(r => r.Id == role.Id) is true ? "changed-role-btn" :" change-role-btn")  ms-1 fs-1" asp-controller="account" asp-action="ToggleRole" asp-route-roleId="@role.Id" asp-route-userId="@user.Id">
+                                <small style="font-size:10px;"> @(user.Roles.Any(r => r.Id == role.Id) is true ? "take " + role.Name : "make " + role.Name)</small>
+                            </a>
+
+                        }
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section jsFiles{
+    <script src="~/admin/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
+}

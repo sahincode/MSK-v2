@@ -6,17 +6,18 @@
     background-color: #435d7d !important;
 }
 
-.table-title .title {
-   font-weight: 700;
-}
+    .table-title .title {
+        font-weight: 700;
+    }
 
-.table-title span {
-    font-weight: 300;
-}
+    .table-title span {
+        font-weight: 300;
+    }
 
 .create-btn {
     width: 110px;
 }
+
 .form-container {
     max-width: 700px;
     padding: 50px;
@@ -26,18 +27,80 @@
 }
 
 .td-min a {
-    width:25px;
-    height:25px;
-    padding:0 3px 5px 5px;
-    
+    width: 25px;
+    height: 25px;
+    padding: 0 3px 5px 5px;
 }
 
-.td-min a i{
-    font-size:12px;
-  
+    .td-min a i {
+        font-size: 12px;
+    }
 
-}
 .sidebar__admin {
     background: linear-gradient(0deg, rgba(43,244,211,1) 0%, rgba(59,226,221,1) 0%, rgba(46,124,135,1) 98%);
 }
+/*layout profile button modal style*/
 
+.popover-example {
+    margin: 0 0 10px;
+    list-style: none;
+}
+
+    .popover-example li {
+        display: inline-block;
+        margin: 4px;
+        padding: 0px;
+    }
+
+.modal-btn:focus {
+    outline: none;
+}
+
+.modExample .btn {
+    margin: 4px 8px 4px 0;
+}
+
+.profile-image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#preview-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.image-container a {
+    cursor: pointer;
+}
+
+.changed-role-btn {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color: aliceblue;
+    background-color: green;
+    
+   width:90px!important;
+    height:30px!important;
+}
+.change-role-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    background-color: #38175C;
+    width: 90px !important;
+    height: 30px !important;
+}
+    .change-role-btn:hover {
+        background-color: #33675C;
+        color:aquamarine;
+    }
+    .changed-role-btn:hover {
+        background-color: #33675C;
+        color: aquamarine;
+    }

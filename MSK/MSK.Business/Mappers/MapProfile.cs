@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MSK.Business.DTOs;
 using MSK.Business.DTOs.AccredationModelDTOs;
 using MSK.Business.DTOs.CalendarPlanModelDTOs;
 using MSK.Business.DTOs.CandidateModelDTOs;
@@ -118,6 +119,8 @@ namespace MSK.Business.Mappers
             // chat model model mapping profile
             CreateMap<ChatCreateDto, Chat>().ReverseMap();
             CreateMap<ChatLayoutDto, Chat>().ReverseMap();
+            // user model model mapping profile
+            CreateMap<UserWithRoleDto, User>().ReverseMap();
         }
     }
 }

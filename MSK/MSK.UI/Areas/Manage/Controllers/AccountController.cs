@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
@@ -16,12 +18,18 @@ namespace MSK.Areas.Manage.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IAccountService accountService)
+        public AccountController(UserManager<User> userManager, 
+            RoleManager<IdentityRole> roleManager, 
+            IAccountService accountService ,IUserService userService ,IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _accountService = accountService;
+            this._userService = userService;
+            this._mapper = mapper;
         }
 
         [HttpGet]
@@ -80,6 +88,84 @@ namespace MSK.Areas.Manage.Controllers
             await _accountService.Logout();
             return RedirectToAction("login", "Account");
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UpdateUserDto updateUserDto ,string cpage)
+        {
+            var currentPath = HttpContext.Request.Path;
+            if (!ModelState.IsValid)
+            {
+                return Redirect(cpage);
+            }
+            try
+            {
+                await _accountService.UpdateUser(updateUserDto);
+            }
+            catch (NullEntityException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return Redirect(cpage);
+            }
+            catch(InvalidUserCredentialException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return Redirect(cpage);
+            }
+            return Redirect(cpage);
+
+        }
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> Roles()
+        {
+            List<UserWithRoleDto> userWithRoleViewModels = new List<UserWithRoleDto>();
+            UserWithRoleDto userWithRoleViewModel = null;
+            
+            var users =  await _userService.GetAll(null, null);
+            if (users is  null)
+            {
+                return NotFound();
+            }
+            foreach(var user in users)
+            {
+                userWithRoleViewModel = new UserWithRoleDto();
+                userWithRoleViewModel = _mapper.Map(user, userWithRoleViewModel);
+
+                var roles = await  _userManager.GetRolesAsync(user);
+                foreach(var role in roles)
+                {
+                    var roleOrigin = await _roleManager.FindByNameAsync(role);
+                    RoleViewDto roleViewModel = new RoleViewDto
+                    {
+                        Name = roleOrigin.Name,
+                        Id = roleOrigin.Id
+                    };
+                    userWithRoleViewModel?.Roles.Add(roleViewModel);
+                    
+                }
+                userWithRoleViewModels.Add(userWithRoleViewModel);
+
+            }
+
+            return View(userWithRoleViewModels);
+        }
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> ToggleRole( string roleId , string userId)
+        {
+            try
+            {
+                await _accountService.ToggleRole(roleId, userId);
+                return RedirectToAction("roles", "account");
+
+
+            }
+            catch (NullEntityException ex)
+            {
+                return NotFound();
+            }catch(NotChangedRoleException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return RedirectToAction("roles", "account");
+            }
+            
+        }
     }
 }

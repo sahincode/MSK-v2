@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using MSK.Business.DTOs;
 using MSK.Business.Exceptions;
+using MSK.Business.InternalHelperServices;
 using MSK.Business.Services.Interfaces;
 using MSK.Core.Models;
 using System.Text;
@@ -17,16 +21,25 @@ namespace MSK.Business.Services.Implementations
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
         private readonly IUserStore<User> _userStore;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _env;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountService(UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration configuration, IEmailService emailService, IUserStore<User> userStore)
+            IConfiguration configuration, IEmailService emailService
+            , IUserStore<User> userStore,
+            IHttpContextAccessor httpContextAccessor,
+            IWebHostEnvironment env, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this._configuration = configuration;
             this._emailService = emailService;
             this._userStore = userStore;
+            this._httpContextAccessor = httpContextAccessor;
+            this._env = env;
+            this._roleManager = roleManager;
         }
         public async Task Login(LoginModelDto adminLoginViewModel)
         {
@@ -71,6 +84,7 @@ namespace MSK.Business.Services.Implementations
             if (result.Succeeded)
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                await _userManager.AddToRoleAsync(user ,"User");
                 var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
 
@@ -88,13 +102,13 @@ namespace MSK.Business.Services.Implementations
         public async Task GenerateForgetPasswordTokenAsync(User user)
         {
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+            var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
 
-                if (!string.IsNullOrEmpty(encodedToken))
-                {
-                    await SendResetPasswordEmail(user, encodedToken);
-                }
+            if (!string.IsNullOrEmpty(encodedToken))
+            {
+                await SendResetPasswordEmail(user, encodedToken);
+            }
         }
         private IUserEmailStore<User> GetEmailStore()
         {
@@ -147,10 +161,97 @@ namespace MSK.Business.Services.Implementations
             await _emailService.SendEmailForForgetPassword(options);
         }
 
-       public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
         {
-          return  await _userManager.ResetPasswordAsync(await _userManager.FindByIdAsync(resetPasswordDto.UserId),resetPasswordDto.Token,resetPasswordDto.NewPassword);
+            return await _userManager.ResetPasswordAsync(await _userManager.FindByIdAsync(resetPasswordDto.UserId), resetPasswordDto.Token, resetPasswordDto.NewPassword);
         }
-        
+
+        public async Task UpdateUser(UpdateUserDto updateUserDto)
+        {
+            string passPath = "admin/img/user";
+            string rootPath = _env.WebRootPath;
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (user == null)
+            {
+                throw new NullEntityException($"Unable to load user with ID '{_userManager.GetUserId(_httpContextAccessor.HttpContext.User)}'.");
+            }
+            if (updateUserDto.NewPassword is not null && updateUserDto.Password is not null)
+            {
+
+
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, updateUserDto.Password, updateUserDto.NewPassword);
+
+                if (changePasswordResult.Succeeded)
+                {
+                    user.UserName = updateUserDto.UserName;
+                    await _signInManager.RefreshSignInAsync(user);
+
+
+                }
+
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    throw new InvalidUserCredentialException(string.Empty, error.Description);
+                }
+            }
+            if (updateUserDto.Image is not null)
+            {
+                if (user.ImageUrl is not null)
+                    File.Delete(Path.Combine(rootPath, passPath, user.ImageUrl));
+
+                user.ImageUrl = await FileHelper.SaveImage(rootPath, passPath, updateUserDto.Image);
+                user.UserName = updateUserDto.UserName;
+                await _userManager.UpdateAsync(user);
+                await _signInManager.RefreshSignInAsync(user);
+
+
+            }
+
+            user.UserName = updateUserDto.UserName;
+            await _userManager.UpdateAsync(user);
+            await _signInManager.RefreshSignInAsync(user);
+
+
+
+        }
+        public async Task ToggleRole(string roleId, string userId)
+        {
+            // Find the user and role by their IDs
+            var user = await _userManager.FindByIdAsync(userId);
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (user == null || role == null)
+            {
+                throw new NullEntityException("", "User with this id or role with this id does not exist.");
+            }
+
+            // Check if the user has the role
+            var userHasRole = await _userManager.IsInRoleAsync(user, role.Name);
+
+            if (userHasRole)
+            {
+                // User has the role, so remove it
+                var result = await _userManager.RemoveFromRoleAsync(user, role.Name);
+
+                if (!result.Succeeded)
+                {
+                    throw new NotChangedRoleException("", "Something went wrong in role changing!");
+                }
+            }
+            else
+            {
+                // User doesn't have the role, so add it
+                var result = await _userManager.AddToRoleAsync(user, role.Name);
+                if (!result.Succeeded)
+                {
+                    throw new NotChangedRoleException("", "Something went wrong in role changing!");
+                }
+
+            }
+
+
+
+        }
     }
 }

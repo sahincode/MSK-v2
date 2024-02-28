@@ -11,5 +11,7 @@ namespace MSK.Business.Services.Interfaces
         public Task Logout();
         public Task GenerateForgetPasswordTokenAsync(User user);
         Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
+        public  Task UpdateUser(UpdateUserDto updateUserDto);
+        public Task ToggleRole(string roleId, string userId);
     }
 }

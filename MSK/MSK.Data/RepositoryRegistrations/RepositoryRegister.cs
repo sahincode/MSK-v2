@@ -29,6 +29,8 @@ namespace MSK.Data.RepositoryRegistrations
             services.AddScoped<IVoteRepository, VoteRepository>();
             services.AddScoped<IElectionRepository, ElectionRepository>();
             services.AddScoped<IChatRepository, ChatRepossitory>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
 
 
 
