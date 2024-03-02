@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MSK.Business.DTOs.SettingModelDTOs;
+using MSK.Business.Exceptions;
 using MSK.Business.Services.Interfaces;
+using MSK.Core.enums;
 using MSK.Core.Models;
 using MSK.Data.Configurations;
+using System.Net.Http.Headers;
 using System.Net.WebSockets;
 
 namespace MSK.Business.Services.Implementations
@@ -19,7 +22,7 @@ namespace MSK.Business.Services.Implementations
 
         public LayoutService(ISettingService settingService,
             IHttpContextAccessor httpContextAccessor, UserManager<User> userManager
-            ,IElectionService electionService ,RoleManager<IdentityRole> roleManager)
+            , IElectionService electionService, RoleManager<IdentityRole> roleManager)
         {
             this._settingService = settingService;
             this._httpContextAccessor = httpContextAccessor;
@@ -41,21 +44,21 @@ namespace MSK.Business.Services.Implementations
             }
             return user;
         }
-        public async Task<Dictionary<string,Array>> CalculateElectionsVotes()
+        public async Task<Dictionary<string, Array>> CalculateElectionsVotes()
         {
             int electionVotes = 0;
-            var elections =await  _electionService.GetAll(null ,"Candidates");
+            var elections = await _electionService.GetAll(null, "Candidates");
             List<Election> eList = elections.ToList();
             int[] votesArrey = new int[eList.Count];
-            string[] electionNames = new string[eList.Count]; 
-            for(int i=0;i<eList.Count;i++)
+            string[] electionNames = new string[eList.Count];
+            for (int i = 0; i < eList.Count; i++)
             {
-                foreach(var candiate in eList[i].Candidates)
+                foreach (var candiate in eList[i].Candidates)
                 {
-                     electionVotes = electionVotes + candiate.VotedCount;
+                    electionVotes = electionVotes + candiate.VotedCount;
                 }
                 votesArrey[i] = electionVotes;
-                electionNames[i]= eList[i].Name;
+                electionNames[i] = eList[i].Name;
 
             }
             Dictionary<string, Array> arrays = new Dictionary<string, Array>()
@@ -72,15 +75,15 @@ namespace MSK.Business.Services.Implementations
         }
         public async Task<Dictionary<string, Array>> CalculateCandiateVotes(int id)
         {
-            var election = await _electionService.Get(e=>e.Id==id, "Candidates");
-         
+            var election = await _electionService.Get(e => e.Id == id, "Candidates");
+
             double[] votesArrey = new double[election.Candidates.Count];
             string[] candidateNames = new string[election.Candidates.Count];
             for (int i = 0; i < election.Candidates.Count; i++)
             {
-                
-                    votesArrey[i] = election.Candidates[i].VotedCount;
-                
+
+                votesArrey[i] = election.Candidates[i].VotedCount;
+
                 candidateNames[i] = election.Candidates[i].FullName;
 
             }
@@ -100,6 +103,19 @@ namespace MSK.Business.Services.Implementations
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return roles;
+        }
+        public async Task<DateTime?> GetActiveELectionTime()
+        {
+            try
+            {
+                var election = await _electionService.Get(e => e.ElectionStatus == ElectionStatus.Pending);
+                return election.StartDate;
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return null;
+
+            }       
         }
     }
 }

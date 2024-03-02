@@ -1,4 +1,5 @@
-﻿(function () {
+﻿
+(function () {
     const second = 1000,
         minute = second * 60,
         hour = minute * 60,
@@ -10,7 +11,7 @@
         dd = String(today.getDate()).padStart(2, "0"),
         mm = String(today.getMonth() + 1).padStart(2, "0"),
         yyyy = today.getFullYear(),
-        nextYear = yyyy + 1,
+        nextYear = yyyy+1,
         dayMonth = "02/07/",
         birthday = dayMonth + yyyy;
 

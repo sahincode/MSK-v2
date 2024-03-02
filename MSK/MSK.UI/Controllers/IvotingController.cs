@@ -109,8 +109,12 @@ namespace MSK.UI.Controllers
             request.AddParameter("attributes_as_list", true);
             request.AddParameter("show_original_response", true);
             request.AddParameter("providers", "amazon");
-            var response = client.Post(request);
+            var response = await  client.PostAsync(request);
             string jsonResponse = response?.Content;
+            if (filePath2 is not null)
+            {
+                System.IO.File.Delete(filePath2);
+            }
             try
             {
                 var jsonObject = JObject.Parse(jsonResponse);
@@ -133,39 +137,41 @@ namespace MSK.UI.Controllers
                     else if (similarity > 95)
                     {
                         var result = await _signInManager.PasswordSignInAsync(voter, voterLoginDto.FinCode, false, false);
-                        if (!result.Succeeded)
+                        if (result.Succeeded)
                         {
-                            ModelState.AddModelError("", "Invalid credential!");
-                            return View();
+                            return RedirectToAction("vote");
                         }
                         else
                         {
 
-                            return RedirectToAction("vote");
+
+                            ModelState.AddModelError("", "Invalid credential!");
+                            return View(voterLoginDto);
                         }
                     }
 
                 }
+                
 
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
+                return View(voterLoginDto);
             }
 
 
-            if (filePath2 is not null)
-            {
-                System.IO.File.Delete(filePath2);
-            }
+           
 
             return View();
         }
         [VoterAuthorize]
+        [HttpGet]
         public async Task<IActionResult> Vote()
         {
-            var election =  _electionService.
-                GetAll(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4) , "Candidates").Result.OrderByDescending(e=>e.CreationTime).FirstOrDefault();
+            var elections = await   _electionService.
+                GetAll(e => e.IsDeleted == false && e.StartDate.AddDays(-1) <= DateTime.UtcNow.AddHours(4) , "Candidates");
+            var election = elections.ToList().OrderByDescending(e => e.CreationTime).FirstOrDefault();
             ElectionLayoutDto electionLayoutDto =  new ElectionLayoutDto();
             if (election is not null)
             {

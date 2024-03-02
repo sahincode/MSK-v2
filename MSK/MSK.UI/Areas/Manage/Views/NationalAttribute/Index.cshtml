@@ -45,8 +45,8 @@
                                 <div>
                                     <h5 class="font-weight-bold">Updated Time:<span class="text-danger"> @(item.UpdateTime.ToString("dddd, dd MMMM yyyy hh:mm:ss"))</span></h5>
                                 </div>
-                                <div class="border-bottom-1">
-
+                                <div class="border-bottom-1 pb-2">
+                                    Deleted Status:
                                     <a asp-action="toggledelete" asp-controller="nationalattribute" asp-route-id="@item.Id" class="@(item.IsDeleted == true ? " btn btn-danger":" btn btn-success")" form="soft-delete-form">
                                         <i class="fa-solid @(item.IsDeleted == true ? "fa-check":"fa-x")"></i>
                                     </a>
@@ -54,26 +54,19 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                                Name: @item.InfoStart
+                                @Html.Raw(item.InfoStart)
+                                 @Html.Raw(item.InfoMiddle)
+                                 @Html.Raw(item.InfoEnd)
                             </div>
-                            <hr>
-                            <div class="modal-body">
-                                Description : @item.InfoMiddle
-                            </div>
-                            <hr>
-                            <div class="modal-body">
-                                Sub Description : @item.InfoEnd
-                            </div>
-                           
-
+                          
                         </div>
                     </div>
                 </div>
                 <tr>
                     <td class="about-info-td">@counter</td>
-                    <td class="about-info-td">@item.InfoStart.Substring(0 ,200)</td>
-                    <td class="about-info-td">@item.InfoMiddle.Substring(0 ,200)</td>
-                    <td class="about-info-td">@item.InfoEnd.Substring(0 ,200)</td>
+                    <td class="about-info-td">@(item.InfoStart.Length > 70 ?item.InfoStart.Substring(0, 69) :item.InfoStart)</td>
+                    <td class="about-info-td">@(item.InfoMiddle.Length > 70 ? item.InfoMiddle.Substring(0, 69) : item.InfoMiddle)</td>
+                    <td class="about-info-td">@(item.InfoEnd.Length > 70 ? item.InfoEnd.Substring(0, 69) : item.InfoEnd)</td>
 
                     <td class="td-min d-flex">
                         <a class="btn btn-warning ms-1" asp-controller="history" asp-action="Update" asp-route-id="@item.Id">

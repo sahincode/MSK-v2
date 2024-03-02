@@ -51,10 +51,12 @@
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Register
                                     </button>
-                                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                                    @if (TempData["SuccessMessage"] is not null)
                                     {
-                                        <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+
+                                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
                                     }
+
                                 </form>
                             </div>
                         </div>
